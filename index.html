@@ -813,6 +813,36 @@
     color: #a3a3a3;
 }
 
+/* Feed (grille 8 visuels) */
+.feed-section {
+    padding: 80px 16px;
+}
+.feed-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+.feed-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+.feed-item {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: #111;
+    border-radius: 4px;
+}
+.feed-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+.feed-item:hover img {
+    transform: scale(1.04);
+}
+
 /* Project Modal */
 .project-modal {
     display: none;
@@ -1089,70 +1119,6 @@
         .testimonial-info p {
             font-size: 14px;
             color: #737373;
-        }
-
-        /* Team */
-        .team-section {
-            padding: 80px 16px;
-        }
-        .team-header {
-            max-width: 1280px;
-            margin: 0 auto 48px;
-        }
-        .team-header h2 {
-            font-size: clamp(32px, 5vw, 48px);
-            margin-bottom: 16px;
-        }
-        .team-header h2 .accent {
-            color: var(--accent);
-        }
-        .team-header > p {
-            font-size: 16px;
-            color: var(--text-muted);
-            max-width: 900px;
-        }
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-        .team-card {
-            text-align: center;
-        }
-        .team-avatar {
-            width: 280px;
-            height: 280px;
-            border-radius: 15px;
-            margin: 0 auto 24px;
-            overflow: hidden;
-            background: #e5e5e5;
-        }
-        .team-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .team-card h3 {
-            font-size: 24px;
-            margin-bottom: 4px;
-        }
-        .team-card .role {
-            color: var(--accent);
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 12px;
-        }
-        .team-card .quote {
-            font-style: italic;
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-        .team-card .bio {
-            font-size: 14px;
-            color: #525252;
         }
 
         /* Pricing */
@@ -1482,20 +1448,15 @@
             .project-card {
                 aspect-ratio: 1/1;
             }
+            .feed-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
             
             .testimonial-card {
                 min-width: 320px;
                 max-width: 320px;
             }
-            
-            .team-grid {
-                grid-template-columns: 1fr;
-            }
-            .team-avatar {
-                width: 150px;
-                height: 150px;
-            }
-            
+
             .pricing-grid {
                 grid-template-columns: 1fr;
             }
@@ -1635,20 +1596,6 @@
                 margin-bottom: 32px;
             }
 
-            .team-section {
-                padding: 56px 16px;
-            }
-            .team-header {
-                margin-bottom: 32px;
-            }
-            .team-avatar {
-                width: 200px;
-                height: 200px;
-            }
-            .team-card h3 {
-                font-size: 20px;
-            }
-
             .pricing-card {
                 padding: 28px 24px;
             }
@@ -1756,6 +1703,9 @@
         @media (max-width: 480px) {
             .container { padding: 0 16px; }
 
+            .feed-section { padding: 48px 8px; }
+            .feed-grid { gap: 4px; }
+
             .btn-primary,
             .btn-whatsapp,
             .btn-secondary,
@@ -1800,11 +1750,6 @@
             }
             .project-card .project-content {
                 padding: 20px;
-            }
-
-            .team-avatar {
-                width: 160px;
-                height: 160px;
             }
 
             .pricing-card {
@@ -1894,7 +1839,6 @@
                 <a href="#services">Services</a>
                 <a href="#realisations">Réalisations</a>
                 <a href="#offres">Offres</a>
-                <a href="#equipe">Équipe</a>
             </nav>
             <div class="header-cta">
                 <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20démarrer%20un%20projet." class="btn-primary" target="_blank" rel="noopener noreferrer">
@@ -1911,7 +1855,6 @@
             <a href="#services" onclick="toggleMenu()">Services</a>
             <a href="#realisations" onclick="toggleMenu()">Réalisations</a>
             <a href="#offres" onclick="toggleMenu()">Offres</a>
-            <a href="#equipe" onclick="toggleMenu()">Équipe</a>
             <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20démarrer%20un%20projet." class="btn-primary" style="margin-top: 16px; justify-content: center;" target="_blank" rel="noopener noreferrer">Démarrer →</a>
         </div>
     </header>
@@ -2208,57 +2151,40 @@
     </section>
 
     <!-- Projects -->
-    <section id="realisations" class="projects-section">
-        <div class="projects-header container">
-            <div class="section-label">
-                <div class="section-dot orange"></div>
-                <span>Nos réalisations</span>
-            </div>
-            <h2>L'IA au service de la publicité<span class="accent"> de demain</span></h2>
-            <p>Découvrez comment nous transformons des visions en leaders de marché à travers nos études de cas conceptuels.</p>
-        </div>
-        <div class="projects-grid container">
-            <div class="project-card" onclick="openProject(1)">
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Parfumerie</span>
-                    </div>
-                    <div class="project-title">
-                        <h3>Maison Orsola</h3>
-                    </div>
+    <section id="realisations" class="feed-section">
+        <div class="feed-inner">
+            <div class="feed-grid">
+                <div class="feed-item">
+                    <!-- 👉 REMPLACER : visuel 1 -->
+                    <img src="https://placehold.co/800x1000/171717/ea580c?text=VISUEL+1" alt="Visuel 1" loading="lazy" decoding="async">
                 </div>
-            </div>
-            <div class="project-card" onclick="openProject(2)">
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Boisson</span>
-                    </div>
-                    <div class="project-title">
-                        <h3>Kombucha</h3>
-                        <p>Identité visuelle — soda radical</p>
-                    </div>
+                <div class="feed-item">
+                    <!-- 👉 REMPLACER : visuel 2 -->
+                    <img src="https://placehold.co/800x1000/262626/ea580c?text=VISUEL+2" alt="Visuel 2" loading="lazy" decoding="async">
                 </div>
-            </div>
-            <div class="project-card" onclick="openProject(3)">
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Création de marque</span>
-                    </div>
-                    <div class="project-title">
-                        <h3>Neshama</h3>
-                        <p>Parfum masculin contemplatif — création complète</p>
-                    </div>
+                <div class="feed-item">
+                    <!-- 👉 REMPLACER : visuel 3 -->
+                    <img src="https://placehold.co/800x1000/1a0f0a/ea580c?text=VISUEL+3" alt="Visuel 3" loading="lazy" decoding="async">
                 </div>
-            </div>
-            <div class="project-card" onclick="openProject(4)">
-                <div class="project-content">
-                    <div class="project-tags">
-                        <span class="project-tag">Direction cinéma</span>
-                    </div>
-                    <div class="project-title">
-                        <h3>Échos</h3>
-                        <p>Teaser d'anthologie psychologique</p>
-                    </div>
+                <div class="feed-item">
+                    <!-- 👉 REMPLACER : visuel 4 -->
+                    <img src="https://placehold.co/800x1000/2c1810/ea580c?text=VISUEL+4" alt="Visuel 4" loading="lazy" decoding="async">
+                </div>
+                <div class="feed-item">
+                    <!-- 👉 REMPLACER : visuel 5 -->
+                    <img src="https://placehold.co/800x1000/1a0f2e/a78bfa?text=VISUEL+5" alt="Visuel 5" loading="lazy" decoding="async">
+                </div>
+                <div class="feed-item">
+                    <!-- 👉 REMPLACER : visuel 6 -->
+                    <img src="https://placehold.co/800x1000/0a0a0a/e5e5e5?text=VISUEL+6" alt="Visuel 6" loading="lazy" decoding="async">
+                </div>
+                <div class="feed-item">
+                    <!-- 👉 REMPLACER : visuel 7 -->
+                    <img src="https://placehold.co/800x1000/1e3a5f/fde047?text=VISUEL+7" alt="Visuel 7" loading="lazy" decoding="async">
+                </div>
+                <div class="feed-item">
+                    <!-- 👉 REMPLACER : visuel 8 -->
+                    <img src="https://placehold.co/800x1000/111827/e5e5e5?text=VISUEL+8" alt="Visuel 8" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -2382,48 +2308,6 @@
         </div>
     </section>
 
-    <!-- Team -->
-    <section id="equipe" class="team-section">
-        <div class="team-header container">
-            <div class="section-label">
-                <div class="section-dot orange"></div>
-                <span>Notre équipe</span>
-            </div>
-            <h2>10 ans de métier. <span class="accent">Une équipe d'experts</span></h2>
-            <p>L'IA ne remplace pas le talent, elle l'augmente. Notre force repose sur 10 ans de métier à diriger des films et conseiller des marques.</p>
-        </div>
-        <div class="team-grid container">
-            <div class="team-card">
-                <div class="team-avatar">
-                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773281491/__3_ab5foh.jpg" alt="Terry" loading="lazy" decoding="async">
-                </div>
-                <h3>Terry</h3>
-                <p class="role">Stratégie de marque & Consulting Senior</p>
-                <p class="bio">Huit ans à structurer des positionnements et des territoires de marque à l'international.</p>
-                <p class="quote">"Une image ne performe jamais seule. C'est la direction derrière elle qui décide."</p>
-
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">
-                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773281697/__5_rsemtk.jpg" alt="Golle" loading="lazy" decoding="async">
-                </div>
-                <h3>Golle</h3>
-                <p class="role">Direction artistique & Image</p>
-                <p class="bio">"Une image capte l'attention, mais seule une histoire peut capturer un marché."</p>
-                <p class="quote">"L'IA est notre nouvel appareil photo. Mon rôle est de lui donner un regard."</p>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">
-                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773280935/__1_noctsx.jpg" alt="Ben" loading="lazy" decoding="async">
-                </div>
-                <h3>Ben</h3>
-                <p class="role">Narration & Mythe de Marque</p>
-                <p class="bio">Cinéaste récompensé, expert en storytelling et récits de marque.</p>
-                <p class="quote">"Une image capte l'attention, mais seule une histoire peut capturer un marché."/p>
-            </div>
-        </div>
-    </section>
-
     <!-- Pricing -->
     <section id="offres" class="pricing-section section-dark">
         <div class="pricing-inner">
@@ -2438,10 +2322,11 @@
                 <div class="pricing-card">
                     <div class="pricing-card-header">
                         <div>
-                            <h3>Une direction, une série d'images</h3>
+                            <span>Starter</span>
+                            <h3>Direction Artistique</h3>
                         </div>
                     </div>
-                    <p>Poser un territoire visuel clair, en quelques semaines.</p>
+                    <p>Lancement rapide et ciblé.</p>
                     <div class="pricing-features">
                         <div class="pricing-feature"><span>Audit de marque & positionnement</span></div>
                         <div class="pricing-feature"><span>Moodboard & direction artistique</span></div>
@@ -2453,11 +2338,12 @@
                 <div class="pricing-card popular">
                     <div class="pricing-card-header">
                         <div>
-                            <h3>Un univers, multi-formats</h3>
+                            <span>Pro</span>
+                            <h3>Direction + Stratégie</h3>
                         </div>
-                        <span class="popular-badge">Recommandé</span>
+                        <span class="popular-badge">Populaire</span>
                     </div>
-                    <p>Construire un langage visuel cohérent sur tous vos canaux.</p>
+                    <p>Maximiser votre impact multi-canal.</p>
                     <div class="pricing-features">
                         <div class="pricing-feature"><span>Direction artistique complète & charte visuelle</span></div>
                         <div class="pricing-feature"><span>Campagne image principale (hero + packshots)</span></div>
@@ -2469,10 +2355,11 @@
                 <div class="pricing-card">
                     <div class="pricing-card-header">
                         <div>
-                            <h3>Une transformation, dans la durée</h3>
+                            <span>Elite</span>
+                            <h3>Direction + Stratégie + Suivi</h3>
                         </div>
                     </div>
-                    <p>Refonder votre image et l'incarner au fil du temps.</p>
+                    <p>Transformer votre image sur le long terme.</p>
                     <div class="pricing-features">
                         <div class="pricing-feature"><span>Audit stratégique approfondi & rebranding</span></div>
                         <div class="pricing-feature"><span>Bible de marque & univers visuel complet</span></div>
