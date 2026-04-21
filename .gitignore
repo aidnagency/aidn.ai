@@ -20,3 +20,21 @@ npm-debug.log*
 # OS
 Thumbs.db
 ehthumbs.db
+
+# Node
+node_modules/
+package-lock.json
+
+# Claude / agents workspace
+.agents/
+.claude/
+.playwright-mcp/
+skills-lock.json
+memory/
+
+# Backups locaux
+index.backup.html
+*.backup.html
+
+# Screenshots de QA
+[0-9][0-9]-*.png

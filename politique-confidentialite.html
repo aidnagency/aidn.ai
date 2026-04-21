@@ -4,383 +4,434 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, follow">
-    <meta name="theme-color" content="#0a0a0a">
-
+    <meta name="theme-color" content="#0E0E0E">
     <title>Politique de confidentialité — AiDN Agency</title>
-    <meta name="description" content="Politique de confidentialité et gestion des données personnelles du site AiDN Agency, conforme RGPD.">
+    <meta name="description" content="Politique de confidentialité d'AiDN Agency : données collectées, cookies, vos droits RGPD, contact DPO.">
     <link rel="canonical" href="https://www.aidnagency.fr/politique-confidentialite">
-
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { overflow-x: clip; scrollbar-gutter: stable; -webkit-text-size-adjust: 100%; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f5f5f4;
-            color: #171717;
-            line-height: 1.7;
-            overflow-x: clip;
-            width: 100%;
-            max-width: 100vw;
-        }
-        img, svg { max-width: 100%; }
+    :root {
+        --ink: #0E0E0E;
+        --paper: #F2EFE8;
+        --orange: #FF5B0C;
+        --acid: #D4FF3A;
+        --muted: #8A8680;
+        --muted-dark: #A8A39A;
+        --line: rgba(14,14,14,0.12);
+        --sans: 'Inter', ui-sans-serif, system-ui;
+        --serif: 'Instrument Serif', ui-serif, Georgia;
+        --mono: 'JetBrains Mono', ui-monospace, monospace;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *::selection { background: var(--acid); color: var(--ink); }
+    html { scroll-behavior: smooth; overflow-x: clip; -webkit-font-smoothing: antialiased; }
+    body {
+        font-family: var(--sans);
+        background: var(--paper);
+        color: var(--ink);
+        line-height: 1.6;
+        overflow-x: clip;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    }
+    img, svg { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
 
-        .skip-link {
-            position: absolute;
-            top: -48px;
-            left: 8px;
-            background: #ea580c;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            z-index: 10000;
-        }
-        .skip-link:focus { top: 8px; }
-        a:focus-visible, button:focus-visible {
-            outline: 2px solid #ea580c;
-            outline-offset: 3px;
-            border-radius: 4px;
-        }
+    .skip-link {
+        position: absolute; top: -48px; left: 8px;
+        background: var(--ink); color: var(--paper);
+        padding: 12px 20px; border-radius: 8px; z-index: 1000;
+        transition: top 0.2s;
+    }
+    .skip-link:focus { top: 8px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 4px; }
 
-        .header {
-            background: white;
-            border-bottom: 1px solid #e5e5e5;
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .header-inner {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .logo img { display: block; width: 120px; height: auto; }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #171717;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .back-link:hover { color: #ea580c; }
+    .grain {
+        position: fixed; inset: 0;
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.06;
+        mix-blend-mode: multiply;
+        background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.8'/></svg>");
+    }
 
-        main {
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 64px 24px 96px;
-        }
+    .nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 20px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(242,239,232,0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+    }
+    .nav-logo {
+        font-family: var(--serif); font-style: italic;
+        font-size: 26px; letter-spacing: -0.02em;
+    }
+    .nav-logo b { font-family: var(--sans); font-style: normal; font-weight: 600; letter-spacing: -0.03em; }
+    .back {
+        font-family: var(--mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 10px 16px;
+        border: 1px solid var(--ink);
+        border-radius: 100px;
+        transition: all 0.3s var(--ease);
+    }
+    .back:hover { background: var(--ink); color: var(--paper); }
 
-        .page-label {
-            display: inline-block;
-            padding: 6px 14px;
-            background: rgba(234, 88, 12, 0.1);
-            color: #ea580c;
-            border-radius: 100px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 20px;
-        }
+    main { max-width: 860px; margin: 0 auto; padding: 80px 32px 120px; }
 
-        h1 {
-            font-size: clamp(32px, 5vw, 48px);
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-            margin-bottom: 16px;
-        }
-        .subtitle {
-            color: #737373;
-            font-size: 16px;
-            margin-bottom: 48px;
-        }
+    .page-label {
+        font-family: var(--mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--muted);
+        margin-bottom: 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .page-label::before {
+        content: '';
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: var(--orange);
+    }
 
-        section {
-            margin-bottom: 40px;
-            padding: 28px 28px;
-            background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 20px;
-        }
-        h2 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: #171717;
-        }
-        h2::before {
-            content: '';
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ea580c;
-            margin-right: 12px;
-            transform: translateY(-2px);
-        }
-        h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin: 20px 0 8px;
-            color: #171717;
-        }
-        p, li {
-            font-size: 15px;
-            color: #3d3d3d;
-            margin-bottom: 12px;
-        }
-        p:last-child, li:last-child { margin-bottom: 0; }
-        ul { padding-left: 20px; }
-        strong { color: #171717; font-weight: 600; }
-        a { color: #ea580c; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+    h1 {
+        font-family: var(--sans);
+        font-weight: 500;
+        font-size: clamp(40px, 6vw, 88px);
+        line-height: 0.95;
+        letter-spacing: -0.03em;
+        margin-bottom: 24px;
+    }
+    h1 .serif { font-family: var(--serif); font-style: italic; font-weight: 400; }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 16px 0;
-            font-size: 14px;
-        }
-        th, td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #e5e5e5;
-            vertical-align: top;
-        }
-        th {
-            font-weight: 600;
-            background: #fafafa;
-            color: #171717;
-        }
+    .subtitle {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: clamp(18px, 2.2vw, 24px);
+        line-height: 1.4;
+        color: var(--muted);
+        max-width: 62ch;
+        margin-bottom: 64px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid var(--line);
+    }
 
-        .placeholder {
-            display: inline-block;
-            background: #fff4ed;
-            color: #c2410c;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-family: monospace;
-            border: 1px dashed #ea580c;
-        }
+    section { margin-bottom: 48px; }
+    section h2 {
+        font-family: var(--sans);
+        font-weight: 500;
+        font-size: clamp(22px, 3vw, 32px);
+        letter-spacing: -0.02em;
+        margin-bottom: 16px;
+        padding-left: 20px;
+        position: relative;
+    }
+    section h2::before {
+        content: '';
+        position: absolute;
+        left: 0; top: 0.55em;
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: var(--orange);
+    }
+    section h3 {
+        font-family: var(--sans);
+        font-weight: 500;
+        font-size: 17px;
+        margin: 24px 0 10px;
+        letter-spacing: -0.01em;
+    }
 
-        .callout {
-            padding: 16px 20px;
-            background: #eff6ff;
-            border-left: 3px solid #3b82f6;
-            border-radius: 8px;
-            margin: 16px 0;
-            font-size: 14px;
-            color: #1e40af;
-        }
+    section p, section li {
+        font-size: 15px;
+        color: #2a2a2a;
+        margin-bottom: 10px;
+        line-height: 1.65;
+    }
+    section p:last-child, section li:last-child { margin-bottom: 0; }
+    ul { padding-left: 24px; margin: 8px 0; }
+    strong { color: var(--ink); font-weight: 600; }
+    section a {
+        color: var(--orange);
+        border-bottom: 1px solid rgba(255,91,12,0.3);
+        transition: border-color 0.2s;
+    }
+    section a:hover { border-bottom-color: var(--orange); }
 
-        .footer {
-            background: #0a0a0a;
-            color: #a3a3a3;
-            padding: 32px 24px;
-            text-align: center;
-            font-size: 13px;
-        }
-        .footer a { color: #a3a3a3; margin: 0 8px; }
-        .footer a:hover { color: white; }
+    .placeholder {
+        display: inline-block;
+        background: rgba(255,91,12,0.08);
+        color: #C2410C;
+        padding: 2px 10px;
+        border-radius: 100px;
+        font-family: var(--mono);
+        font-size: 12px;
+        border: 1px dashed var(--orange);
+    }
 
-        @media (max-width: 480px) {
-            main { padding: 40px 16px 64px; }
-            section { padding: 24px 20px; }
-            h2 { font-size: 18px; }
-            table { font-size: 13px; }
-            th, td { padding: 8px; }
-        }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 14px;
+        background: rgba(14,14,14,0.02);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        overflow: hidden;
+    }
+    th, td {
+        padding: 14px 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+    }
+    tr:last-child td { border-bottom: 0; }
+    th {
+        background: var(--ink);
+        color: var(--paper);
+        font-family: var(--mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 500;
+    }
+
+    .callout {
+        padding: 20px 24px;
+        background: var(--acid);
+        color: var(--ink);
+        border-radius: 16px;
+        margin-top: 20px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    .callout a { color: var(--ink); border-bottom-color: rgba(14,14,14,0.4); }
+
+    .updated {
+        font-family: var(--mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+        text-align: center;
+        margin-top: 64px;
+        padding-top: 32px;
+        border-top: 1px solid var(--line);
+    }
+
+    .foot {
+        background: var(--ink);
+        color: var(--paper);
+        padding: 48px 32px;
+        text-align: center;
+        font-family: var(--mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted-dark);
+    }
+    .foot a {
+        color: var(--paper);
+        opacity: 0.8;
+        margin: 0 12px;
+        transition: opacity 0.2s;
+    }
+    .foot a:hover { opacity: 1; }
+
+    @media (max-width: 600px) {
+        .nav { padding: 16px 20px; }
+        .back { padding: 8px 12px; font-size: 10px; }
+        main { padding: 48px 20px 80px; }
+        section h2 { padding-left: 16px; }
+        table { font-size: 13px; }
+        th, td { padding: 10px 12px; }
+    }
     </style>
 </head>
 <body>
+    <a href="#main" class="skip-link">Aller au contenu</a>
+    <div class="grain" aria-hidden="true"></div>
 
-<a href="#main" class="skip-link">Aller au contenu</a>
-
-<header class="header">
-    <div class="header-inner">
-        <a href="index.html" class="logo" aria-label="AiDN Agency — retour à l'accueil">
-            <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773272750/Logo_gauche_Texte_Noir_-_Aidn_bdc6ml.png" alt="AiDN Agency" width="132" height="50" decoding="async">
+    <nav class="nav">
+        <a href="index.html" class="nav-logo" aria-label="Retour à l'accueil"><b>aidn</b>/studio</a>
+        <a href="index.html" class="back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Retour
         </a>
-        <a href="index.html" class="back-link">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Retour au site
-        </a>
-    </div>
-</header>
+    </nav>
 
-<main id="main">
-    <span class="page-label">Vos données, vos droits</span>
-    <h1>Politique de confidentialité</h1>
-    <p class="subtitle">AiDN Agency respecte votre vie privée. Cette page explique quelles données nous collectons, pourquoi, combien de temps nous les gardons, et comment exercer vos droits — conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés.</p>
+    <main id="main">
+        <span class="page-label">Vos données, vos droits</span>
+        <h1>Politique de <span class="serif">confidentialité</span></h1>
+        <p class="subtitle">AiDN Agency respecte votre vie privée. Cette page explique quelles données nous collectons, pourquoi, combien de temps nous les gardons, et comment exercer vos droits — conformément au RGPD et à la loi Informatique et Libertés.</p>
 
-    <section>
-        <h2>1. Responsable du traitement</h2>
-        <p>Le responsable du traitement des données collectées sur ce site est :</p>
-        <p><strong><span class="placeholder">[À COMPLÉTER — raison sociale]</span></strong><br>
-        <span class="placeholder">[À COMPLÉTER — adresse complète]</span><br>
-        Email : <a href="mailto:aidn.contact@gmail.com">aidn.contact@gmail.com</a></p>
-        <p>Pour toute question relative à vos données personnelles, vous pouvez nous contacter à l'adresse ci-dessus.</p>
-    </section>
+        <section>
+            <h2>1. Responsable du traitement</h2>
+            <p>Le responsable du traitement des données collectées sur ce site est :</p>
+            <p><strong><span class="placeholder">[À COMPLÉTER — raison sociale]</span></strong><br>
+            <span class="placeholder">[À COMPLÉTER — adresse complète]</span><br>
+            Email : <a href="mailto:aidn.contact@gmail.com">aidn.contact@gmail.com</a></p>
+            <p>Pour toute question relative à vos données personnelles, vous pouvez nous contacter à l'adresse ci-dessus.</p>
+        </section>
 
-    <section>
-        <h2>2. Données collectées</h2>
-        <p>Ce site est principalement <strong>une vitrine</strong>. Il ne contient pas de formulaire, ni de création de compte, ni de paiement en ligne. Les données collectées sont donc limitées aux situations suivantes :</p>
+        <section>
+            <h2>2. Données collectées</h2>
+            <p>Ce site est principalement <strong>une vitrine</strong>. Il ne contient pas de formulaire, ni de création de compte, ni de paiement en ligne. Les données collectées sont donc limitées aux situations suivantes :</p>
 
-        <h3>2.1 Quand vous nous contactez par email ou WhatsApp</h3>
-        <p>Si vous nous écrivez à <strong>aidn.contact@gmail.com</strong> ou que vous initiez une conversation via WhatsApp depuis le site, nous collectons :</p>
-        <ul>
-            <li>Votre nom (si vous le communiquez)</li>
-            <li>Votre adresse email ou numéro de téléphone</li>
-            <li>Le contenu de votre message</li>
-        </ul>
-        <p>Ces données sont utilisées uniquement pour vous répondre et gérer l'échange commercial éventuel.</p>
+            <h3>2.1 Quand vous nous contactez par email ou WhatsApp</h3>
+            <p>Si vous nous écrivez à <strong>aidn.contact@gmail.com</strong> ou que vous initiez une conversation via WhatsApp depuis le site, nous collectons :</p>
+            <ul>
+                <li>Votre nom (si vous le communiquez)</li>
+                <li>Votre adresse email ou numéro de téléphone</li>
+                <li>Le contenu de votre message</li>
+            </ul>
+            <p>Ces données sont utilisées uniquement pour vous répondre et gérer l'échange commercial éventuel.</p>
 
-        <h3>2.2 Données techniques (mesure d'audience)</h3>
-        <p>Nous utilisons <strong>Vercel Web Analytics</strong> et <strong>Vercel Speed Insights</strong>, des outils de mesure d'audience <strong>sans cookies et respectueux de la vie privée</strong>. Ces outils collectent des données agrégées et anonymisées :</p>
-        <ul>
-            <li>Pages visitées</li>
-            <li>Pays (au niveau macro)</li>
-            <li>Navigateur et type d'appareil</li>
-            <li>Source de trafic (site référent)</li>
-            <li>Métriques de performance (temps de chargement, Core Web Vitals)</li>
-        </ul>
-        <p>Ces données <strong>ne permettent pas de vous identifier personnellement</strong>. Aucun cookie publicitaire ni traceur tiers n'est déposé sur votre appareil. Pour cette raison, aucune bannière cookies n'est requise par la CNIL sur ce site.</p>
+            <h3>2.2 Données techniques (mesure d'audience)</h3>
+            <p>Nous utilisons <strong>Vercel Web Analytics</strong> et <strong>Vercel Speed Insights</strong>, des outils de mesure d'audience <strong>sans cookies et respectueux de la vie privée</strong>. Ces outils collectent des données agrégées et anonymisées :</p>
+            <ul>
+                <li>Pages visitées</li>
+                <li>Pays (au niveau macro)</li>
+                <li>Navigateur et type d'appareil</li>
+                <li>Source de trafic (site référent)</li>
+                <li>Métriques de performance (temps de chargement, Core Web Vitals)</li>
+            </ul>
+            <p>Ces données <strong>ne permettent pas de vous identifier personnellement</strong>. Aucun cookie publicitaire ni traceur tiers n'est déposé sur votre appareil. Pour cette raison, aucune bannière cookies n'est requise par la CNIL sur ce site.</p>
 
-        <h3>2.3 Logs serveur</h3>
-        <p>Comme tout site web, notre hébergeur (Vercel) conserve des logs techniques (adresse IP, horodatage, URL demandée) à des fins de sécurité et de diagnostic. Ces logs sont automatiquement purgés selon la politique de rétention de Vercel.</p>
-    </section>
+            <h3>2.3 Logs serveur</h3>
+            <p>Comme tout site web, notre hébergeur (Vercel) conserve des logs techniques (adresse IP, horodatage, URL demandée) à des fins de sécurité et de diagnostic. Ces logs sont automatiquement purgés selon la politique de rétention de Vercel.</p>
+        </section>
 
-    <section>
-        <h2>3. Finalités et bases légales</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Finalité</th>
-                    <th>Base légale</th>
-                    <th>Durée</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Répondre à vos demandes</td>
-                    <td>Exécution d'un contrat ou mesures précontractuelles (art. 6.1.b RGPD)</td>
-                    <td>3 ans après le dernier contact</td>
-                </tr>
-                <tr>
-                    <td>Mesure d'audience anonymisée</td>
-                    <td>Intérêt légitime (art. 6.1.f RGPD)</td>
-                    <td>Données agrégées conservées 12 mois</td>
-                </tr>
-                <tr>
-                    <td>Sécurité et logs</td>
-                    <td>Intérêt légitime (art. 6.1.f RGPD)</td>
-                    <td>Selon politique Vercel (généralement &lt; 30 jours)</td>
-                </tr>
-                <tr>
-                    <td>Obligations légales (facturation, comptabilité)</td>
-                    <td>Obligation légale (art. 6.1.c RGPD)</td>
-                    <td>10 ans (Code de commerce)</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+        <section>
+            <h2>3. Finalités et bases légales</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Finalité</th>
+                        <th>Base légale</th>
+                        <th>Durée</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Répondre à vos demandes</td>
+                        <td>Exécution d'un contrat ou mesures précontractuelles (art. 6.1.b RGPD)</td>
+                        <td>3 ans après le dernier contact</td>
+                    </tr>
+                    <tr>
+                        <td>Mesure d'audience anonymisée</td>
+                        <td>Intérêt légitime (art. 6.1.f RGPD)</td>
+                        <td>Données agrégées conservées 12 mois</td>
+                    </tr>
+                    <tr>
+                        <td>Sécurité et logs</td>
+                        <td>Intérêt légitime (art. 6.1.f RGPD)</td>
+                        <td>Selon politique Vercel (généralement &lt; 30 jours)</td>
+                    </tr>
+                    <tr>
+                        <td>Obligations légales (facturation)</td>
+                        <td>Obligation légale (art. 6.1.c RGPD)</td>
+                        <td>10 ans (Code de commerce)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-    <section>
-        <h2>4. Destinataires des données</h2>
-        <p>Vos données sont destinées uniquement à AiDN Agency. Elles ne sont ni vendues, ni louées, ni cédées à des tiers à des fins commerciales.</p>
-        <p>Elles peuvent être transmises à nos <strong>sous-traitants techniques</strong> agissant pour notre compte, uniquement dans le cadre strict de leur mission :</p>
-        <ul>
-            <li><strong>Vercel Inc.</strong> (États-Unis) — hébergement du site et mesure d'audience. Vercel est certifié <a href="https://www.dataprivacyframework.gov/" target="_blank" rel="noopener noreferrer">Data Privacy Framework</a> pour les transferts UE–US.</li>
-            <li><strong>Cloudinary</strong> (États-Unis) — stockage et diffusion des visuels du site (CDN images).</li>
-            <li><strong>Google LLC</strong> — fourniture de la police Inter via Google Fonts (l'adresse IP peut transiter lors du chargement de la police).</li>
-            <li><strong>Meta (WhatsApp)</strong> — uniquement si vous cliquez sur un lien WhatsApp. Dans ce cas, Meta applique sa propre politique de confidentialité.</li>
-        </ul>
-    </section>
+        <section>
+            <h2>4. Destinataires des données</h2>
+            <p>Vos données sont destinées uniquement à AiDN Agency. Elles ne sont ni vendues, ni louées, ni cédées à des tiers à des fins commerciales.</p>
+            <p>Elles peuvent être transmises à nos <strong>sous-traitants techniques</strong> agissant pour notre compte, uniquement dans le cadre strict de leur mission :</p>
+            <ul>
+                <li><strong>Vercel Inc.</strong> (États-Unis) — hébergement du site et mesure d'audience. Vercel est certifié <a href="https://www.dataprivacyframework.gov/" target="_blank" rel="noopener noreferrer">Data Privacy Framework</a> pour les transferts UE–US.</li>
+                <li><strong>Cloudinary</strong> (États-Unis) — stockage et diffusion des visuels du site (CDN images).</li>
+                <li><strong>Google LLC</strong> — fourniture des polices via Google Fonts (l'adresse IP peut transiter lors du chargement des polices).</li>
+                <li><strong>Meta (WhatsApp)</strong> — uniquement si vous cliquez sur un lien WhatsApp. Dans ce cas, Meta applique sa propre politique de confidentialité.</li>
+            </ul>
+        </section>
 
-    <section>
-        <h2>5. Transferts hors Union européenne</h2>
-        <p>Certains de nos sous-traitants (Vercel, Cloudinary, Google, Meta) sont établis aux États-Unis. Ces transferts sont encadrés soit par une <strong>décision d'adéquation de la Commission européenne</strong> (Data Privacy Framework), soit par des <strong>clauses contractuelles types (CCT)</strong> approuvées par la Commission européenne, garantissant un niveau de protection équivalent à celui en vigueur dans l'Union européenne.</p>
-    </section>
+        <section>
+            <h2>5. Transferts hors Union européenne</h2>
+            <p>Certains de nos sous-traitants (Vercel, Cloudinary, Google, Meta) sont établis aux États-Unis. Ces transferts sont encadrés soit par une <strong>décision d'adéquation de la Commission européenne</strong> (Data Privacy Framework), soit par des <strong>clauses contractuelles types (CCT)</strong> approuvées par la Commission européenne, garantissant un niveau de protection équivalent à celui en vigueur dans l'Union européenne.</p>
+        </section>
 
-    <section>
-        <h2>6. Vos droits</h2>
-        <p>Conformément au RGPD et à la loi Informatique et Libertés, vous disposez des droits suivants sur vos données :</p>
-        <ul>
-            <li><strong>Droit d'accès</strong> — obtenir la confirmation que vos données sont traitées et en recevoir une copie.</li>
-            <li><strong>Droit de rectification</strong> — faire corriger des données inexactes ou incomplètes.</li>
-            <li><strong>Droit à l'effacement</strong> (« droit à l'oubli ») — faire supprimer vos données, sauf obligation légale de conservation.</li>
-            <li><strong>Droit à la limitation</strong> — demander la suspension temporaire du traitement.</li>
-            <li><strong>Droit d'opposition</strong> — vous opposer au traitement pour des motifs légitimes.</li>
-            <li><strong>Droit à la portabilité</strong> — recevoir vos données dans un format structuré et lisible.</li>
-            <li><strong>Droit de retirer votre consentement</strong> à tout moment, lorsque le traitement est fondé sur le consentement.</li>
-            <li><strong>Droit de définir des directives post-mortem</strong> sur le sort de vos données après votre décès.</li>
-        </ul>
-        <p style="margin-top:16px;"><strong>Pour exercer vos droits :</strong> envoyez un email à <a href="mailto:aidn.contact@gmail.com">aidn.contact@gmail.com</a> en précisant l'objet de votre demande. Nous vous répondrons dans un délai maximum de <strong>30 jours</strong>.</p>
-        <div class="callout">
-            Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous avez la possibilité d'introduire une réclamation auprès de la <strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés) : <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener noreferrer">cnil.fr/fr/plaintes</a>
-        </div>
-    </section>
+        <section>
+            <h2>6. Vos droits</h2>
+            <p>Conformément au RGPD et à la loi Informatique et Libertés, vous disposez des droits suivants sur vos données :</p>
+            <ul>
+                <li><strong>Droit d'accès</strong> — obtenir la confirmation que vos données sont traitées et en recevoir une copie.</li>
+                <li><strong>Droit de rectification</strong> — faire corriger des données inexactes ou incomplètes.</li>
+                <li><strong>Droit à l'effacement</strong> (« droit à l'oubli ») — faire supprimer vos données, sauf obligation légale de conservation.</li>
+                <li><strong>Droit à la limitation</strong> — demander la suspension temporaire du traitement.</li>
+                <li><strong>Droit d'opposition</strong> — vous opposer au traitement pour des motifs légitimes.</li>
+                <li><strong>Droit à la portabilité</strong> — recevoir vos données dans un format structuré et lisible.</li>
+                <li><strong>Droit de retirer votre consentement</strong> à tout moment, lorsque le traitement est fondé sur le consentement.</li>
+                <li><strong>Droit de définir des directives post-mortem</strong> sur le sort de vos données après votre décès.</li>
+            </ul>
+            <p style="margin-top:16px;"><strong>Pour exercer vos droits :</strong> envoyez un email à <a href="mailto:aidn.contact@gmail.com">aidn.contact@gmail.com</a> en précisant l'objet de votre demande. Nous vous répondrons dans un délai maximum de <strong>30 jours</strong>.</p>
+            <div class="callout">
+                Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous avez la possibilité d'introduire une réclamation auprès de la <strong>CNIL</strong> : <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener noreferrer">cnil.fr/fr/plaintes</a>
+            </div>
+        </section>
 
-    <section>
-        <h2>7. Cookies et traceurs</h2>
-        <p>Ce site <strong>ne dépose aucun cookie publicitaire ni traceur tiers</strong>.</p>
-        <p>Vercel Web Analytics et Vercel Speed Insights fonctionnent sans cookies — ils utilisent une signature technique anonymisée et non persistante, conforme aux lignes directrices de la CNIL pour les outils de mesure d'audience exemptés de consentement.</p>
-        <p>Seuls peuvent être présents :</p>
-        <ul>
-            <li>Des cookies strictement nécessaires au fonctionnement du site (aucun à ce jour).</li>
-        </ul>
-        <p>Vous pouvez à tout moment configurer votre navigateur pour bloquer ou supprimer les cookies. Consultez l'aide de votre navigateur (Chrome, Firefox, Safari, Edge) pour la procédure.</p>
-    </section>
+        <section>
+            <h2>7. Cookies et traceurs</h2>
+            <p>Ce site <strong>ne dépose aucun cookie publicitaire ni traceur tiers</strong>.</p>
+            <p>Vercel Web Analytics et Vercel Speed Insights fonctionnent sans cookies — ils utilisent une signature technique anonymisée et non persistante, conforme aux lignes directrices de la CNIL pour les outils de mesure d'audience exemptés de consentement.</p>
+            <p>Seuls peuvent être présents :</p>
+            <ul>
+                <li>Des cookies strictement nécessaires au fonctionnement du site (aucun à ce jour).</li>
+            </ul>
+            <p>Vous pouvez à tout moment configurer votre navigateur pour bloquer ou supprimer les cookies.</p>
+        </section>
 
-    <section>
-        <h2>8. Sécurité</h2>
-        <p>AiDN Agency met en œuvre toutes les mesures techniques et organisationnelles raisonnables pour protéger vos données contre l'accès non autorisé, la perte, la destruction ou l'altération. Notamment :</p>
-        <ul>
-            <li>Chiffrement HTTPS (TLS) sur l'ensemble du site</li>
-            <li>Hébergement chez un acteur certifié (Vercel)</li>
-            <li>Accès restreint aux emails professionnels</li>
-        </ul>
-        <p>Aucune transmission sur Internet ne pouvant être garantie 100% sûre, nous ne pouvons garantir une sécurité absolue.</p>
-    </section>
+        <section>
+            <h2>8. Sécurité</h2>
+            <p>AiDN Agency met en œuvre toutes les mesures techniques et organisationnelles raisonnables pour protéger vos données contre l'accès non autorisé, la perte, la destruction ou l'altération :</p>
+            <ul>
+                <li>Chiffrement HTTPS (TLS) sur l'ensemble du site</li>
+                <li>Hébergement chez un acteur certifié (Vercel)</li>
+                <li>Accès restreint aux emails professionnels</li>
+            </ul>
+            <p>Aucune transmission sur Internet ne pouvant être garantie 100% sûre, nous ne pouvons garantir une sécurité absolue.</p>
+        </section>
 
-    <section>
-        <h2>9. Modifications de cette politique</h2>
-        <p>Cette politique peut être mise à jour pour refléter des évolutions légales, techniques ou organisationnelles. La date de dernière mise à jour est indiquée en bas de page. En cas de modification substantielle, nous vous informerons par un moyen adapté (publication visible sur le site).</p>
-    </section>
+        <section>
+            <h2>9. Modifications de cette politique</h2>
+            <p>Cette politique peut être mise à jour pour refléter des évolutions légales, techniques ou organisationnelles. La date de dernière mise à jour est indiquée en bas de page. En cas de modification substantielle, nous vous informerons par un moyen adapté (publication visible sur le site).</p>
+        </section>
 
-    <section>
-        <h2>10. Contact</h2>
-        <p>Pour toute question relative à cette politique de confidentialité ou au traitement de vos données :</p>
-        <p>📧 <a href="mailto:aidn.contact@gmail.com">aidn.contact@gmail.com</a></p>
-        <p>Voir aussi nos <a href="mentions-legales.html">mentions légales</a>.</p>
-    </section>
+        <section>
+            <h2>10. Contact</h2>
+            <p>Pour toute question relative à cette politique de confidentialité ou au traitement de vos données :</p>
+            <p><a href="mailto:aidn.contact@gmail.com">aidn.contact@gmail.com</a></p>
+            <p>Voir aussi nos <a href="mentions-legales.html">mentions légales</a>.</p>
+        </section>
 
-    <p style="color:#737373;font-size:13px;text-align:center;margin-top:48px;">Dernière mise à jour : 21 avril 2026</p>
-</main>
+        <p class="updated">Dernière mise à jour — 21 avril 2026</p>
+    </main>
 
-<footer class="footer">
-    <p>© 2026 AiDN Agency · <a href="index.html">Accueil</a> · <a href="mentions-legales.html">Mentions légales</a> · <a href="politique-confidentialite.html">Confidentialité</a></p>
-</footer>
-
+    <footer class="foot">
+        © 2026 AiDN Agency · <a href="index.html">Accueil</a> · <a href="mentions-legales.html">Mentions légales</a> · <a href="politique-confidentialite.html">Confidentialité</a>
+    </footer>
 </body>
 </html>
