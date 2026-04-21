@@ -3,10 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AiDN Agency - Le Futur de l'Image</title>
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <title>AiDN Agency — Studio de direction artistique par l'IA</title>
+    <meta name="description" content="AiDN Agency : studio de direction artistique qui construit l'univers visuel des marques par l'IA. Campagnes, identité, rendu éditorial — zéro studio, zéro tournage.">
+    <meta name="author" content="AiDN Agency">
+    <meta name="keywords" content="direction artistique, IA, intelligence artificielle, image de marque, campagne publicitaire, identité visuelle, studio créatif, agence créative">
+
+    <link rel="canonical" href="https://www.aidnagency.fr/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AiDN Agency">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:url" content="https://www.aidnagency.fr/">
+    <meta property="og:title" content="AiDN Agency — Studio de direction artistique par l'IA">
+    <meta property="og:description" content="Studio de direction artistique. Nous construisons l'univers visuel des marques, par l'IA. +36 entreprises accompagnées.">
+    <meta property="og:image" content="https://res.cloudinary.com/dke6iy9pe/image/upload/c_fill,w_1200,h_630,g_auto,f_auto,q_auto/v1773284507/__b94k3c.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="AiDN Agency — Direction artistique par l'IA">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AiDN Agency — Studio de direction artistique par l'IA">
+    <meta name="twitter:description" content="Studio de direction artistique. Nous construisons l'univers visuel des marques, par l'IA.">
+    <meta name="twitter:image" content="https://res.cloudinary.com/dke6iy9pe/image/upload/c_fill,w_1200,h_630,g_auto,f_auto,q_auto/v1773284507/__b94k3c.jpg">
+    <meta name="twitter:image:alt" content="AiDN Agency — Direction artistique par l'IA">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AiDN Agency",
+      "url": "https://www.aidnagency.fr/",
+      "logo": "https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773272750/Logo_gauche_Texte_Noir_-_Aidn_bdc6ml.png",
+      "description": "Studio de direction artistique qui construit l'univers visuel des marques par l'IA.",
+      "email": "aidn.contact@gmail.com",
+      "areaServed": ["Paris", "Dubai", "Miami"],
+      "sameAs": []
+    }
+    </script>
     <style>
         * {
             margin: 0;
@@ -25,11 +72,61 @@
             --text-muted: #737373;
         }
 
+        html {
+            overflow-x: clip;
+            scrollbar-gutter: stable;
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: clip;
+            width: 100%;
+            max-width: 100vw;
+            position: relative;
+        }
+
+        img, svg, video, canvas {
+            max-width: 100%;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Skip link accessibilité */
+        .skip-link {
+            position: absolute;
+            top: -48px;
+            left: 8px;
+            background: var(--accent);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            z-index: 10000;
+            transition: top 0.2s;
+        }
+        .skip-link:focus {
+            top: 8px;
+            outline: 3px solid white;
+            outline-offset: 2px;
+        }
+
+        /* Focus visible */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 4px;
         }
 
         h1, h2, h3, h4 { font-weight: 600; }
@@ -314,17 +411,20 @@
             border-radius: 24px;
             padding: 24px 0;
             overflow: hidden;
+            max-width: calc(100vw - 32px);
         }
         .marquee {
             display: flex;
             animation: marquee 40s linear infinite;
             white-space: nowrap;
+            will-change: transform;
         }
         .marquee-content {
             display: flex;
             align-items: center;
             gap: 32px;
             padding: 0 16px;
+            flex-shrink: 0;
         }
         .marquee-content span {
             font-size: 14px;
@@ -661,7 +761,7 @@
 /* 👉 Remplacer les URLs ci-dessous par tes visuels principaux (hero de chaque projet) */
 .project-card:nth-child(1) {
     /* MAISON ORSOLA - flacon rouge / cocktail */
-    background-image: url("https://res.cloudinary.com/dke6iy9pe/image/upload/v1776724061/hf_20260206_013554_90ad4e2d-57bf-4e0f-b09a-74aaa5c032e9_cmhvn7.jpg");
+    background-image: url("https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1776724061/hf_20260206_013554_90ad4e2d-57bf-4e0f-b09a-74aaa5c032e9_cmhvn7.jpg");
 }
 .project-card:nth-child(2) {
     /* KOMBUCHA - canette lifestyle plage */
@@ -927,12 +1027,14 @@
         .testimonials-scroll-wrapper {
             overflow: hidden;
             width: 100%;
+            max-width: 100%;
         }
         .testimonials-scroll {
             display: flex;
             gap: 24px;
             animation: scrollTestimonials 60s linear infinite;
             width: max-content;
+            will-change: transform;
         }
         @keyframes scrollTestimonials {
             0% { transform: translateX(0); }
@@ -1348,10 +1450,24 @@
             border-top: 1px solid #e5e5e5;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
             gap: 16px;
             font-size: 14px;
             color: var(--text-muted);
+        }
+        .footer-legal {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-legal a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-legal a:hover {
+            color: var(--accent);
         }
 
         /* Responsive */
@@ -1724,15 +1840,54 @@
                 font-size: 15px;
             }
         }
+
+        /* Très petits écrans (iPhone SE 1ère gen, etc.) */
+        @media (max-width: 380px) {
+            .container { padding: 0 12px; }
+            .hero { margin: 8px; }
+            .hero-inner { padding: 40px 12px 48px; }
+            .hero h1 { font-size: 26px; }
+            .hero p { font-size: 14px; }
+            .btn-primary,
+            .btn-whatsapp,
+            .btn-secondary,
+            .btn-outline {
+                padding: 12px 18px;
+                font-size: 14px;
+            }
+            .marquee-section { margin: 8px; }
+            .expandable-section { margin: 8px; }
+            .testimonials-section { margin: 8px; }
+            .testimonial-card {
+                min-width: 240px;
+                max-width: 240px;
+            }
+            .header-inner {
+                padding: 12px 16px;
+            }
+            .logo img { width: 90px; height: auto; }
+        }
+
+        /* Très grands écrans (>1920px) */
+        @media (min-width: 1920px) {
+            .container { max-width: 1440px; }
+        }
+
+        /* Tablettes en portrait */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero h1 { font-size: clamp(40px, 7vw, 56px); }
+        }
     </style>
 </head>
 <body>
 
+    <a href="#main" class="skip-link">Aller au contenu principal</a>
+
     <!-- Header -->
     <header class="header" id="header">
         <div class="header-inner">
-            <a href="#" class="logo">
-                <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773272750/Logo_gauche_Texte_Noir_-_Aidn_bdc6ml.png" alt="AiDN Logo">
+            <a href="#" class="logo" aria-label="AiDN Agency — retour en haut">
+                <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773272750/Logo_gauche_Texte_Noir_-_Aidn_bdc6ml.png" alt="AiDN Agency" width="132" height="50" decoding="async" style="width:auto">
             </a>
             <nav class="nav">
                 <a href="#approche">Approche</a>
@@ -1742,12 +1897,12 @@
                 <a href="#equipe">Équipe</a>
             </nav>
             <div class="header-cta">
-                <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20démarrer%20un%20projet." class="btn-primary" target="_blank">
+                <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20démarrer%20un%20projet." class="btn-primary" target="_blank" rel="noopener noreferrer">
                     Démarrer
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
-                <button class="mobile-menu-btn" onclick="toggleMenu()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                 </button>
             </div>
         </div>
@@ -1757,9 +1912,11 @@
             <a href="#realisations" onclick="toggleMenu()">Réalisations</a>
             <a href="#offres" onclick="toggleMenu()">Offres</a>
             <a href="#equipe" onclick="toggleMenu()">Équipe</a>
-            <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20démarrer%20un%20projet." class="btn-primary" style="margin-top: 16px; justify-content: center;" target="_blank">Démarrer →</a>
+            <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20démarrer%20un%20projet." class="btn-primary" style="margin-top: 16px; justify-content: center;" target="_blank" rel="noopener noreferrer">Démarrer →</a>
         </div>
     </header>
+
+    <main id="main">
 
     <!-- Hero -->
     <section class="hero">
@@ -1772,7 +1929,7 @@
             <h1>Nous sommes<br><span class="accent">le futur</span> de l'image.</h1>
             <p>Un studio de direction artistique. Nous construisons l'univers visuel des marques, par l'IA.</p>
             <div class="hero-buttons">
-                <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20démarrer%20un%20projet." class="btn-primary" target="_blank">
+                <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20démarrer%20un%20projet." class="btn-primary" target="_blank" rel="noopener noreferrer">
                     Lancer mon projet
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -1927,7 +2084,7 @@
                             </div>
                         </div>
                         <div class="service-details-image">
-                            <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773284509/__8_h4siyg.jpg" alt="Diagnostic Stratégique">
+                            <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773284509/__8_h4siyg.jpg" alt="Diagnostic Stratégique" loading="lazy" decoding="async">
                         </div>
                     </div>
                 </div>
@@ -1957,7 +2114,7 @@
                             </div>
                         </div>
                         <div class="service-details-image">
-                            <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773284507/__b94k3c.jpg" alt="Direction Artistique">
+                            <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773284507/__b94k3c.jpg" alt="Direction Artistique" loading="lazy" decoding="async">
                         </div>
                     </div>
 
@@ -1986,7 +2143,7 @@
                             </div>
                         </div>
                         <div class="service-details-image">
-                            <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773284506/__1_gtvpbx.jpg" alt="Film Publicitaire">
+                            <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773284506/__1_gtvpbx.jpg" alt="Film Publicitaire" loading="lazy" decoding="async">
                         </div>
                     </div>
                 </div>
@@ -2014,7 +2171,7 @@
                             </div>
                         </div>
                         <div class="service-details-image">
-                            <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773284826/Calm_in_the_Chaos_joynho.jpg" alt="Expansion & Assetisation">
+                            <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773284826/Calm_in_the_Chaos_joynho.jpg" alt="Expansion & Assetisation" loading="lazy" decoding="async">
                         </div>
                     </div>
                 </div>
@@ -2042,7 +2199,7 @@
                             </div>
                         </div>
                         <div class="service-details-image">
-                            <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773284506/Visual_research_009__goodhood_zokyxb.jpg" alt="Conseil Stratégique">
+                            <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773284506/Visual_research_009__goodhood_zokyxb.jpg" alt="Conseil Stratégique" loading="lazy" decoding="async">
                         </div>
                     </div>
                 </div>
@@ -2122,7 +2279,7 @@
                     <div class="testimonial-card">
                         <p class="testimonial-quote">"Ils ont traduit notre intuition en langage visuel. Rares sont les studios capables de ça."</p>
                         <div class="testimonial-author">
-                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773278026/7_r3nshm.png" alt="Marie Laurent">
+                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773278026/7_r3nshm.png" alt="Marie Laurent" loading="lazy" decoding="async" width="48" height="48">
                             <div class="testimonial-info">
                                 <h4>Marie L.</h4>
                                 <p>Directrice Marketing</p>
@@ -2132,7 +2289,7 @@
                     <div class="testimonial-card">
                         <p class="testimonial-quote">"Une lecture juste du premium. Ils ont saisi ce que nous voulions avant même qu'on le formule."</p>
                         <div class="testimonial-author">
-                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773278029/1_ipzyrx.png" alt="William R.">
+                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773278029/1_ipzyrx.png" alt="William R." loading="lazy" decoding="async" width="48" height="48">
                             <div class="testimonial-info">
                                 <h4>William R.</h4>
                                 <p>Responsable Acquisition</p>
@@ -2142,7 +2299,7 @@
                     <div class="testimonial-card">
                         <p class="testimonial-quote">"La vitesse sans la précipitation. Chaque image est pensée — pas produite à la chaîne."</p>
                         <div class="testimonial-author">
-                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773278027/5_u6xuev.png" alt="Antoine M.">
+                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773278027/5_u6xuev.png" alt="Antoine M." loading="lazy" decoding="async" width="48" height="48">
                             <div class="testimonial-info">
                                 <h4>Antoine M.</h4>
                                 <p>Head of Marketing</p>
@@ -2152,7 +2309,7 @@
                     <div class="testimonial-card">
                         <p class="testimonial-quote">"Nous travaillions avec des studios traditionnels. AiDN joue dans une autre cour — plus libre, plus précise."</p>
                         <div class="testimonial-author">
-                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773278027/3_kxde4e.png" alt="Alexandre D.">
+                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773278027/3_kxde4e.png" alt="Alexandre D." loading="lazy" decoding="async" width="48" height="48">
                             <div class="testimonial-info">
                                 <h4>Alexandre D.</h4>
                                 <p>Directeur Créatif</p>
@@ -2162,7 +2319,7 @@
                     <div class="testimonial-card">
                         <p class="testimonial-quote">"Ils n'ont pas illustré notre marque. Ils l'ont révélée."</p>
                         <div class="testimonial-author">
-                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773278027/6_rm6l4q.png" alt="Nicolas M.">
+                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773278027/6_rm6l4q.png" alt="Nicolas M." loading="lazy" decoding="async" width="48" height="48">
                             <div class="testimonial-info">
                                 <h4>Nicolas M.</h4>
                                 <p>VP Communication</p>
@@ -2172,7 +2329,7 @@
                     <div class="testimonial-card">
                         <p class="testimonial-quote">"Ils ne commencent pas par l'image. Ils commencent par la question — et c'est ça qui change tout."</p>
                         <div class="testimonial-author">
-                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773278026/9_eaogen.png" alt="Émilie M.">
+                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773278026/9_eaogen.png" alt="Émilie M." loading="lazy" decoding="async" width="48" height="48">
                             <div class="testimonial-info">
                                 <h4>Émilie M.</h4>
                                 <p>Head of Content</p>
@@ -2182,7 +2339,7 @@
                     <div class="testimonial-card">
                         <p class="testimonial-quote">"Ce qui nous a pris trois mois ailleurs s'est fait en dix jours chez eux — sans rien sacrifier."</p>
                         <div class="testimonial-author">
-                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773278027/4_s6pcm8.png" alt="Julien H.">
+                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773278027/4_s6pcm8.png" alt="Julien H." loading="lazy" decoding="async" width="48" height="48">
                             <div class="testimonial-info">
                                 <h4>Julien H.</h4>
                                 <p>Head of Growth</p>
@@ -2193,7 +2350,7 @@
                     <div class="testimonial-card">
                         <p class="testimonial-quote">"Ils ont traduit notre intuition en langage visuel. Rares sont les studios capables de ça."</p>
                         <div class="testimonial-author">
-                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773278026/7_r3nshm.png" alt="Marie Laurent">
+                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773278026/7_r3nshm.png" alt="Marie Laurent" loading="lazy" decoding="async" width="48" height="48">
                             <div class="testimonial-info">
                                 <h4>Marie L.</h4>
                                 <p>Directrice Marketing</p>
@@ -2203,7 +2360,7 @@
                     <div class="testimonial-card">
                         <p class="testimonial-quote">"Une lecture juste du premium. Ils ont saisi ce que nous voulions avant même qu'on le formule."</p>
                         <div class="testimonial-author">
-                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773278029/1_ipzyrx.png" alt="William R.">
+                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773278029/1_ipzyrx.png" alt="William R." loading="lazy" decoding="async" width="48" height="48">
                             <div class="testimonial-info">
                                 <h4>William R.</h4>
                                 <p>Responsable Acquisition</p>
@@ -2213,7 +2370,7 @@
                     <div class="testimonial-card">
                         <p class="testimonial-quote">"La vitesse sans la précipitation. Chaque image est pensée — pas produite à la chaîne."</p>
                         <div class="testimonial-author">
-                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773278027/5_u6xuev.png" alt="Antoine M.">
+                            <img class="testimonial-avatar-img" src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773278027/5_u6xuev.png" alt="Antoine M." loading="lazy" decoding="async" width="48" height="48">
                             <div class="testimonial-info">
                                 <h4>Antoine M.</h4>
                                 <p>Head of Marketing</p>
@@ -2238,7 +2395,7 @@
         <div class="team-grid container">
             <div class="team-card">
                 <div class="team-avatar">
-                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773281491/__3_ab5foh.jpg" alt="Terry">
+                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773281491/__3_ab5foh.jpg" alt="Terry" loading="lazy" decoding="async">
                 </div>
                 <h3>Terry</h3>
                 <p class="role">Stratégie de marque & Consulting Senior</p>
@@ -2248,7 +2405,7 @@
             </div>
             <div class="team-card">
                 <div class="team-avatar">
-                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773281697/__5_rsemtk.jpg" alt="Golle">
+                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773281697/__5_rsemtk.jpg" alt="Golle" loading="lazy" decoding="async">
                 </div>
                 <h3>Golle</h3>
                 <p class="role">Direction artistique & Image</p>
@@ -2257,7 +2414,7 @@
             </div>
             <div class="team-card">
                 <div class="team-avatar">
-                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/v1773280935/__1_noctsx.jpg" alt="Ben">
+                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto/v1773280935/__1_noctsx.jpg" alt="Ben" loading="lazy" decoding="async">
                 </div>
                 <h3>Ben</h3>
                 <p class="role">Narration & Mythe de Marque</p>
@@ -2291,7 +2448,7 @@
                         <div class="pricing-feature"><span>Série de visuels hero (3 à 5)</span></div>
                         <div class="pricing-feature"><span>Une série de révisions incluse</span></div>
                     </div>
-                    <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20échanger%20sur%20un%20projet%20de%20direction%20artistique." class="btn-secondary" target="_blank">Parlons de votre projet</a>
+                    <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20échanger%20sur%20un%20projet%20de%20direction%20artistique." class="btn-secondary" target="_blank" rel="noopener noreferrer">Parlons de votre projet</a>
                 </div>
                 <div class="pricing-card popular">
                     <div class="pricing-card-header">
@@ -2307,7 +2464,7 @@
                         <div class="pricing-feature"><span>Déclinaisons social, print, e-commerce</span></div>
                         <div class="pricing-feature"><span>Option : un court motion éditorial</span></div>
                     </div>
-                    <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20échanger%20sur%20un%20projet%20de%20campagne%20visuelle." class="btn-whatsapp" target="_blank">Parlons de votre projet</a>
+                    <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20échanger%20sur%20un%20projet%20de%20campagne%20visuelle." class="btn-whatsapp" target="_blank" rel="noopener noreferrer">Parlons de votre projet</a>
                 </div>
                 <div class="pricing-card">
                     <div class="pricing-card-header">
@@ -2322,7 +2479,7 @@
                         <div class="pricing-feature"><span>Deux campagnes saisonnières</span></div>
                         <div class="pricing-feature"><span>Accompagnement D.A. continu (3 mois)</span></div>
                     </div>
-                    <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20échanger%20sur%20un%20projet%20de%20rebranding." class="btn-secondary" target="_blank">Parlons de votre projet</a>
+                    <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20échanger%20sur%20un%20projet%20de%20rebranding." class="btn-secondary" target="_blank" rel="noopener noreferrer">Parlons de votre projet</a>
                 </div>
             </div>
             <p class="pricing-note">Tarif sur devis uniquement.</p>
@@ -2413,7 +2570,7 @@
                 <div class="contact-info">
                     <div class="contact-info-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        <span><a class="__cf_email__" data-cfemail="5f373a3333301f3e363b31713e383a313c26">Aidn.contact@gmail.com</a></span>
+                        <span><a href="mailto:aidn.contact@gmail.com" style="color:inherit;text-decoration:none">aidn.contact@gmail.com</a></span>
                     </div>
                     <div class="contact-info-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -2426,7 +2583,7 @@
                 </div>
             </div>
             <div class="contact-cta">
-                <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20réserver%20un%20appel%20découverte." class="btn-whatsapp" target="_blank">
+                <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20réserver%20un%20appel%20découverte." class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                     Réserver un appel découverte
                 </a>
@@ -2435,10 +2592,17 @@
         </div>
     </section>
 
+    </main>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-bottom">
             <span>© 2026 AiDN Agency · Tous droits réservés</span>
+            <nav class="footer-legal" aria-label="Liens légaux">
+                <a href="mentions-legales.html">Mentions légales</a>
+                <span aria-hidden="true">·</span>
+                <a href="politique-confidentialite.html">Confidentialité</a>
+            </nav>
             <span>Nous sommes le futur de l'image.</span>
         </div>
     </footer>
@@ -2490,7 +2654,7 @@
                 </div>
                 <div class="project-modal-cta">
                     <p>Vous voulez un projet avec cette exigence visuelle ?</p>
-                    <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20démarrer%20un%20projet." class="btn-whatsapp" target="_blank">
+                    <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20démarrer%20un%20projet." class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
                         Démarrer mon projet
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </a>
@@ -2513,7 +2677,12 @@
     // Mobile menu toggle
     function toggleMenu() {
         const menu = document.getElementById('mobileMenu');
-        menu.classList.toggle('active');
+        const btn = document.querySelector('.mobile-menu-btn');
+        const isOpen = menu.classList.toggle('active');
+        if (btn) {
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            btn.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
+        }
     }
 
     // Expandable cards
@@ -2739,5 +2908,17 @@
         }
     });
 </script>
+
+    <!-- Vercel Web Analytics -->
+    <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <!-- Vercel Speed Insights -->
+    <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
