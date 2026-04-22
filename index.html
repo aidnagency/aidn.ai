@@ -293,6 +293,23 @@
     @media (prefers-reduced-motion: reduce) {
         .hero-video { display: none; }
     }
+    /* Hero text en blanc sur vidéo sombre */
+    .hero { color: var(--paper); }
+    .hero .hero-meta { color: rgba(242, 239, 232, 0.75); }
+    .hero .hero-meta b { color: var(--paper); }
+    .hero .hero-badge {
+        background: rgba(14, 14, 14, 0.35);
+        color: var(--paper);
+        border-color: rgba(242, 239, 232, 0.25);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+    }
+    .hero .cta-ghost { color: var(--paper); border-color: var(--paper); }
+    .hero .cta-ghost:hover { background: var(--paper); color: var(--ink); }
+    .hero .scroll-hint { color: rgba(242, 239, 232, 0.7); }
+    .hero .scroll-hint::after {
+        background: linear-gradient(to bottom, rgba(242, 239, 232, 0.7), transparent);
+    }
     .hero-meta {
         display: flex;
         justify-content: space-between;
@@ -2284,16 +2301,6 @@
         </div>
 
         <div class="scroll-hint">Scroll</div>
-    </section>
-
-    <section class="zoom" aria-label="Présentation visuelle">
-        <div class="zoom-sticky">
-            <div class="zoom-label">— Fait par IA, pensé par humains —</div>
-            <div class="zoom-frame">
-                <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/c_fill,w_1600,h_900,f_auto,q_auto/v1773284507/__b94k3c.jpg" alt="Direction artistique éditoriale AiDN Agency" loading="lazy">
-            </div>
-            <div class="zoom-caption">Zéro studio. Zéro tournage. Juste l'image.</div>
-        </div>
     </section>
 
     <div class="marquee-wrap" aria-hidden="true">
