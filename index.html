@@ -444,7 +444,7 @@
     }
     @media (max-width: 768px) { .scroll-hint { display: none; } }
 
-    .zoom { height: 280vh; position: relative; }
+    .zoom { height: 360vh; position: relative; }
     .zoom-sticky {
         position: sticky; top: 0;
         height: 100vh;
@@ -463,9 +463,52 @@
         text-transform: uppercase;
         letter-spacing: 0.15em;
         color: var(--muted);
-        z-index: 2;
+        z-index: 4;
+    }
+    .zoom-floats {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+    }
+    .float-img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: var(--w, 14vw);
+        aspect-ratio: var(--ar, 3/4);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px -20px rgba(0,0,0,0.18), 0 10px 30px -10px rgba(0,0,0,0.12);
+        will-change: transform, opacity;
+        transform: translate(-50%, -50%) translate(var(--x), var(--y)) rotate(var(--r, 0deg)) scale(0.6);
+        opacity: 0;
+        animation: floatPar linear;
+        animation-timeline: view();
+        animation-range: entry 0% cover 60%;
+    }
+    .float-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    @keyframes floatPar {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -50%) translate(calc(var(--x) * 0.35), calc(var(--y) * 0.35)) rotate(0deg) scale(0.55);
+        }
+        18% {
+            opacity: 1;
+            transform: translate(-50%, -50%) translate(var(--x), var(--y)) rotate(var(--r, 0deg)) scale(1);
+        }
+        55% {
+            opacity: 1;
+            transform: translate(-50%, -50%) translate(calc(var(--x) * var(--p, 1.25)), calc(var(--y) * var(--p, 1.25))) rotate(var(--r, 0deg)) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -50%) translate(calc(var(--x) * var(--pe, 1.9)), calc(var(--y) * var(--pe, 1.9))) rotate(var(--r, 0deg)) scale(1.05);
+        }
     }
     .zoom-frame {
+        position: relative;
+        z-index: 2;
         width: 42vw;
         aspect-ratio: 16/9;
         border-radius: 32px;
@@ -473,13 +516,25 @@
         will-change: transform;
         animation: zoomIn linear;
         animation-timeline: view();
-        animation-range: entry 0% cover 50%;
+        animation-range: entry 20% cover 60%;
     }
     @keyframes zoomIn {
         0% { transform: scale(0.55); border-radius: 48px; }
         100% { transform: scale(2.8); border-radius: 0; }
     }
-    .zoom-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .zoom-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        will-change: transform;
+        animation: zoomImgPar linear;
+        animation-timeline: view();
+        animation-range: entry 20% cover 60%;
+    }
+    @keyframes zoomImgPar {
+        0% { transform: scale(1.15) translateY(-4%); }
+        100% { transform: scale(1) translateY(4%); }
+    }
     .zoom-caption {
         position: absolute;
         bottom: 48px;
@@ -491,10 +546,10 @@
         text-align: center;
         color: var(--paper);
         mix-blend-mode: difference;
-        z-index: 2;
+        z-index: 4;
         animation: captionFade linear;
         animation-timeline: view();
-        animation-range: entry 30% cover 60%;
+        animation-range: entry 40% cover 70%;
         max-width: 80vw;
     }
     @keyframes captionFade {
@@ -502,11 +557,13 @@
         100% { opacity: 1; transform: translate(-50%, 0); }
     }
     @media (max-width: 768px) {
+        .zoom { height: 320vh; }
         .zoom-frame { width: 72vw; }
         @keyframes zoomIn {
             0% { transform: scale(0.7); border-radius: 32px; }
             100% { transform: scale(2.2); border-radius: 0; }
         }
+        .float-img { border-radius: 10px; box-shadow: 0 18px 36px -14px rgba(0,0,0,0.2); width: calc(var(--w, 14vw) * 1.8); }
     }
 
 /* Feed (grille 8 visuels) */
@@ -2272,6 +2329,26 @@
     <section class="zoom" aria-label="Présentation visuelle">
         <div class="zoom-sticky">
             <div class="zoom-label">— Fait par IA, pensé par humains —</div>
+            <div class="zoom-floats" aria-hidden="true">
+                <div class="float-img" style="--x:-34vw;--y:-26vh;--w:13vw;--ar:3/4;--r:-6deg;--p:1.35;--pe:2.1;">
+                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto,w_600/v1773284509/__8_h4siyg.jpg" alt="" loading="lazy">
+                </div>
+                <div class="float-img" style="--x:32vw;--y:-28vh;--w:12vw;--ar:4/5;--r:7deg;--p:1.3;--pe:2.0;">
+                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto,w_600/v1773284506/__1_gtvpbx.jpg" alt="" loading="lazy">
+                </div>
+                <div class="float-img" style="--x:-30vw;--y:22vh;--w:11vw;--ar:1/1;--r:4deg;--p:1.35;--pe:2.2;">
+                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto,w_500/v1773284506/Visual_research_009__goodhood_zokyxb.jpg" alt="" loading="lazy">
+                </div>
+                <div class="float-img" style="--x:34vw;--y:24vh;--w:13vw;--ar:3/4;--r:-5deg;--p:1.3;--pe:2.05;">
+                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto,w_600/v1773284826/Calm_in_the_Chaos_joynho.jpg" alt="" loading="lazy">
+                </div>
+                <div class="float-img" style="--x:-40vw;--y:-4vh;--w:10vw;--ar:4/5;--r:8deg;--p:1.45;--pe:2.3;">
+                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto,w_500/v1773284506/__1_gtvpbx.jpg" alt="" loading="lazy">
+                </div>
+                <div class="float-img" style="--x:40vw;--y:2vh;--w:10vw;--ar:3/4;--r:-9deg;--p:1.45;--pe:2.35;">
+                    <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/f_auto,q_auto,w_500/v1773284509/__8_h4siyg.jpg" alt="" loading="lazy">
+                </div>
+            </div>
             <div class="zoom-frame">
                 <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/c_fill,w_1600,h_900,f_auto,q_auto/v1773284507/__b94k3c.jpg" alt="Direction artistique éditoriale AiDN Agency" loading="lazy">
             </div>
@@ -2809,15 +2886,55 @@
     if (!CSS.supports('animation-timeline: view()')) {
         const zoomSection = document.querySelector('.zoom');
         const zoomFrame = document.querySelector('.zoom-frame');
+        const zoomImg = zoomFrame && zoomFrame.querySelector('img');
         const zoomCaption = document.querySelector('.zoom-caption');
+        const floats = document.querySelectorAll('.zoom-floats .float-img');
         if (zoomSection && zoomFrame) {
+            const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
             const onScroll = () => {
                 const rect = zoomSection.getBoundingClientRect();
                 const total = rect.height - innerHeight;
-                const progress = Math.max(0, Math.min(1, -rect.top / total));
-                zoomFrame.style.transform = `scale(${0.55 + progress * 2.25})`;
-                zoomFrame.style.borderRadius = `${Math.max(0, 48 - progress * 48)}px`;
-                if (zoomCaption) zoomCaption.style.opacity = Math.max(0, Math.min(1, (progress - 0.3) * 3));
+                const progress = clamp(-rect.top / total, 0, 1);
+                const zp = clamp((progress - 0.2) / 0.4, 0, 1);
+                zoomFrame.style.transform = `scale(${0.55 + zp * 2.25})`;
+                zoomFrame.style.borderRadius = `${Math.max(0, 48 - zp * 48)}px`;
+                if (zoomImg) {
+                    const ip = zp;
+                    zoomImg.style.transform = `scale(${1.15 - ip * 0.15}) translateY(${-4 + ip * 8}%)`;
+                }
+                if (zoomCaption) zoomCaption.style.opacity = clamp((progress - 0.4) * 3, 0, 1);
+                floats.forEach(el => {
+                    const s = el.style;
+                    const px = parseFloat(getComputedStyle(el).getPropertyValue('--x')) || 0;
+                    const py = parseFloat(getComputedStyle(el).getPropertyValue('--y')) || 0;
+                    const r = getComputedStyle(el).getPropertyValue('--r') || '0deg';
+                    const pMid = parseFloat(getComputedStyle(el).getPropertyValue('--p')) || 1.25;
+                    const pEnd = parseFloat(getComputedStyle(el).getPropertyValue('--pe')) || 1.9;
+                    let opacity, mx, my, scale;
+                    const xUnit = getComputedStyle(el).getPropertyValue('--x').trim().replace(/[0-9.\-]/g, '') || 'vw';
+                    const yUnit = getComputedStyle(el).getPropertyValue('--y').trim().replace(/[0-9.\-]/g, '') || 'vh';
+                    if (progress < 0.18) {
+                        const t = progress / 0.18;
+                        opacity = t;
+                        const f = 0.35 + t * 0.65;
+                        mx = px * f; my = py * f;
+                        scale = 0.55 + t * 0.45;
+                    } else if (progress < 0.55) {
+                        const t = (progress - 0.18) / 0.37;
+                        opacity = 1;
+                        const f = 1 + t * (pMid - 1);
+                        mx = px * f; my = py * f;
+                        scale = 1;
+                    } else {
+                        const t = clamp((progress - 0.55) / 0.45, 0, 1);
+                        opacity = 1 - t;
+                        const f = pMid + t * (pEnd - pMid);
+                        mx = px * f; my = py * f;
+                        scale = 1 + t * 0.05;
+                    }
+                    s.opacity = opacity;
+                    s.transform = `translate(-50%, -50%) translate(${mx}${xUnit}, ${my}${yUnit}) rotate(${r}) scale(${scale})`;
+                });
             };
             addEventListener('scroll', onScroll, { passive: true });
             onScroll();
