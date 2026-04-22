@@ -624,6 +624,23 @@
     transition: transform 0.7s var(--ease);
 }
 .bento-item:hover img { transform: scale(1.05); }
+@media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+        .bento-item img {
+            animation: bentoScrollZoom linear both;
+            animation-timeline: view();
+            animation-range: cover 0% cover 100%;
+            transition: none;
+            will-change: transform;
+        }
+        @keyframes bentoScrollZoom {
+            0%   { transform: scale(1.0); }
+            50%  { transform: scale(1.07); }
+            100% { transform: scale(1.0); }
+        }
+        .bento-item:hover img { animation-play-state: paused; }
+    }
+}
 .bento-overlay { display: none; }
 
 /* Image Lightbox */
