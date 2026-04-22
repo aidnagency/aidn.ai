@@ -46,6 +46,7 @@ local-*.jpeg
 
 # Sources d'images non optimisées (gardées en local, optimisées copiées dans assets/)
 1. Images édités/
+2. Images services/
 
 # Sources vidéo non optimisées (originaux HEVC gardés en local, web copies dans assets/video/)
 /video/
