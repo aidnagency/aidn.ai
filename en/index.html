@@ -82,6 +82,8 @@
         --ink: #0E0E0E;
         --paper: #F2EFE8;
         --orange: #FF5B0C;
+        --red: #C8261A;
+        --green: #1F6F43;
         --muted: #8A8680;
         --muted-dark: #A8A39A;
         --line: rgba(14,14,14,0.12);
@@ -1176,7 +1178,11 @@
         padding: 40px;
         transition: transform 0.5s var(--ease), border-color 0.4s var(--ease);
     }
-    .approche-card:hover { transform: translateY(-4px); border-color: var(--ink); }
+    .approche-card:hover { transform: translateY(-4px); }
+    .approche-card:has(.approche-tag.red) { border-color: var(--red); }
+    .approche-card:has(.approche-tag.red):hover { border-color: var(--red); }
+    .approche-card:has(.approche-tag.green) { border-color: var(--green); }
+    .approche-card:has(.approche-tag.green):hover { border-color: var(--green); }
     .approche-tag {
         display: inline-flex;
         align-items: center;
@@ -1188,13 +1194,15 @@
         margin-bottom: 32px;
         color: var(--muted);
     }
+    .approche-tag.red { color: var(--red); }
+    .approche-tag.green { color: var(--green); }
     .approche-tag::before {
         content: '';
         width: 8px; height: 8px;
         border-radius: 50%;
     }
-    .approche-tag.red::before { background: var(--muted); }
-    .approche-tag.green::before { background: var(--orange); }
+    .approche-tag.red::before { background: var(--red); }
+    .approche-tag.green::before { background: var(--green); }
     .approche-card h3 {
         font-family: var(--sans);
         font-weight: 600;
@@ -1204,12 +1212,12 @@
         margin-bottom: 32px;
     }
     .approche-card h3 .serif { font-family: var(--serif); font-style: italic; font-weight: 400; }
-    .approche-card h3 .red { color: var(--ink); }
-    .approche-card h3 .green { color: var(--orange); }
+    .approche-card h3 .red { color: var(--red); }
+    .approche-card h3 .green { color: var(--green); }
 
     .problem-list { display: flex; flex-direction: column; }
     .problem-item {
-        border-top: 1px solid var(--line);
+        border-top: 1px solid rgba(200, 38, 26, 0.2);
         cursor: pointer;
     }
     .problem-item:first-child { border-top: 0; }
@@ -1223,7 +1231,7 @@
     .problem-num {
         font-family: var(--mono);
         font-size: 13px;
-        color: var(--muted);
+        color: var(--red);
     }
     .problem-item h4 {
         font-family: var(--sans);
@@ -1234,15 +1242,15 @@
     }
     .problem-chev {
         width: 28px; height: 28px;
-        border: 1px solid var(--line);
+        border: 1px solid var(--red);
         border-radius: 50%;
         display: grid;
         place-items: center;
-        color: var(--muted);
+        color: var(--red);
         transition: transform 0.4s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
     }
-    .problem-item:hover .problem-chev { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-    .problem-item.open .problem-chev { transform: rotate(180deg); background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .problem-item:hover .problem-chev { background: var(--red); color: var(--paper); border-color: var(--red); }
+    .problem-item.open .problem-chev { transform: rotate(180deg); background: var(--red); color: var(--paper); border-color: var(--red); }
     .problem-body {
         max-height: 0;
         overflow: hidden;
@@ -1272,7 +1280,7 @@
         font-size: 13px;
         font-weight: 500;
     }
-    .solution-item svg { color: var(--orange); flex-shrink: 0; }
+    .solution-item svg { color: var(--green); flex-shrink: 0; }
     .solution-lead {
         font-size: 15px;
         color: var(--muted);
@@ -2578,7 +2586,7 @@
 
     <section id="services" class="services">
         <div class="services-head">
-            <h2 class="reveal"><span class="reveal-line"><span>What we</span></span><br><span class="reveal-line" style="--d:0.1s"><span>actually <span class="serif hl">build</span></span></span></h2>
+            <h2 class="reveal"><span class="reveal-line"><span>Our <span class="serif hl">services</span></span></span></h2>
         </div>
 
         <div class="service-accordion">
