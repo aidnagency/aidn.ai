@@ -554,17 +554,15 @@
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 180px;
     gap: 10px;
 }
-@media (min-width: 1200px) { .bento-grid { grid-auto-rows: 200px; } }
-@media (min-width: 1600px) { .bento-grid { grid-auto-rows: 220px; } }
 .bento-item {
     position: relative;
     overflow: hidden;
     background: #111;
     border-radius: 10px;
     cursor: zoom-in;
+    aspect-ratio: 4 / 5;
     transition: transform 0.4s var(--ease);
 }
 .bento-item:hover { transform: translateY(-3px); }
@@ -605,19 +603,6 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
 }
-/* Bento spans — 4 cols × 6 rows = 24 cells for 12 items */
-.bento-item:nth-child(1)  { grid-column: span 1; grid-row: span 2; }
-.bento-item:nth-child(2)  { grid-column: span 2; grid-row: span 2; }
-.bento-item:nth-child(3)  { grid-column: span 1; grid-row: span 2; }
-.bento-item:nth-child(4)  { grid-column: span 1; grid-row: span 1; }
-.bento-item:nth-child(5)  { grid-column: span 1; grid-row: span 1; }
-.bento-item:nth-child(6)  { grid-column: span 1; grid-row: span 1; }
-.bento-item:nth-child(7)  { grid-column: span 1; grid-row: span 1; }
-.bento-item:nth-child(8)  { grid-column: span 2; grid-row: span 2; }
-.bento-item:nth-child(9)  { grid-column: span 1; grid-row: span 2; }
-.bento-item:nth-child(10) { grid-column: span 1; grid-row: span 2; }
-.bento-item:nth-child(11) { grid-column: span 2; grid-row: span 1; }
-.bento-item:nth-child(12) { grid-column: span 2; grid-row: span 1; }
 
 /* Image Lightbox */
 .img-lightbox {
@@ -1284,27 +1269,20 @@
             .contact-inner { grid-template-columns: 1fr; text-align: center; }
             .contact-info { align-items: center; }
         }
-        /* Responsive — bento tablette */
+        /* Responsive — bento tablette / mobile */
+        @media (max-width: 1200px) {
+            .bento-grid { grid-template-columns: repeat(3, 1fr); }
+        }
         @media (max-width: 900px) {
             .pricing-grid { grid-template-columns: 1fr; gap: 24px; }
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: 180px;
-            }
-            .bento-item:nth-child(n) { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(2),
-            .bento-item:nth-child(8) { grid-column: span 2; grid-row: span 2; }
+            .bento-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
         }
         @media (max-width: 480px) {
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: 140px;
-                gap: 6px;
-            }
-            .bento-item:nth-child(n) { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(2),
-            .bento-item:nth-child(8) { grid-column: span 2; grid-row: span 1; }
+            .bento-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
             .bento-overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 60%); }
+            .bento-item { border-radius: 8px; }
+            .bento-title { font-size: 12px; }
+            .bento-desc { font-size: 9.5px; letter-spacing: 0.06em; }
         }
 
     .services {
@@ -2721,7 +2699,7 @@
                     <div class="bento-overlay"><span class="bento-title">Ciao Kombucha</span><span class="bento-desc">Identité · Lifestyle</span></div>
                 </div>
                 <div class="bento-item" data-title="Rio Sport" data-desc="Campagne athlétique — Christ Rédempteur en fond">
-                    <img src="assets/images/realisations/04-money.jpg" alt="Campagne sportive à Rio — Christ Rédempteur et bikini rouge" loading="lazy" decoding="async">
+                    <img src="assets/images/realisations/08-ferrari.jpg" alt="Campagne sportive à Rio — Christ Rédempteur et bikini rouge" loading="lazy" decoding="async">
                     <div class="bento-overlay"><span class="bento-title">Rio Sport</span><span class="bento-desc">Campagne · Athlétique</span></div>
                 </div>
                 <div class="bento-item" data-title="Neshama" data-desc="Parfum ambré — lumière d'or, flacon monolithe">
@@ -2737,7 +2715,7 @@
                     <div class="bento-overlay"><span class="bento-title">Moncler Alpine</span><span class="bento-desc">Éditorial · Haute montagne</span></div>
                 </div>
                 <div class="bento-item" data-title="American Road" data-desc="Streetwear — duo en virée, camion US">
-                    <img src="assets/images/realisations/08-ferrari.jpg" alt="Campagne streetwear — duo et chien devant un camion américain" loading="lazy" decoding="async">
+                    <img src="assets/images/realisations/04-money.jpg" alt="Campagne streetwear — duo et chien devant un camion américain" loading="lazy" decoding="async">
                     <div class="bento-overlay"><span class="bento-title">American Road</span><span class="bento-desc">Streetwear · Roadtrip</span></div>
                 </div>
                 <div class="bento-item" data-title="Maison Orsola — Hibiscus" data-desc="Flacon Mahajád — rouge profond, texture graphique">
