@@ -2754,6 +2754,18 @@
         const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
         const coarse = matchMedia('(pointer: coarse)').matches;
 
+        const heroVideo = document.querySelector('.hero-video');
+        if (heroVideo && !reduced) {
+            heroVideo.muted = true;
+            heroVideo.playsInline = true;
+            const tryPlay = () => { heroVideo.play().catch(() => {}); };
+            tryPlay();
+            heroVideo.addEventListener('loadeddata', tryPlay, { once: true });
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) tryPlay();
+            });
+        }
+
         if (!coarse && !reduced) {
             const cursor = document.querySelector('.cursor');
             const dot = document.querySelector('.cursor-dot');
