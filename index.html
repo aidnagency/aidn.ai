@@ -551,27 +551,73 @@
     max-width: 1400px;
     margin: 0 auto;
 }
-.feed-grid {
+.bento-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    grid-auto-rows: 180px;
+    gap: 10px;
 }
-.feed-item {
-    aspect-ratio: 4/5;
+@media (min-width: 1200px) { .bento-grid { grid-auto-rows: 200px; } }
+@media (min-width: 1600px) { .bento-grid { grid-auto-rows: 220px; } }
+.bento-item {
+    position: relative;
     overflow: hidden;
     background: #111;
-    border-radius: 4px;
+    border-radius: 10px;
+    cursor: zoom-in;
+    transition: transform 0.4s var(--ease);
 }
-.feed-item img {
+.bento-item:hover { transform: translateY(-3px); }
+.bento-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.6s ease;
+    transition: transform 0.7s var(--ease);
 }
-.feed-item:hover img {
-    transform: scale(1.04);
+.bento-item:hover img { transform: scale(1.05); }
+.bento-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 55%);
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+    pointer-events: none;
 }
+.bento-item:hover .bento-overlay { opacity: 1; }
+.bento-title {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
+    color: #fff;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+    margin-bottom: 4px;
+}
+.bento-desc {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+/* Bento spans — 4 cols × 6 rows = 24 cells for 12 items */
+.bento-item:nth-child(1)  { grid-column: span 1; grid-row: span 2; }
+.bento-item:nth-child(2)  { grid-column: span 2; grid-row: span 2; }
+.bento-item:nth-child(3)  { grid-column: span 1; grid-row: span 2; }
+.bento-item:nth-child(4)  { grid-column: span 1; grid-row: span 1; }
+.bento-item:nth-child(5)  { grid-column: span 1; grid-row: span 1; }
+.bento-item:nth-child(6)  { grid-column: span 1; grid-row: span 1; }
+.bento-item:nth-child(7)  { grid-column: span 1; grid-row: span 1; }
+.bento-item:nth-child(8)  { grid-column: span 2; grid-row: span 2; }
+.bento-item:nth-child(9)  { grid-column: span 1; grid-row: span 2; }
+.bento-item:nth-child(10) { grid-column: span 1; grid-row: span 2; }
+.bento-item:nth-child(11) { grid-column: span 2; grid-row: span 1; }
+.bento-item:nth-child(12) { grid-column: span 2; grid-row: span 1; }
 
 /* Image Lightbox */
 .img-lightbox {
@@ -587,19 +633,55 @@
     cursor: zoom-out;
 }
 .img-lightbox.active { display: flex; }
-.img-lightbox img {
-    max-width: 95vw;
-    max-height: 92vh;
+.img-lightbox-stage {
+    position: relative;
+    max-width: 92vw;
+    max-height: 78vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+.img-lightbox-stage img {
+    max-width: 92vw;
+    max-height: 78vh;
     width: auto;
     height: auto;
     border-radius: 12px;
     object-fit: contain;
+    display: block;
     animation: lightboxIn 0.3s ease;
 }
-.img-lightbox-close {
+.img-lightbox-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px 24px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    color: #fff;
+    pointer-events: none;
+    border-radius: 0 0 12px 12px;
+}
+.img-lightbox-caption h3 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+}
+.img-lightbox-caption p {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.75);
+    margin: 0;
+}
+.img-lightbox-caption:empty, .img-lightbox-caption.hidden { display: none; }
+.img-lightbox-close,
+.img-lightbox-nav {
     position: fixed;
-    top: 24px;
-    right: 24px;
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -609,14 +691,73 @@
     display: grid;
     place-items: center;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease;
     z-index: 301;
 }
-.img-lightbox-close:hover { background: rgba(255,255,255,0.2); }
+.img-lightbox-close { top: 24px; right: 24px; }
+.img-lightbox-nav.prev { top: 50%; left: 24px; transform: translateY(-50%); }
+.img-lightbox-nav.next { top: 50%; right: 24px; transform: translateY(-50%); }
+.img-lightbox-close:hover,
+.img-lightbox-nav:hover { background: rgba(255,255,255,0.22); }
+.img-lightbox-nav.prev:hover { transform: translateY(-50%) translateX(-2px); }
+.img-lightbox-nav.next:hover { transform: translateY(-50%) translateX(2px); }
+.img-lightbox-nav.hidden { display: none; }
+.img-lightbox-dock {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    padding: 8px 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px;
+    backdrop-filter: blur(14px);
+    max-width: 94vw;
+    overflow-x: auto;
+    z-index: 301;
+    scrollbar-width: none;
+}
+.img-lightbox-dock::-webkit-scrollbar { display: none; }
+.img-lightbox-dock.hidden { display: none; }
+.img-lightbox-dock-thumb {
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.45;
+    transition: opacity 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    flex-shrink: 0;
+    background: #222;
+    border: none;
+    padding: 0;
+}
+.img-lightbox-dock-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.img-lightbox-dock-thumb:hover { opacity: 0.85; transform: translateY(-2px); }
+.img-lightbox-dock-thumb.active {
+    opacity: 1;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,255,255,0.9);
+}
 .zoomable { cursor: zoom-in; }
 @keyframes lightboxIn {
     from { opacity: 0; transform: scale(0.96); }
     to { opacity: 1; transform: scale(1); }
+}
+@media (max-width: 600px) {
+    .img-lightbox { padding: 16px; }
+    .img-lightbox-stage img { max-height: 72vh; border-radius: 10px; }
+    .img-lightbox-close { top: 12px; right: 12px; width: 38px; height: 38px; }
+    .img-lightbox-nav { width: 38px; height: 38px; }
+    .img-lightbox-nav.prev { left: 8px; }
+    .img-lightbox-nav.next { right: 8px; }
+    .img-lightbox-dock { bottom: 10px; padding: 6px 8px; gap: 4px; }
+    .img-lightbox-dock-thumb { width: 36px; height: 36px; border-radius: 6px; }
+    .img-lightbox-caption { padding: 24px 16px 14px; }
+    .img-lightbox-caption h3 { font-size: 14px; }
+    .img-lightbox-caption p { font-size: 10px; }
 }
 
 /* Project Modal */
@@ -1136,9 +1277,6 @@
     }
 
         /* Responsive — tablette / desktop intermédiaire */
-        @media (max-width: 1200px) {
-            .feed-grid { grid-template-columns: repeat(3, 1fr); }
-        }
         @media (max-width: 1024px) {
             .projects-grid { grid-template-columns: 1fr; }
             .project-card { aspect-ratio: 1/1; }
@@ -1146,13 +1284,27 @@
             .contact-inner { grid-template-columns: 1fr; text-align: center; }
             .contact-info { align-items: center; }
         }
-        /* Responsive — tablette portrait / grand mobile */
+        /* Responsive — bento tablette */
         @media (max-width: 900px) {
-            .feed-grid { grid-template-columns: repeat(2, 1fr); }
             .pricing-grid { grid-template-columns: 1fr; gap: 24px; }
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 180px;
+            }
+            .bento-item:nth-child(n) { grid-column: span 1; grid-row: span 1; }
+            .bento-item:nth-child(2),
+            .bento-item:nth-child(8) { grid-column: span 2; grid-row: span 2; }
         }
-        @media (max-width: 380px) {
-            .feed-grid { grid-template-columns: 1fr; }
+        @media (max-width: 480px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 140px;
+                gap: 6px;
+            }
+            .bento-item:nth-child(n) { grid-column: span 1; grid-row: span 1; }
+            .bento-item:nth-child(2),
+            .bento-item:nth-child(8) { grid-column: span 2; grid-row: span 1; }
+            .bento-overlay { opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 60%); }
         }
 
     .services {
@@ -2100,7 +2252,6 @@
             .container { padding: 0 16px; }
 
             .feed-section { padding: 48px 8px; }
-            .feed-grid { gap: 4px; }
 
             .btn-primary,
             .btn-whatsapp,
@@ -2556,42 +2707,54 @@
     <!-- Projects -->
     <section id="realisations" class="feed-section">
         <div class="feed-inner">
-            <div class="feed-grid">
-                <div class="feed-item">
+            <div class="bento-grid">
+                <div class="bento-item" data-title="Éditorial minimaliste" data-desc="Silhouette chinoise — robe noire, ligne pure">
                     <img src="assets/images/realisations/01-chinoise.jpg" alt="Danseuse en robe noire, posture classique — éditorial minimaliste" loading="lazy" decoding="async">
+                    <div class="bento-overlay"><span class="bento-title">Éditorial minimaliste</span><span class="bento-desc">Silhouette · Ligne pure</span></div>
                 </div>
-                <div class="feed-item">
+                <div class="bento-item" data-title="Rouge Serpent" data-desc="Portrait éditorial — contraste sur fond carmin">
                     <img src="assets/images/realisations/02-rouge-serpent.jpg" alt="Portrait éditorial — robe blanche et serpent sur fond rouge" loading="lazy" decoding="async">
+                    <div class="bento-overlay"><span class="bento-title">Rouge Serpent</span><span class="bento-desc">Portrait · Fond carmin</span></div>
                 </div>
-                <div class="feed-item">
+                <div class="bento-item" data-title="Ciao Kombucha" data-desc="Identité boisson — gobelet solaire, ciel d'été">
                     <img src="assets/images/realisations/03-ciao-kombucha.jpg" alt="Ciao Kombucha — gobelet orange tenu devant ciel bleu" loading="lazy" decoding="async">
+                    <div class="bento-overlay"><span class="bento-title">Ciao Kombucha</span><span class="bento-desc">Identité · Lifestyle</span></div>
                 </div>
-                <div class="feed-item">
+                <div class="bento-item" data-title="Rio Sport" data-desc="Campagne athlétique — Christ Rédempteur en fond">
                     <img src="assets/images/realisations/04-money.jpg" alt="Campagne sportive à Rio — Christ Rédempteur et bikini rouge" loading="lazy" decoding="async">
+                    <div class="bento-overlay"><span class="bento-title">Rio Sport</span><span class="bento-desc">Campagne · Athlétique</span></div>
                 </div>
-                <div class="feed-item">
+                <div class="bento-item" data-title="Neshama" data-desc="Parfum ambré — lumière d'or, flacon monolithe">
                     <img src="assets/images/realisations/05-parfum-neshama.jpg" alt="Parfum Neshama — flacon ambré au coucher du soleil" loading="lazy" decoding="async">
+                    <div class="bento-overlay"><span class="bento-title">Neshama</span><span class="bento-desc">Parfum · Monolithe ambré</span></div>
                 </div>
-                <div class="feed-item">
+                <div class="bento-item" data-title="Mami Podcast" data-desc="Portrait intime — café du matin, micro vintage">
                     <img src="assets/images/realisations/06-mami-podcast.jpg" alt="Mami Podcast — portrait intime, café et micro vintage" loading="lazy" decoding="async">
+                    <div class="bento-overlay"><span class="bento-title">Mami Podcast</span><span class="bento-desc">Portrait · Intime</span></div>
                 </div>
-                <div class="feed-item">
+                <div class="bento-item" data-title="Moncler Alpine" data-desc="Éditorial haute montagne — chèvre, pique-nique">
                     <img src="assets/images/realisations/07-moncler-mami.jpg" alt="Moncler Mami — scène alpine, chèvre et pique-nique en haute montagne" loading="lazy" decoding="async">
+                    <div class="bento-overlay"><span class="bento-title">Moncler Alpine</span><span class="bento-desc">Éditorial · Haute montagne</span></div>
                 </div>
-                <div class="feed-item">
+                <div class="bento-item" data-title="American Road" data-desc="Streetwear — duo en virée, camion US">
                     <img src="assets/images/realisations/08-ferrari.jpg" alt="Campagne streetwear — duo et chien devant un camion américain" loading="lazy" decoding="async">
+                    <div class="bento-overlay"><span class="bento-title">American Road</span><span class="bento-desc">Streetwear · Roadtrip</span></div>
                 </div>
-                <div class="feed-item">
+                <div class="bento-item" data-title="Maison Orsola — Hibiscus" data-desc="Flacon Mahajád — rouge profond, texture graphique">
                     <img src="assets/images/realisations/09-parfum-hibiscus.jpg" alt="Maison Orsola — flacon Hibiscus Mahajád sur fond rouge" loading="lazy" decoding="async">
+                    <div class="bento-overlay"><span class="bento-title">Maison Orsola</span><span class="bento-desc">Parfum · Hibiscus Mahajád</span></div>
                 </div>
-                <div class="feed-item">
+                <div class="bento-item" data-title="Maison Orsola — Rituel" data-desc="Cocktail hibiscus — plateau d'argent, heure bleue">
                     <img src="assets/images/realisations/10-parfum-hibiscus-cocktail.jpg" alt="Maison Orsola — cocktail hibiscus et flacon sur plateau d'argent" loading="lazy" decoding="async">
+                    <div class="bento-overlay"><span class="bento-title">Maison Orsola — Rituel</span><span class="bento-desc">Nature morte · Cocktail</span></div>
                 </div>
-                <div class="feed-item">
+                <div class="bento-item" data-title="Kumba" data-desc="Nature morte contemporaine — crème huile d'olive">
                     <img src="assets/images/realisations/11-kumba.jpg" alt="Kumba — pot de crème à l'huile d'olive, nature morte contemporaine" loading="lazy" decoding="async">
+                    <div class="bento-overlay"><span class="bento-title">Kumba</span><span class="bento-desc">Nature morte · Contemporaine</span></div>
                 </div>
-                <div class="feed-item">
+                <div class="bento-item" data-title="Jacquemus — Paysage" data-desc="Silhouette costume — orange géante, horizon">
                     <img src="assets/images/realisations/12-jacquemus.jpg" alt="Jacquemus — silhouette costume devant orange géante en paysage" loading="lazy" decoding="async">
+                    <div class="bento-overlay"><span class="bento-title">Jacquemus — Paysage</span><span class="bento-desc">Silhouette · Surréel</span></div>
                 </div>
             </div>
         </div>
@@ -2803,7 +2966,20 @@
         <button class="img-lightbox-close" onclick="closeLightbox()" aria-label="Fermer">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
-        <img id="imgLightboxImg" src="" alt="">
+        <button class="img-lightbox-nav prev" id="imgLightboxPrev" onclick="lightboxNav(-1)" aria-label="Image précédente">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="img-lightbox-nav next" id="imgLightboxNext" onclick="lightboxNav(1)" aria-label="Image suivante">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+        <div class="img-lightbox-stage">
+            <img id="imgLightboxImg" src="" alt="">
+            <div class="img-lightbox-caption">
+                <h3 id="imgLightboxTitle"></h3>
+                <p id="imgLightboxDesc"></p>
+            </div>
+        </div>
+        <div class="img-lightbox-dock" id="imgLightboxDock" role="tablist" aria-label="Navigation galerie"></div>
     </div>
 
     <script>
@@ -2931,20 +3107,89 @@
         el.classList.toggle('open');
     }
 
-    function openLightbox(src, alt) {
-        const lb = document.getElementById('imgLightbox');
+    let lightboxItems = [];
+    let lightboxIndex = 0;
+
+    function renderLightbox() {
+        if (!lightboxItems.length) return;
+        const item = lightboxItems[lightboxIndex];
         const img = document.getElementById('imgLightboxImg');
-        img.src = src;
-        img.alt = alt || '';
+        img.src = item.src;
+        img.alt = item.title || item.alt || '';
+        document.getElementById('imgLightboxTitle').textContent = item.title || '';
+        document.getElementById('imgLightboxDesc').textContent = item.desc || '';
+        const hasMeta = item.title || item.desc;
+        document.querySelector('.img-lightbox-caption').classList.toggle('hidden', !hasMeta);
+        document.querySelectorAll('.img-lightbox-dock-thumb').forEach((t, idx) => {
+            t.classList.toggle('active', idx === lightboxIndex);
+            if (idx === lightboxIndex) t.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+        });
+    }
+
+    function lightboxNav(delta) {
+        if (lightboxItems.length < 2) return;
+        lightboxIndex = (lightboxIndex + delta + lightboxItems.length) % lightboxItems.length;
+        renderLightbox();
+    }
+
+    function openLightbox(src, alt, items, startIndex) {
+        const lb = document.getElementById('imgLightbox');
+        const dock = document.getElementById('imgLightboxDock');
+        const prev = document.getElementById('imgLightboxPrev');
+        const next = document.getElementById('imgLightboxNext');
+
+        if (items && items.length) {
+            lightboxItems = items;
+            lightboxIndex = startIndex || 0;
+            dock.replaceChildren();
+            items.forEach((it, idx) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'img-lightbox-dock-thumb';
+                btn.setAttribute('role', 'tab');
+                btn.setAttribute('aria-label', it.title || ('Image ' + (idx + 1)));
+                btn.addEventListener('click', (e) => { e.stopPropagation(); lightboxIndex = idx; renderLightbox(); });
+                const t = document.createElement('img');
+                t.src = it.src;
+                t.alt = '';
+                t.loading = 'lazy';
+                btn.appendChild(t);
+                dock.appendChild(btn);
+            });
+            const showNav = items.length > 1;
+            prev.classList.toggle('hidden', !showNav);
+            next.classList.toggle('hidden', !showNav);
+            dock.classList.toggle('hidden', !showNav);
+        } else {
+            lightboxItems = [{ src, title: alt || '', desc: '', alt }];
+            lightboxIndex = 0;
+            prev.classList.add('hidden');
+            next.classList.add('hidden');
+            dock.classList.add('hidden');
+        }
+        renderLightbox();
         lb.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
+
     function closeLightbox() {
         const lb = document.getElementById('imgLightbox');
         lb.classList.remove('active');
         document.body.style.overflow = '';
     }
+
     document.addEventListener('click', (e) => {
+        const bento = e.target.closest('.bento-item');
+        if (bento) {
+            const all = [...document.querySelectorAll('.bento-item')];
+            const items = all.map(el => ({
+                src: el.querySelector('img').src,
+                title: el.dataset.title || '',
+                desc: el.dataset.desc || ''
+            }));
+            openLightbox(null, null, items, all.indexOf(bento));
+            return;
+        }
         const img = e.target.closest('.service-img img, .project-modal-gallery-item img');
         if (img) {
             e.stopPropagation();
@@ -2955,9 +3200,17 @@
         document.querySelectorAll('.service-img img').forEach(img => img.classList.add('zoomable'));
     });
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && document.getElementById('imgLightbox').classList.contains('active')) {
+        const lb = document.getElementById('imgLightbox');
+        if (!lb.classList.contains('active')) return;
+        if (e.key === 'Escape') {
             e.stopImmediatePropagation();
             closeLightbox();
+        } else if (e.key === 'ArrowLeft') {
+            e.stopImmediatePropagation();
+            lightboxNav(-1);
+        } else if (e.key === 'ArrowRight') {
+            e.stopImmediatePropagation();
+            lightboxNav(1);
         }
     });
 
