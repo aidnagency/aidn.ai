@@ -287,19 +287,11 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        z-index: -2;
-        pointer-events: none;
-    }
-    .hero-video-overlay {
-        position: absolute;
-        inset: 0;
-        background: rgba(242, 239, 232, 0.55);
         z-index: -1;
         pointer-events: none;
     }
     @media (prefers-reduced-motion: reduce) {
         .hero-video { display: none; }
-        .hero-video-overlay { display: none; }
     }
     .hero-meta {
         display: flex;
@@ -2264,8 +2256,9 @@
     <main id="main">
 
     <section class="hero">
-        <video class="hero-video" src="assets/video/hero.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
-        <div class="hero-video-overlay" aria-hidden="true"></div>
+        <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true" disablepictureinpicture disableremoteplayback>
+            <source src="assets/video/hero.mp4" type="video/mp4">
+        </video>
         <div class="hero-meta">
             <div><span class="hero-badge">+36 entreprises accompagnées</span></div>
             <div style="text-align:right;"><span>Paris — Dubai — Miami</span><b>Index / 2026</b></div>
