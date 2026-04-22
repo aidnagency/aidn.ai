@@ -1679,14 +1679,22 @@
         transform: translate(-50%, -50%);
         font-family: var(--serif);
         font-style: italic;
-        font-size: clamp(200px, 36vw, 540px);
-        color: var(--ink);
-        opacity: 0.05;
+        font-size: clamp(120px, 32vw, 540px);
+        color: var(--orange);
+        opacity: 0.18;
         pointer-events: none;
         z-index: 0;
         line-height: 0.8;
         letter-spacing: -0.05em;
+        text-align: center;
+        width: 100%;
         animation: ctaFloat 8s ease-in-out infinite;
+    }
+    @media (max-width: 768px) {
+        .contact-bg-text {
+            font-size: clamp(96px, 34vw, 180px);
+            opacity: 0.22;
+        }
     }
     @keyframes ctaFloat {
         0%, 100% { transform: translate(-50%, -50%) rotate(-2deg); }
@@ -2242,7 +2250,7 @@
         <h1 class="hero-title">
             <span class="reveal-word" style="--d:0.05s"><span>Nous sommes</span></span><br>
             <span class="reveal-word" style="--d:0.15s"><span>le</span></span>
-            <span class="reveal-word" style="--d:0.25s"><span class="serif">futur</span></span>
+            <span class="reveal-word" style="--d:0.25s"><span class="serif hl">futur</span></span>
             <span class="reveal-word" style="--d:0.35s"><span>de</span></span><br>
             <span class="reveal-word" style="--d:0.45s"><span>l'image.</span></span>
         </h1>
@@ -2339,7 +2347,7 @@
 
     <section id="services" class="services">
         <div class="services-head">
-            <h2 class="reveal"><span class="reveal-line"><span>Ce qu'on</span></span><br><span class="reveal-line" style="--d:0.1s"><span>fait <span class="serif">vraiment</span></span></span></h2>
+            <h2 class="reveal"><span class="reveal-line"><span>Ce qu'on</span></span><br><span class="reveal-line" style="--d:0.1s"><span>fait <span class="serif hl">vraiment</span></span></span></h2>
             <p>02 / Services. Du territoire de marque à la campagne déployée, en 7–15 jours.</p>
         </div>
 
@@ -2530,7 +2538,7 @@
     <section id="offres" class="pricing">
         <div class="pricing-head">
             <div class="sec-label dark">05 — Offres</div>
-            <h2 class="reveal"><span class="reveal-line"><span>Nos <span class="serif">formules</span></span></span></h2>
+            <h2 class="reveal"><span class="reveal-line"><span>Nos <span class="serif hl">formules</span></span></span></h2>
         </div>
 
         <div class="pricing-grid">
@@ -2587,7 +2595,7 @@
 
     <section class="faq">
         <div class="sec-label">06 — FAQ</div>
-        <h2 class="reveal"><span class="reveal-line"><span>Questions <span class="serif">fréquentes</span></span></span></h2>
+        <h2 class="reveal"><span class="reveal-line"><span>Questions <span class="serif hl">fréquentes</span></span></span></h2>
 
         <div class="faq-list">
             <div class="faq-item" id="faq1">
@@ -2636,7 +2644,7 @@
     <!-- Contact -->
     <section class="contact">
         <div class="contact-bg-text" aria-hidden="true">parlons</div>
-        <h2>Vous avez un projet <span class="serif">en tête ?</span></h2>
+        <h2>Vous avez un projet <span class="serif hl">en tête ?</span></h2>
         <p class="lead">Un premier échange pour lire votre positionnement, comprendre votre image, et voir ce qu'un studio de direction artistique peut ouvrir pour votre marque. Sans engagement.</p>
         <div class="contact-info">
             <span>
