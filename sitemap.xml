@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.aidnagency.fr/</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-04-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aidnagency.fr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aidnagency.fr/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.aidnagency.fr/"/>
+  </url>
+  <url>
+    <loc>https://www.aidnagency.fr/en/</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aidnagency.fr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aidnagency.fr/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.aidnagency.fr/"/>
   </url>
   <url>
     <loc>https://www.aidnagency.fr/mentions-legales</loc>
