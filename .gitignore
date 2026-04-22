@@ -38,3 +38,11 @@ index.backup.html
 
 # Screenshots de QA
 [0-9][0-9]-*.png
+debug-*.png
+fix-*.png
+fix-*.jpeg
+local-*.png
+local-*.jpeg
+
+# Sources d'images non optimisées (gardées en local, optimisées copiées dans assets/)
+1. Images édités/
