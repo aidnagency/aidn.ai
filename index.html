@@ -18,6 +18,22 @@
     <link rel="alternate" hreflang="en" href="https://www.aidnagency.fr/en/">
     <link rel="alternate" hreflang="x-default" href="https://www.aidnagency.fr/">
 
+    <script>
+    (function () {
+        try {
+            if (sessionStorage.getItem('aidn_redirected')) return;
+            if (localStorage.getItem('aidn_lang')) return;
+            var ua = navigator.userAgent || '';
+            if (/bot|crawl|spider|slurp|bing|yandex|duckduck/i.test(ua)) return;
+            var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+            if (!lang.startsWith('fr')) {
+                sessionStorage.setItem('aidn_redirected', '1');
+                location.replace('/en/' + location.search + location.hash);
+            }
+        } catch (e) {}
+    })();
+    </script>
+
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="AiDN Agency">
     <meta property="og:locale" content="fr_FR">
@@ -2466,7 +2482,7 @@
         <div class="lang-switch" aria-label="Changer de langue">
             <span class="active" aria-current="true">FR</span>
             <span class="sep" aria-hidden="true">·</span>
-            <a href="/en/" hreflang="en">EN</a>
+            <a href="/en/" hreflang="en" onclick="try{localStorage.setItem('aidn_lang','en')}catch(e){}">EN</a>
         </div>
         <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20démarrer%20un%20projet." class="nav-cta" target="_blank" rel="noopener noreferrer">
             Démarrer
@@ -2484,7 +2500,7 @@
         <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20démarrer%20un%20projet." class="nav-cta" style="margin-top: 24px; align-self: flex-start;" target="_blank" rel="noopener noreferrer">Démarrer →</a>
         <div class="lang-switch-mobile">
             <span class="active">FR</span>
-            <a href="/en/" hreflang="en">EN</a>
+            <a href="/en/" hreflang="en" onclick="try{localStorage.setItem('aidn_lang','en')}catch(e){}">EN</a>
         </div>
     </div>
 

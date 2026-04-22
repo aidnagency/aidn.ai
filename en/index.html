@@ -18,6 +18,22 @@
     <link rel="alternate" hreflang="fr" href="https://www.aidnagency.fr/">
     <link rel="alternate" hreflang="x-default" href="https://www.aidnagency.fr/">
 
+    <script>
+    (function () {
+        try {
+            if (sessionStorage.getItem('aidn_redirected')) return;
+            if (localStorage.getItem('aidn_lang')) return;
+            var ua = navigator.userAgent || '';
+            if (/bot|crawl|spider|slurp|bing|yandex|duckduck/i.test(ua)) return;
+            var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+            if (lang.startsWith('fr')) {
+                sessionStorage.setItem('aidn_redirected', '1');
+                location.replace('/' + location.search + location.hash);
+            }
+        } catch (e) {}
+    })();
+    </script>
+
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="AiDN Agency">
     <meta property="og:locale" content="en_US">
@@ -2435,7 +2451,7 @@
             <a href="#offres">Pricing</a>
         </div>
         <div class="lang-switch" aria-label="Switch language">
-            <a href="/" hreflang="fr">FR</a>
+            <a href="/" hreflang="fr" onclick="try{localStorage.setItem('aidn_lang','fr')}catch(e){}">FR</a>
             <span class="sep" aria-hidden="true">·</span>
             <span class="active" aria-current="true">EN</span>
         </div>
@@ -2454,7 +2470,7 @@
         <a href="#offres" onclick="toggleMobileMenu()">Pricing</a>
         <a href="https://wa.me/33612345678?text=Hi%20AiDN%2C%20I%27d%20like%20to%20start%20a%20project." class="nav-cta" style="margin-top: 24px; align-self: flex-start;" target="_blank" rel="noopener noreferrer">Start →</a>
         <div class="lang-switch-mobile">
-            <a href="/" hreflang="fr">FR</a>
+            <a href="/" hreflang="fr" onclick="try{localStorage.setItem('aidn_lang','fr')}catch(e){}">FR</a>
             <span class="active">EN</span>
         </div>
     </div>
