@@ -42,7 +42,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
     <link rel="preload" as="image" href="https://res.cloudinary.com/dke6iy9pe/image/upload/c_fill,w_1600,h_900,f_auto,q_auto/v1773284507/__b94k3c.jpg" fetchpriority="high">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <script type="application/ld+json">
     {
@@ -63,20 +63,18 @@
         --ink: #0E0E0E;
         --paper: #F2EFE8;
         --orange: #FF5B0C;
-        --acid: #D4FF3A;
-        --whatsapp: #25D366;
         --muted: #8A8680;
         --muted-dark: #A8A39A;
         --line: rgba(14,14,14,0.12);
         --line-dark: rgba(242,239,232,0.15);
         --sans: 'Inter', ui-sans-serif, system-ui;
         --serif: 'Instrument Serif', ui-serif, Georgia;
-        --mono: 'JetBrains Mono', ui-monospace, monospace;
+        --mono: 'Inter', ui-sans-serif, system-ui;
         --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    *::selection { background: var(--acid); color: var(--ink); }
+    *::selection { background: var(--orange); color: var(--paper); }
 
     html {
         scroll-behavior: smooth;
@@ -90,6 +88,7 @@
         background: var(--paper);
         color: var(--ink);
         font-size: 16px;
+        font-weight: 500;
         line-height: 1.5;
         overflow-x: clip;
         cursor: none;
@@ -124,7 +123,7 @@
         z-index: 10000;
         transition: top 0.2s;
     }
-    .skip-link:focus { top: 8px; outline: 3px solid var(--acid); outline-offset: 2px; }
+    .skip-link:focus { top: 8px; outline: 3px solid var(--orange); outline-offset: 2px; }
 
     a:focus-visible, button:focus-visible {
         outline: 2px solid var(--orange);
@@ -164,8 +163,8 @@
     }
     body.cursor-hover .cursor {
         width: 64px; height: 64px;
-        background: var(--acid);
-        border-color: var(--acid);
+        background: var(--paper);
+        border-color: var(--paper);
         mix-blend-mode: difference;
     }
     body.cursor-hover .cursor-dot { opacity: 0; }
@@ -315,7 +314,7 @@
 
     .hero-title {
         font-family: var(--sans);
-        font-weight: 500;
+        font-weight: 600;
         font-size: clamp(52px, 12vw, 200px);
         line-height: 0.88;
         letter-spacing: -0.04em;
@@ -344,15 +343,16 @@
 
     .hero-foot {
         display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 32px;
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        text-align: center;
     }
     .hero-desc {
-        max-width: 420px;
+        max-width: 520px;
         font-size: 17px;
-        line-height: 1.45;
+        font-weight: 500;
+        line-height: 1.5;
         opacity: 0;
         animation: fadeUp 1s var(--ease) 0.8s forwards;
     }
@@ -363,6 +363,7 @@
         display: flex;
         gap: 12px;
         align-items: center;
+        justify-content: center;
         flex-wrap: wrap;
         opacity: 0;
         animation: fadeUp 1s var(--ease) 1s forwards;
@@ -377,11 +378,12 @@
         border-radius: 100px;
         font-family: var(--mono);
         font-size: 12px;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        transition: all 0.4s var(--ease);
+        transition: transform 0.4s var(--ease);
     }
-    .cta-pill:hover { background: var(--orange); transform: translateY(-2px); }
+    .cta-pill:hover { transform: translateY(-2px); }
     .cta-pill .arrow {
         width: 30px; height: 30px;
         background: var(--paper);
@@ -390,9 +392,9 @@
         display: grid;
         place-items: center;
         font-size: 14px;
-        transition: transform 0.4s var(--ease), background 0.4s var(--ease);
+        transition: transform 0.4s var(--ease);
     }
-    .cta-pill:hover .arrow { transform: rotate(-45deg); background: var(--acid); }
+    .cta-pill:hover .arrow { transform: rotate(-45deg); }
     .cta-ghost {
         display: inline-flex;
         align-items: center;
@@ -402,9 +404,11 @@
         border-radius: 100px;
         font-family: var(--mono);
         font-size: 12px;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        transition: all 0.3s var(--ease);
+        color: var(--ink);
+        transition: background 0.3s var(--ease), color 0.3s var(--ease);
     }
     .cta-ghost:hover { background: var(--ink); color: var(--paper); }
 
@@ -964,19 +968,19 @@
         width: 8px; height: 8px;
         border-radius: 50%;
     }
-    .approche-tag.red::before { background: #EF4444; }
-    .approche-tag.green::before { background: #1A7A4A; }
+    .approche-tag.red::before { background: var(--muted); }
+    .approche-tag.green::before { background: var(--orange); }
     .approche-card h3 {
         font-family: var(--sans);
-        font-weight: 500;
+        font-weight: 600;
         font-size: clamp(22px, 2.2vw, 32px);
         line-height: 1.15;
         letter-spacing: -0.02em;
         margin-bottom: 32px;
     }
     .approche-card h3 .serif { font-family: var(--serif); font-style: italic; font-weight: 400; }
-    .approche-card h3 .red { color: #EF4444; }
-    .approche-card h3 .green { color: #1A7A4A; }
+    .approche-card h3 .red { color: var(--ink); }
+    .approche-card h3 .green { color: var(--orange); }
 
     .problem-list { display: flex; flex-direction: column; gap: 16px; }
     .problem-item {
@@ -1017,11 +1021,12 @@
         align-items: center;
         gap: 10px;
         padding: 12px 14px;
-        background: rgba(26,122,74,0.06);
+        background: rgba(14,14,14,0.04);
         border-radius: 12px;
         font-size: 13px;
+        font-weight: 500;
     }
-    .solution-item svg { color: #1A7A4A; flex-shrink: 0; }
+    .solution-item svg { color: var(--orange); flex-shrink: 0; }
     .solution-lead {
         font-size: 15px;
         color: var(--muted);
@@ -1084,7 +1089,7 @@
     }
     .services-head h2 {
         font-family: var(--sans);
-        font-weight: 500;
+        font-weight: 600;
         font-size: clamp(40px, 6vw, 96px);
         line-height: 0.95;
         letter-spacing: -0.03em;
@@ -1141,7 +1146,7 @@
     }
     .service-info h3 {
         font-family: var(--sans);
-        font-weight: 500;
+        font-weight: 600;
         font-size: clamp(22px, 3vw, 40px);
         letter-spacing: -0.02em;
         margin-bottom: 4px;
@@ -1162,8 +1167,8 @@
         place-items: center;
         transition: all 0.4s var(--ease);
     }
-    .service-row:hover .service-chev { background: var(--acid); color: var(--ink); border-color: var(--acid); }
-    .service-row.open .service-chev { transform: rotate(180deg); background: var(--orange); color: var(--ink); border-color: var(--orange); }
+    .service-row:hover .service-chev { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+    .service-row.open .service-chev { transform: rotate(180deg); background: var(--paper); color: var(--ink); border-color: var(--paper); }
     .service-body {
         max-height: 0;
         overflow: hidden;
@@ -1332,7 +1337,7 @@
     }
     .testi-head h2 {
         font-family: var(--sans);
-        font-weight: 500;
+        font-weight: 600;
         font-size: clamp(40px, 6vw, 96px);
         letter-spacing: -0.03em;
         line-height: 0.95;
@@ -1359,7 +1364,7 @@
     @media (max-width: 600px) {
         .testi-card p { font-size: 18px; }
     }
-    .testi-card:hover { border-color: var(--acid); }
+    .testi-card:hover { border-color: var(--paper); }
     .testi-card p {
         font-family: var(--serif);
         font-style: italic;
@@ -1409,7 +1414,7 @@
     .pricing-head { max-width: 1400px; margin: 0 auto 64px; }
     .pricing-head h2 {
         font-family: var(--sans);
-        font-weight: 500;
+        font-weight: 600;
         font-size: clamp(40px, 6vw, 96px);
         letter-spacing: -0.03em;
         line-height: 0.95;
@@ -1434,12 +1439,12 @@
     }
     .price-card:hover { transform: translateY(-4px); border-color: var(--paper); }
     .price-card.popular {
-        background: var(--orange);
+        background: var(--paper);
         color: var(--ink);
-        border-color: var(--orange);
+        border-color: var(--paper);
         position: relative;
     }
-    .price-card.popular:hover { border-color: var(--ink); }
+    .price-card.popular:hover { border-color: var(--paper); transform: translateY(-6px); }
     .price-head {
         display: flex;
         justify-content: space-between;
@@ -1453,7 +1458,7 @@
         color: var(--muted-dark);
         margin-bottom: 6px;
     }
-    .price-card.popular .price-tier { color: var(--ink); opacity: 0.6; }
+    .price-card.popular .price-tier { color: var(--muted); }
     .price-card h3 {
         font-family: var(--sans);
         font-weight: 500;
@@ -1464,11 +1469,12 @@
     .price-badge {
         font-family: var(--mono);
         font-size: 10px;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.12em;
         padding: 6px 10px;
         background: var(--ink);
-        color: var(--acid);
+        color: var(--paper);
         border-radius: 100px;
     }
     .price-sub {
@@ -1476,19 +1482,20 @@
         color: var(--muted-dark);
         line-height: 1.5;
     }
-    .price-card.popular .price-sub { color: var(--ink); opacity: 0.75; }
+    .price-card.popular .price-sub { color: var(--muted); }
     .price-features { display: flex; flex-direction: column; gap: 12px; }
     .price-feat {
         display: flex;
         align-items: flex-start;
         gap: 10px;
         font-size: 14px;
+        font-weight: 500;
         line-height: 1.4;
     }
     .price-feat::before {
         content: '';
         width: 16px; height: 16px;
-        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23D4FF3A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center / contain no-repeat;
+        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F2EFE8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center / contain no-repeat;
         flex-shrink: 0;
         margin-top: 3px;
     }
@@ -1507,13 +1514,14 @@
         border-radius: 100px;
         font-family: var(--mono);
         font-size: 11px;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        transition: all 0.4s var(--ease);
+        transition: transform 0.4s var(--ease);
     }
-    .price-btn:hover { background: var(--acid); transform: translateY(-2px); }
+    .price-btn:hover { transform: translateY(-2px); }
     .price-card.popular .price-btn { background: var(--ink); color: var(--paper); }
-    .price-card.popular .price-btn:hover { background: var(--paper); color: var(--ink); }
+    .price-card.popular .price-btn:hover { background: var(--ink); color: var(--paper); }
     .pricing-note {
         max-width: 1400px;
         margin: 32px auto 0;
@@ -1535,7 +1543,7 @@
     }
     .faq h2 {
         font-family: var(--sans);
-        font-weight: 500;
+        font-weight: 600;
         font-size: clamp(40px, 6vw, 88px);
         letter-spacing: -0.03em;
         line-height: 0.95;
@@ -1577,7 +1585,7 @@
         place-items: center;
         transition: transform 0.4s var(--ease), background 0.3s;
     }
-    .faq-item.open .faq-chev { transform: rotate(180deg); background: var(--acid); border-color: var(--acid); }
+    .faq-item.open .faq-chev { transform: rotate(180deg); background: var(--ink); color: var(--paper); border-color: var(--ink); }
     .faq-a {
         max-height: 0;
         overflow: hidden;
@@ -1608,7 +1616,7 @@
     }
     .contact h2 {
         font-family: var(--sans);
-        font-weight: 500;
+        font-weight: 600;
         font-size: clamp(44px, 9vw, 160px);
         line-height: 0.9;
         letter-spacing: -0.04em;
@@ -1643,28 +1651,20 @@
         align-items: center;
         gap: 14px;
         padding: 22px 36px;
-        background: var(--whatsapp);
-        color: white;
+        background: var(--ink);
+        color: var(--paper);
         border-radius: 100px;
         font-family: var(--mono);
         font-size: 13px;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        transition: all 0.4s var(--ease);
+        transition: transform 0.4s var(--ease);
         position: relative;
         overflow: hidden;
     }
     .contact-btn span { position: relative; z-index: 1; }
-    .contact-btn::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: var(--ink);
-        transform: translateY(100%);
-        transition: transform 0.4s var(--ease);
-    }
-    .contact-btn:hover::before { transform: translateY(0); }
-    .contact-btn:hover { color: var(--paper); }
+    .contact-btn:hover { transform: translateY(-2px); }
     .contact-note {
         margin-top: 20px;
         font-family: var(--mono);
@@ -1680,8 +1680,8 @@
         font-family: var(--serif);
         font-style: italic;
         font-size: clamp(200px, 36vw, 540px);
-        color: var(--acid);
-        opacity: 0.35;
+        color: var(--ink);
+        opacity: 0.05;
         pointer-events: none;
         z-index: 0;
         line-height: 0.8;
@@ -1799,7 +1799,7 @@
         color: var(--paper);
         transition: all 0.3s;
     }
-    .project-modal-close:hover { background: var(--acid); color: var(--ink); border-color: var(--acid); }
+    .project-modal-close:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
     .project-modal-header-content { position: absolute; bottom: 48px; left: 48px; right: 88px; }
     .project-modal-tags {
         display: flex;
@@ -1810,10 +1810,11 @@
     .project-modal-label {
         font-family: var(--mono);
         font-size: 10px;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.12em;
         padding: 6px 10px;
-        background: var(--acid);
+        background: var(--paper);
         color: var(--ink);
         border-radius: 100px;
     }
@@ -1879,7 +1880,7 @@
     .project-modal-quote {
         padding: 24px;
         background: var(--ink);
-        color: var(--acid);
+        color: var(--paper);
         border-radius: 16px;
     }
     .project-modal-quote p {
@@ -1890,7 +1891,8 @@
     }
     .project-modal-cta {
         padding: 32px;
-        background: var(--acid);
+        background: var(--paper);
+        border: 1px solid var(--line);
         border-radius: 20px;
         text-align: center;
     }
@@ -1914,7 +1916,7 @@
         letter-spacing: 0.1em;
         transition: all 0.4s var(--ease);
     }
-    .project-modal-cta a:hover { background: var(--whatsapp); }
+    .project-modal-cta a:hover { background: var(--orange); color: var(--paper); }
 
             .contact-inner {
                 padding: 48px 24px;
@@ -2142,7 +2144,7 @@
         }
         .manifesto h2 {
             font-family: var(--sans);
-            font-weight: 500;
+            font-weight: 600;
             font-size: clamp(40px, 7vw, 120px);
             line-height: 0.95;
             letter-spacing: -0.03em;
@@ -2302,28 +2304,21 @@
                         <span class="problem-num">01</span>
                         <div>
                             <h4>Budget hors de portée</h4>
-                            <p>Shooting photo premium, rebranding, campagne : 20k€ à 200k€ avant la moindre image.</p>
+                            <p>Shooting, rebranding, campagne : 20k€ à 200k€ avant la moindre image.</p>
                         </div>
                     </div>
                     <div class="problem-item">
                         <span class="problem-num">02</span>
                         <div>
                             <h4>Délais qui figent</h4>
-                            <p>3 à 6 mois entre le brief et la première image. Votre marché n'attend pas.</p>
+                            <p>3 à 6 mois entre brief et première image. Votre marché n'attend pas.</p>
                         </div>
                     </div>
                     <div class="problem-item">
                         <span class="problem-num">03</span>
                         <div>
                             <h4>Esthétique sans direction</h4>
-                            <p>Des visuels jolis, mais interchangeables. Aucune vraie identité.</p>
-                        </div>
-                    </div>
-                    <div class="problem-item">
-                        <span class="problem-num">04</span>
-                        <div>
-                            <h4>Un format, rien après</h4>
-                            <p>Des images qui vivent trois semaines puis disparaissent. Pas d'univers durable.</p>
+                            <p>Des visuels jolis mais interchangeables. Aucune vraie identité.</p>
                         </div>
                     </div>
                 </div>
@@ -2332,14 +2327,11 @@
             <div class="approche-card reveal">
                 <div class="approche-tag green">Notre Solution</div>
                 <h3>Nous ne photographions pas ce qui existe. Nous créons ce qui vous rend <span class="green serif">unique</span>.</h3>
-                <p class="solution-lead">Avant toute image, nous définissons votre territoire de marque : positionnement, concurrents, tension visuelle. Puis nous explorons des dizaines d'univers pour ne retenir que celui qui vous rend reconnaissable partout.</p>
                 <div class="solution-list">
                     <div class="solution-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Direction avant production</span></div>
                     <div class="solution-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Premiers visuels sous 72h</span></div>
                     <div class="solution-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Livraison en 7–15 jours</span></div>
                     <div class="solution-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Qualité éditoriale</span></div>
-                    <div class="solution-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Zéro studio</span></div>
-                    <div class="solution-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Accompagnement post-livraison</span></div>
                 </div>
             </div>
         </div>
@@ -2485,35 +2477,51 @@
             <div class="feed-grid">
                 <div class="feed-item">
                     <!-- 👉 REMPLACER : visuel 1 -->
-                    <img src="https://placehold.co/800x1000/171717/ea580c?text=VISUEL+1" alt="Visuel 1" loading="lazy" decoding="async">
+                    <img src="https://placehold.co/800x1000/171717/F2EFE8?text=VISUEL+1" alt="Visuel 1" loading="lazy" decoding="async">
                 </div>
                 <div class="feed-item">
                     <!-- 👉 REMPLACER : visuel 2 -->
-                    <img src="https://placehold.co/800x1000/262626/ea580c?text=VISUEL+2" alt="Visuel 2" loading="lazy" decoding="async">
+                    <img src="https://placehold.co/800x1000/262626/F2EFE8?text=VISUEL+2" alt="Visuel 2" loading="lazy" decoding="async">
                 </div>
                 <div class="feed-item">
                     <!-- 👉 REMPLACER : visuel 3 -->
-                    <img src="https://placehold.co/800x1000/1a0f0a/ea580c?text=VISUEL+3" alt="Visuel 3" loading="lazy" decoding="async">
+                    <img src="https://placehold.co/800x1000/1a0f0a/FF5B0C?text=VISUEL+3" alt="Visuel 3" loading="lazy" decoding="async">
                 </div>
                 <div class="feed-item">
                     <!-- 👉 REMPLACER : visuel 4 -->
-                    <img src="https://placehold.co/800x1000/2c1810/ea580c?text=VISUEL+4" alt="Visuel 4" loading="lazy" decoding="async">
+                    <img src="https://placehold.co/800x1000/2c1810/F2EFE8?text=VISUEL+4" alt="Visuel 4" loading="lazy" decoding="async">
                 </div>
                 <div class="feed-item">
                     <!-- 👉 REMPLACER : visuel 5 -->
-                    <img src="https://placehold.co/800x1000/1a0f2e/a78bfa?text=VISUEL+5" alt="Visuel 5" loading="lazy" decoding="async">
+                    <img src="https://placehold.co/800x1000/1a1a1a/F2EFE8?text=VISUEL+5" alt="Visuel 5" loading="lazy" decoding="async">
                 </div>
                 <div class="feed-item">
                     <!-- 👉 REMPLACER : visuel 6 -->
-                    <img src="https://placehold.co/800x1000/0a0a0a/e5e5e5?text=VISUEL+6" alt="Visuel 6" loading="lazy" decoding="async">
+                    <img src="https://placehold.co/800x1000/0a0a0a/F2EFE8?text=VISUEL+6" alt="Visuel 6" loading="lazy" decoding="async">
                 </div>
                 <div class="feed-item">
                     <!-- 👉 REMPLACER : visuel 7 -->
-                    <img src="https://placehold.co/800x1000/1e3a5f/fde047?text=VISUEL+7" alt="Visuel 7" loading="lazy" decoding="async">
+                    <img src="https://placehold.co/800x1000/1a1a1a/F2EFE8?text=VISUEL+7" alt="Visuel 7" loading="lazy" decoding="async">
                 </div>
                 <div class="feed-item">
                     <!-- 👉 REMPLACER : visuel 8 -->
-                    <img src="https://placehold.co/800x1000/111827/e5e5e5?text=VISUEL+8" alt="Visuel 8" loading="lazy" decoding="async">
+                    <img src="https://placehold.co/800x1000/111111/F2EFE8?text=VISUEL+8" alt="Visuel 8" loading="lazy" decoding="async">
+                </div>
+                <div class="feed-item">
+                    <!-- 👉 REMPLACER : visuel 9 -->
+                    <img src="https://placehold.co/800x1000/1f1a14/F2EFE8?text=VISUEL+9" alt="Visuel 9" loading="lazy" decoding="async">
+                </div>
+                <div class="feed-item">
+                    <!-- 👉 REMPLACER : visuel 10 -->
+                    <img src="https://placehold.co/800x1000/0E0E0E/FF5B0C?text=VISUEL+10" alt="Visuel 10" loading="lazy" decoding="async">
+                </div>
+                <div class="feed-item">
+                    <!-- 👉 REMPLACER : visuel 11 -->
+                    <img src="https://placehold.co/800x1000/262626/F2EFE8?text=VISUEL+11" alt="Visuel 11" loading="lazy" decoding="async">
+                </div>
+                <div class="feed-item">
+                    <!-- 👉 REMPLACER : visuel 12 -->
+                    <img src="https://placehold.co/800x1000/1a1410/F2EFE8?text=VISUEL+12" alt="Visuel 12" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
