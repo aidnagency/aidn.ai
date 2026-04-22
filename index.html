@@ -471,6 +471,8 @@
         border-radius: 32px;
         overflow: hidden;
         will-change: transform;
+        position: relative;
+        z-index: 1;
         animation: zoomIn linear;
         animation-timeline: view();
         animation-range: entry 0% cover 50%;
@@ -479,7 +481,53 @@
         0% { transform: scale(0.55); border-radius: 48px; }
         100% { transform: scale(2.8); border-radius: 0; }
     }
-    .zoom-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .zoom-frame img {
+        width: 100%; height: 100%; object-fit: cover;
+        will-change: transform;
+        animation: imgDezoom linear;
+        animation-timeline: view();
+        animation-range: entry 0% cover 50%;
+    }
+    @keyframes imgDezoom {
+        0%   { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+
+    .zoom-parallax {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+    }
+    .zoom-mini {
+        position: absolute;
+        width: clamp(110px, 12vw, 190px);
+        aspect-ratio: 3/4;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px -24px rgba(20, 16, 10, 0.35), 0 8px 18px -10px rgba(20, 16, 10, 0.25);
+        opacity: 0;
+        will-change: transform, opacity;
+        animation: miniDrift linear;
+        animation-timeline: view();
+        animation-range: entry 0% cover 42%;
+        transform-origin: center;
+    }
+    .zoom-mini img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .zoom-mini.m1 { top: 20%;  left:  8%;  --tx: -36vw; --ty: -22vh; --r0: -6deg; --r1: -14deg; }
+    .zoom-mini.m2 { top: 10%;  left: 38%;  --tx:  -4vw; --ty: -34vh; --r0:  4deg; --r1:   9deg; width: clamp(100px, 10vw, 160px); }
+    .zoom-mini.m3 { top: 22%;  right: 8%;  --tx:  34vw; --ty: -20vh; --r0:  5deg; --r1:  14deg; }
+    .zoom-mini.m4 { bottom: 22%; left: 10%; --tx: -34vw; --ty:  22vh; --r0: -4deg; --r1: -11deg; }
+    .zoom-mini.m5 { bottom: 10%; right: 36%; --tx:  2vw;  --ty:  32vh; --r0: -3deg; --r1:  -7deg; width: clamp(100px, 10vw, 160px); }
+    .zoom-mini.m6 { bottom: 20%; right: 8%;  --tx:  34vw; --ty:  24vh; --r0:  6deg; --r1:  13deg; }
+    @keyframes miniDrift {
+        0%   { opacity: 0;   transform: translate(0, 0) scale(0.55) rotate(var(--r0)); }
+        18%  { opacity: 1;   transform: translate(0, 0) scale(1)    rotate(var(--r0)); }
+        55%  { opacity: 1;   transform: translate(calc(var(--tx) * 0.5),  calc(var(--ty) * 0.5))  scale(1)    rotate(calc(var(--r1) * 0.7)); }
+        82%  { opacity: 0.2; transform: translate(calc(var(--tx) * 0.88), calc(var(--ty) * 0.88)) scale(0.94) rotate(var(--r1)); }
+        100% { opacity: 0;   transform: translate(var(--tx), var(--ty)) scale(0.85) rotate(var(--r1)); }
+    }
+
     .zoom-caption {
         position: absolute;
         bottom: 48px;
@@ -507,6 +555,11 @@
             0% { transform: scale(0.7); border-radius: 32px; }
             100% { transform: scale(2.2); border-radius: 0; }
         }
+        .zoom-parallax { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .zoom-parallax { display: none; }
+        .zoom-frame img { animation: none; transform: none; }
     }
 
 /* Feed (grille 8 visuels) */
@@ -2272,6 +2325,14 @@
     <section class="zoom" aria-label="Présentation visuelle">
         <div class="zoom-sticky">
             <div class="zoom-label">— Fait par IA, pensé par humains —</div>
+            <div class="zoom-parallax" aria-hidden="true">
+                <div class="zoom-mini m1"><img src="https://res.cloudinary.com/dke6iy9pe/image/upload/c_fill,w_600,h_800,g_auto,f_auto,q_auto/v1773284506/__1_gtvpbx.jpg" alt="" loading="lazy" decoding="async"></div>
+                <div class="zoom-mini m2"><img src="https://res.cloudinary.com/dke6iy9pe/image/upload/c_fill,w_520,h_700,g_auto,f_auto,q_auto/v1773284509/__8_h4siyg.jpg" alt="" loading="lazy" decoding="async"></div>
+                <div class="zoom-mini m3"><img src="https://res.cloudinary.com/dke6iy9pe/image/upload/c_fill,w_600,h_800,g_auto,f_auto,q_auto/v1773284506/Visual_research_009__goodhood_zokyxb.jpg" alt="" loading="lazy" decoding="async"></div>
+                <div class="zoom-mini m4"><img src="https://res.cloudinary.com/dke6iy9pe/image/upload/c_fill,w_600,h_800,g_auto,f_auto,q_auto/v1773284826/Calm_in_the_Chaos_joynho.jpg" alt="" loading="lazy" decoding="async"></div>
+                <div class="zoom-mini m5"><img src="https://res.cloudinary.com/dke6iy9pe/image/upload/c_fill,w_520,h_700,g_south,f_auto,q_auto/v1773284506/__1_gtvpbx.jpg" alt="" loading="lazy" decoding="async"></div>
+                <div class="zoom-mini m6"><img src="https://res.cloudinary.com/dke6iy9pe/image/upload/c_fill,w_600,h_800,g_east,f_auto,q_auto/v1773284509/__8_h4siyg.jpg" alt="" loading="lazy" decoding="async"></div>
+            </div>
             <div class="zoom-frame">
                 <img src="https://res.cloudinary.com/dke6iy9pe/image/upload/c_fill,w_1600,h_900,f_auto,q_auto/v1773284507/__b94k3c.jpg" alt="Direction artistique éditoriale AiDN Agency" loading="lazy">
             </div>
@@ -2809,7 +2870,20 @@
     if (!CSS.supports('animation-timeline: view()')) {
         const zoomSection = document.querySelector('.zoom');
         const zoomFrame = document.querySelector('.zoom-frame');
+        const zoomFrameImg = zoomFrame && zoomFrame.querySelector('img');
         const zoomCaption = document.querySelector('.zoom-caption');
+        const miniEls = Array.from(document.querySelectorAll('.zoom-mini'));
+        const miniData = miniEls.map(el => {
+            const cs = getComputedStyle(el);
+            return {
+                el,
+                tx: parseFloat(cs.getPropertyValue('--tx')) || 0,
+                ty: parseFloat(cs.getPropertyValue('--ty')) || 0,
+                r0: parseFloat(cs.getPropertyValue('--r0')) || 0,
+                r1: parseFloat(cs.getPropertyValue('--r1')) || 0,
+            };
+        });
+        const lerp = (a, b, t) => a + (b - a) * t;
         if (zoomSection && zoomFrame) {
             const onScroll = () => {
                 const rect = zoomSection.getBoundingClientRect();
@@ -2817,9 +2891,44 @@
                 const progress = Math.max(0, Math.min(1, -rect.top / total));
                 zoomFrame.style.transform = `scale(${0.55 + progress * 2.25})`;
                 zoomFrame.style.borderRadius = `${Math.max(0, 48 - progress * 48)}px`;
+                if (zoomFrameImg) zoomFrameImg.style.transform = `scale(${1.2 - progress * 0.2})`;
                 if (zoomCaption) zoomCaption.style.opacity = Math.max(0, Math.min(1, (progress - 0.3) * 3));
+                const mp = Math.max(0, Math.min(1, progress / 0.42));
+                const vw = innerWidth / 100;
+                const vh = innerHeight / 100;
+                miniData.forEach(({ el, tx, ty, r0, r1 }) => {
+                    let op, sx, sy, scale, rot;
+                    if (mp < 0.18) {
+                        const t = mp / 0.18;
+                        op = t; sx = 0; sy = 0; scale = lerp(0.55, 1, t); rot = r0;
+                    } else if (mp < 0.55) {
+                        const t = (mp - 0.18) / 0.37;
+                        op = 1;
+                        sx = lerp(0, tx * 0.5, t);
+                        sy = lerp(0, ty * 0.5, t);
+                        scale = 1;
+                        rot = lerp(r0, r1 * 0.7, t);
+                    } else if (mp < 0.82) {
+                        const t = (mp - 0.55) / 0.27;
+                        op = lerp(1, 0.2, t);
+                        sx = lerp(tx * 0.5, tx * 0.88, t);
+                        sy = lerp(ty * 0.5, ty * 0.88, t);
+                        scale = lerp(1, 0.94, t);
+                        rot = lerp(r1 * 0.7, r1, t);
+                    } else {
+                        const t = (mp - 0.82) / 0.18;
+                        op = lerp(0.2, 0, t);
+                        sx = lerp(tx * 0.88, tx, t);
+                        sy = lerp(ty * 0.88, ty, t);
+                        scale = lerp(0.94, 0.85, t);
+                        rot = r1;
+                    }
+                    el.style.opacity = op;
+                    el.style.transform = `translate(${sx * vw}px, ${sy * vh}px) scale(${scale}) rotate(${rot}deg)`;
+                });
             };
             addEventListener('scroll', onScroll, { passive: true });
+            addEventListener('resize', onScroll, { passive: true });
             onScroll();
         }
     }
