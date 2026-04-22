@@ -1441,10 +1441,10 @@
     .price-card.popular {
         background: var(--paper);
         color: var(--ink);
-        border-color: var(--paper);
+        border: 2px solid var(--orange);
         position: relative;
     }
-    .price-card.popular:hover { border-color: var(--paper); transform: translateY(-6px); }
+    .price-card.popular:hover { border-color: var(--orange); transform: translateY(-6px); }
     .price-head {
         display: flex;
         justify-content: space-between;
@@ -1473,7 +1473,7 @@
         text-transform: uppercase;
         letter-spacing: 0.12em;
         padding: 6px 10px;
-        background: var(--ink);
+        background: var(--orange);
         color: var(--paper);
         border-radius: 100px;
     }
@@ -1520,8 +1520,8 @@
         transition: transform 0.4s var(--ease);
     }
     .price-btn:hover { transform: translateY(-2px); }
-    .price-card.popular .price-btn { background: var(--ink); color: var(--paper); }
-    .price-card.popular .price-btn:hover { background: var(--ink); color: var(--paper); }
+    .price-card.popular .price-btn { background: var(--orange); color: var(--paper); }
+    .price-card.popular .price-btn:hover { background: var(--orange); color: var(--paper); }
     .pricing-note {
         max-width: 1400px;
         margin: 32px auto 0;
