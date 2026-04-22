@@ -279,7 +279,7 @@
     }
     @media (max-width: 600px) {
         .hero { padding: 96px 20px 64px; min-height: 92svh; }
-        .hero-title { margin: 32px 0; }
+        .hero-title { margin: 32px 0; line-height: 1.2; }
     }
     .hero-video {
         position: absolute;
@@ -346,8 +346,8 @@
     .hero-title {
         font-family: var(--sans);
         font-weight: 600;
-        font-size: clamp(52px, 12vw, 200px);
-        line-height: 0.88;
+        font-size: clamp(48px, 10vw, 160px);
+        line-height: 1.1;
         letter-spacing: -0.04em;
         margin: 48px 0;
     }
@@ -542,10 +542,13 @@
 
 /* Feed (grille 8 visuels) */
 .feed-section {
-    padding: 80px 16px;
+    padding: 80px 32px;
+}
+@media (max-width: 600px) {
+    .feed-section { padding: 56px 16px; }
 }
 .feed-inner {
-    max-width: 1280px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 .feed-grid {
@@ -1065,38 +1068,24 @@
         line-height: 1.5;
     }
 
-        /* Responsive */
+        /* Responsive — tablette / desktop intermédiaire */
+        @media (max-width: 1200px) {
+            .feed-grid { grid-template-columns: repeat(3, 1fr); }
+        }
         @media (max-width: 1024px) {
-            .nav { display: none; }
-            .mobile-menu-btn { display: block; }
-            .header-cta .btn-primary { display: none; }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            .project-card {
-                aspect-ratio: 1/1;
-            }
-            .feed-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .testimonial-card {
-                min-width: 320px;
-                max-width: 320px;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .contact-info {
-                align-items: center;
-            }
+            .projects-grid { grid-template-columns: 1fr; }
+            .project-card { aspect-ratio: 1/1; }
+            .pricing-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+            .contact-inner { grid-template-columns: 1fr; text-align: center; }
+            .contact-info { align-items: center; }
+        }
+        /* Responsive — tablette portrait / grand mobile */
+        @media (max-width: 900px) {
+            .feed-grid { grid-template-columns: repeat(2, 1fr); }
+            .pricing-grid { grid-template-columns: 1fr; gap: 24px; }
+        }
+        @media (max-width: 380px) {
+            .feed-grid { grid-template-columns: 1fr; }
         }
 
     .services {
@@ -1750,7 +1739,12 @@
         grid-template-columns: 2fr 1fr 1fr 1fr;
         gap: 40px;
     }
+    .foot-col { min-width: 0; }
     @media (max-width: 768px) { .foot-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) {
+        .foot-top { grid-template-columns: 1fr; gap: 28px; margin-bottom: 40px; }
+        .foot-brand { font-size: clamp(44px, 14vw, 72px); margin-bottom: 16px; }
+    }
     .foot-col h4 {
         font-family: var(--mono);
         font-size: 11px;
@@ -1762,7 +1756,9 @@
     }
     .foot-col a {
         display: block;
-        padding: 4px 0;
+        padding: 10px 0;
+        min-height: 44px;
+        line-height: 1.4;
         opacity: 0.8;
         transition: opacity 0.3s;
     }
@@ -2047,13 +2043,6 @@
                 font-size: 15px;
             }
 
-            .hero-inner {
-                padding: 48px 16px 56px;
-            }
-            .hero h1 {
-                font-size: 28px;
-            }
-
             .trust-badge {
                 font-size: 12px;
                 padding: 6px 12px;
@@ -2122,10 +2111,7 @@
         /* Très petits écrans (iPhone SE 1ère gen, etc.) */
         @media (max-width: 380px) {
             .container { padding: 0 12px; }
-            .hero { margin: 8px; }
-            .hero-inner { padding: 40px 12px 48px; }
-            .hero h1 { font-size: 26px; }
-            .hero p { font-size: 14px; }
+            .hero-desc { font-size: 15px; }
             .btn-primary,
             .btn-whatsapp,
             .btn-secondary,
@@ -2149,11 +2135,6 @@
         /* Très grands écrans (>1920px) */
         @media (min-width: 1920px) {
             .container { max-width: 1440px; }
-        }
-
-        /* Tablettes en portrait */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .hero h1 { font-size: clamp(40px, 7vw, 56px); }
         }
 
         /* Section-label (small mono uppercase tag) */
