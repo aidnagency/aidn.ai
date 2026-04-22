@@ -1,191 +1,155 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for AI assistants working in this repo. Read this before making changes.
 
-## Build & Development Commands
+## What this repo is
+
+Static marketing site for **AiDN Agency** — a French AI-native art direction studio. Deployed on Vercel at <https://www.aidnagency.fr>.
+
+- **Pure static HTML/CSS/JS.** No build step, no bundler, no package manager, no framework.
+- **Three pages**, each one a self-contained HTML file with inline `<style>` and `<script>`:
+  - `index.html` — the whole marketing homepage (~3000 lines)
+  - `mentions-legales.html` — French legal notice (LCEN)
+  - `politique-confidentialite.html` — privacy policy (RGPD)
+  - `404.html` — custom 404
+- **No tests, no CI for tests, no lint config.** If you want to test a change, you open it in a browser. There is no `package.json`.
+
+## File layout
+
+```
+.
+├── index.html                      Homepage — CSS, JS, data all inline
+├── 404.html
+├── mentions-legales.html
+├── politique-confidentialite.html
+├── vercel.json                     Vercel config: headers, cache, cleanUrls
+├── robots.txt
+├── sitemap.xml                     3 URLs (must be kept in sync with pages)
+├── site.webmanifest                PWA manifest
+├── favicon.ico
+├── assets/
+│   ├── icons/                      Favicons + apple-touch + PWA icons
+│   └── images/logo.png             Local logo fallback (remote is Cloudinary)
+└── README.md
+```
+
+There is no `src/`, no `public/`, no `dist/`. Files are served exactly as they are from repo root — `vercel.json` has `"outputDirectory": "."`.
+
+## Running locally
 
 ```bash
-# Install dependencies (use make bootstrap for first-time setup)
-make bootstrap
-
-# Build all packages (ALWAYS run from repo root, not from individual packages)
-yarn build           # or: make build
-
-# Watch mode for development
-yarn watch           # or: make watch
-
-# Run tests
-yarn test            # Unit tests (Jest) for all packages
-yarn test-playwright # Playwright E2E tests
-
-# Run tests for a specific package
-cd packages/framer-motion && yarn test-client  # Client-side Jest tests
-cd packages/framer-motion && yarn test-server  # SSR Jest tests
-
-# Lint
-yarn lint            # or: make lint
-
-# Run E2E tests
-make test-e2e        # Runs all E2E tests (Next.js, HTML, React, React 19, Playwright)
-make test-single     # Run a single Cypress test (edit spec path in Makefile)
+python3 -m http.server 8000
+# open http://localhost:8000
 ```
 
-## Package Architecture
+That's it. No install step. Any static server works.
 
-This is a Yarn workspaces monorepo managed by Turborepo and Lerna.
+## Deployment
 
-### Core Packages (packages/)
+- Auto-deploys from Git (Vercel is wired to the connected branch).
+- Manual: `vercel --prod` from repo root.
+- Headers, caching, `cleanUrls` (`/mentions-legales` resolves to `mentions-legales.html`) all configured in `vercel.json`.
 
-- **motion** - Main public package (`npm install motion`). Re-exports from framer-motion with cleaner entry points (`motion/react`, `motion/mini`)
-- **framer-motion** - Core implementation for React. Contains all animation logic, components, hooks, and features
-- **motion-dom** - DOM-specific animation utilities (animate, scroll, gestures, effects). Framework-agnostic
-- **motion-utils** - Shared utilities (easing, math helpers, error handling). No dependencies
+## Architecture of `index.html`
 
-### Development Apps (dev/)
+One file, roughly split into:
 
-- **dev/react** - React 18 development/test app (port 9990)
-- **dev/react-19** - React 19 development/test app (port 9991)
-- **dev/next** - Next.js development/test app (port 3000)
-- **dev/html** - Vanilla JS/HTML test pages (port 8000)
+1. `<head>` (lines ~1-60) — meta, Open Graph, Twitter Card, JSON-LD `Organization`, preconnects to Google Fonts + Cloudinary, preload of the hero image.
+2. `<style>` (lines ~61-2264) — all CSS. Big but organized top-to-bottom following the page sections.
+3. `<body>` (lines ~2265-2815) — markup in semantic order:
+   - `nav.nav#header` + `.mobile-menu#mobileMenu`
+   - `<main id="main">` containing sections in this order: `.hero`, `.zoom` (sticky parallax), `.marquee-wrap`, `.manifesto`, `#approche`, `#services`, `#realisations` (feed + project modal trigger), `#offres` (pricing), `.faq`, `.contact`
+   - `<footer class="foot">`
+   - `.project-modal#projectModal` — single modal reused for all case studies
+4. `<script>` (lines ~2817-3118) — all JS.
+5. Vercel Analytics + Speed Insights scripts (last).
 
-### Package Dependency Flow
+### CSS design tokens (`:root`)
 
 ```
-motion-utils (base utilities)
-    ↓
-motion-dom (DOM animation engine)
-    ↓
-framer-motion (React integration)
-    ↓
-motion (public API)
+--ink: #0E0E0E      text / dark bg
+--paper: #F2EFE8    background / light text
+--orange: #FF5B0C   accent (used sparingly — hero «futur», badges, selection)
+--muted: #8A8680
+--sans: Inter       via Google Fonts
+--serif: Instrument Serif    italic display type
+--ease: cubic-bezier(0.22, 1, 0.36, 1)
 ```
 
-## Key Source Directories (packages/framer-motion/src/)
+Keep the palette minimal. Orange is an editorial accent — don't spread it.
 
-- **animation/** - Animation system (animators, sequences, optimized-appear)
-- **components/** - React components (AnimatePresence, LayoutGroup, LazyMotion, Reorder)
-- **context/** - React contexts (MotionContext, PresenceContext, LayoutGroupContext)
-- **gestures/** - Gesture handling (drag, pan, tap, hover, focus)
-- **motion/** - Core motion component and feature system
-- **projection/** - Layout animation projection system (FLIP animations)
-- **render/** - Rendering pipeline (HTML, SVG, DOM utilities)
-- **value/** - Motion values and hooks (useMotionValue, useSpring, useScroll, useTransform)
+### JS features (all inline, vanilla)
 
-## Writing Tests
+- Custom cursor (`.cursor`, `.cursor-dot`) with magnetic hover via `data-magnetic`, disabled on `pointer: coarse`.
+- `.dark-region` body class toggled when dark sections are mid-viewport (inverts cursor/colors).
+- `IntersectionObserver` reveals `.reveal`, `.reveal-line`, `.reveal-word` on enter.
+- **Zoom section** (`.zoom` / `.zoom-sticky` / `.zoom-frame` / `.zoom-floats`): sticky-scroll parallax. Uses native `animation-timeline: view()` when supported, with a JS fallback that calculates progress from `getBoundingClientRect`. Floating decorative images (`.float-img`) drive in from the center, drift outward with per-image parallax factors (`--p` mid, `--pe` end), and fade out as the central frame zooms in.
+- Marquee scroller (`.marquee-track`).
+- Accordions: `toggleService(id)`, `toggleFaq(id)` — single-open behavior.
+- Mobile menu: `toggleMobileMenu()` toggles `.mobile-menu.open` and locks body scroll.
+- **Project modal**: driven by `projectsData` (object at bottom of script, keyed `1-4`) + `openProject(id)`. Each entry carries `title`, `category`, `tags`, `projet`, `univers`, `intention`, `defi`, `da`, `livrables`, `note`, `gallery`. If you add a project, update both `projectsData` and the `.feed-item` trigger.
+- Smooth scroll for `a[href^="#"]` (overrides default to keep the header offset from `scroll-margin-top: 80px`).
+- `prefers-reduced-motion` disables all animations globally via the CSS rule at the top.
 
-**IMPORTANT: Always write tests for every bug fix AND every new feature.** Write a failing test FIRST before implementing, to ensure the issue is reproducible and the fix is verified.
+## Conventions — follow these
 
-**"Failing test" means a test that reproduces the reported bug.** The test should assert the expected behavior and fail because of the bug — not because your planned code doesn't exist yet. A TypeScript compile error for an API you're about to add is not a failing test. Write the test against the existing codebase, see it fail for the right reason, then implement the fix.
+- **Never split inline CSS/JS into separate files** unless the user explicitly asks. The "one HTML file per page, everything inline" pattern is intentional — zero extra requests, zero build, no cache invalidation dance.
+- **No dependencies.** Don't add npm, don't add a build step, don't bring in a framework. If you're tempted to reach for a library, you're probably solving the wrong problem.
+- **Keep it French.** All user-facing copy is French. Don't translate to English. Match the existing typographic style: curly apostrophes (`l'`), em dashes (`—`), French accentuation.
+- **CSS custom properties for positioning / animation knobs.** The `.float-img` pattern (`--x`, `--y`, `--r`, `--p`, `--pe`) is the house style: keyframes reference variables so each instance tweaks itself via `style="--x: …"`. Reuse this pattern rather than writing new classes per instance.
+- **Respect `prefers-reduced-motion`.** Any new animation should degrade gracefully — the global rule at the top handles the common case, but check that scroll-linked JS doesn't force motion.
+- **Respect `pointer: coarse`.** The custom cursor and magnetic hover are desktop-only. Don't add anything hover-dependent without a touch fallback.
+- **Keep all three pages in visual sync.** `mentions-legales.html` and `politique-confidentialite.html` use a trimmed version of the same tokens and type system. If you change the palette or type scale in `index.html`, update those pages too.
+- **Update `sitemap.xml` `<lastmod>`** if you materially change a page's content.
+- **No cookies, no trackers beyond Vercel Analytics / Speed Insights.** The privacy policy claims "no cookies" — honor it.
+- **`cleanUrls: true`.** Internal links to legal pages use `/mentions-legales` (no `.html`), not `/mentions-legales.html`.
 
-### Test types by feature
+## Scroll-linked animation gotchas
 
-- **Unit tests (Jest)**: For pure logic, value transformations, utilities. Located in `__tests__/` directories alongside source. **JSDOM does not support WAAPI** (`Element.animate()`), so Jest tests only cover the JS animation fallback path.
-- **E2E tests (Cypress)**: For UI behavior that involves DOM rendering, scroll interactions, gesture handling, or WAAPI animations. Test specs in `packages/framer-motion/cypress/integration/`, test pages in `dev/react/src/tests/`.
-- **E2E tests (Playwright)**: For cross-browser testing and HTML/vanilla JS tests. Specs in `tests/`, test pages in `dev/html/public/playwright/`.
+- `animation-timeline: view()` is Chromium-only as of writing. The JS fallback path (`if (!CSS.supports('animation-timeline: view()'))`) must be kept in parity with any keyframe change. When you edit `@keyframes zoomIn` / `zoomImgPar` / `floatPar`, update the fallback `onScroll` in the same commit.
+- `.zoom` section height (`360vh` desktop, `320vh` mobile) controls the sticky scroll runway. Shortening it compresses the zoom; lengthening it gives more parallax room. Don't change it without checking both the CSS ranges (`animation-range: entry X% cover Y%`) and the JS progress bounds (`(progress - 0.2) / 0.4`, etc.) — they must move together.
+- `.float-img` transforms stack a `translate(-50%, -50%)` (centering) with `translate(var(--x), var(--y))` (offset) with `rotate()` and `scale()`. Keep that order.
 
-### When to escalate from unit tests to Cypress
+## Known placeholders (real TODOs)
 
-**If a bug is reported with a reproduction but your unit test passes, do NOT conclude "already works."** JSDOM lacks WAAPI, real layout, and real browser rendering. The bug is likely in the browser code path. You MUST:
+The homepage and legal pages ship with placeholder business data. Do **not** invent values for these — they require real information from the business owner:
 
-1. Create a Cypress E2E test that matches the reporter's reproduction as closely as possible.
-2. Verify the Cypress test fails before implementing a fix.
-3. If the bug involves `opacity`, `transform`, React.lazy/Suspense, scroll, layout animations, or any visual behavior — **start with Cypress**, skip the unit test entirely.
+- `wa.me/33612345678` — placeholder WhatsApp number, 9 occurrences in `index.html`. Real number needed before public launch.
+- `placehold.co/...` — 12 `.feed-item` images + 12 gallery images across 4 entries in `projectsData`. Replace with real Cloudinary-hosted visuals.
+- `[À COMPLÉTER]` fields in `mentions-legales.html` — raison sociale, SIRET, RCS, capital, adresse, téléphone, responsable légal.
+- `[À COMPLÉTER]` fields in `politique-confidentialite.html` — responsable du traitement.
 
-### Creating Cypress E2E tests
+If asked to "finish the TODOs" without data being provided, stop and ask. Don't fabricate legal or contact information.
 
-1. **Create a test page** in `dev/react/src/tests/<test-name>.tsx` exporting a named `App` component. It's automatically available at `?test=<test-name>`.
-2. **Create a spec** in `packages/framer-motion/cypress/integration/<test-name>.ts`.
-3. **Verify WAAPI acceleration** using `element.getAnimations()` in Cypress callbacks — but **only for compositor properties** (opacity, transform). `getAnimations()` won't return WAAPI animations for non-compositor properties like height/width in Electron. Don't use it for those.
+## Common tasks
 
-### Cypress animation testing patterns
+### Edit a section's copy
+Find the section by its `id` (`#services`, `#offres`, etc.) or by its `.sec-label` ("01 — Manifeste", "02 — …"). Edit the text in place.
 
-- **Use `.then()`, not `.should()`, for mid-animation measurements.** `cy.should()` retries assertions until they pass or timeout — so it will keep retrying until the animation completes, masking bugs where the target value is wrong. `.then()` captures the value at a single point in time.
-- **For animation target bugs, use long duration + linear easing + mid-animation measurement.** Set `transition={{ type: "tween", ease: "linear", duration: 10 }}`, wait 5s (50% through), then check the computed style with `.then()`. If the target is wrong, the value will be proportionally wrong and easy to detect.
-- **Don't try `getAnimations()` for non-compositor properties** (height, width, etc.) in Cypress/Electron. It likely won't have WAAPI animations to inspect. Stick to computed style checks for these.
-- **Don't use `onUpdate` for mid-animation pixel values.** For keyword targets like `"auto"`, `onUpdate` reports the keyword, not the resolved pixel value. Use `getComputedStyle()` instead.
-- **Always run Cypress tests in the foreground.** Background bash commands hang silently and produce empty output, making debugging impossible. Cypress needs reliable stdout/stderr.
+### Add a project to the feed
+1. Append an entry to `projectsData` with a new numeric key.
+2. Add a `.feed-item` in `#realisations` with matching `onclick="openProject(N)"` and a thumbnail.
+3. Make sure image URLs are real (Cloudinary with `f_auto,q_auto` for WebP/AVIF).
 
-### Running Cypress tests locally
+### Add / change an animation
+1. Write the CSS `@keyframes` + `animation-timeline: view()` + `animation-range`.
+2. Mirror it in the `!CSS.supports('animation-timeline: view()')` fallback block.
+3. Verify with both a modern Chromium (native path) and either Firefox or Safari (fallback path).
 
-**You MUST run every new Cypress test against both React 18 and React 19 before creating a PR.** CI runs both and will break if you skip this.
+### Change colors or fonts
+Edit `:root` tokens in `index.html`, then replicate the same changes in `mentions-legales.html` and `politique-confidentialite.html`.
 
-**Start the Vite dev server directly** — do NOT use `yarn start-server-and-test` with `yarn dev-server` (turbo). Turbo starts ALL dev servers including Next.js, which is slow and unreliable. Starting Vite directly is instant:
+## What NOT to do
 
-```bash
-# React 18 — start Vite directly, then run Cypress
-PORT=$((10000 + RANDOM % 50000))
-cd dev/react && TEST_PORT=$PORT yarn vite --port $PORT &
-DEV_PID=$!
-# Wait for server to be ready
-npx wait-on http://localhost:$PORT
-cd packages/framer-motion && cypress run --headed --config baseUrl=http://localhost:$PORT --spec cypress/integration/<test-name>.ts
-kill $DEV_PID
+- Don't add `package.json`, `tsconfig`, `vite.config`, or any build/lint/format tooling without being asked.
+- Don't extract CSS or JS into separate files.
+- Don't swap the static-site deploy for SSR or a framework.
+- Don't add unit tests — there's no logic to unit test here. If testing is requested, the right layer is Playwright smoke + axe + lychee (link check) in a GitHub Action.
+- Don't touch placeholders (WhatsApp number, SIRET, etc.) with invented values.
+- Don't commit screenshots, local backups (`*.backup.html`), or `.vercel/` — all covered by `.gitignore`.
 
-# React 19 — same pattern, start its Vite server independently
-PORT=$((10000 + RANDOM % 50000))
-cd dev/react-19 && TEST_PORT=$PORT yarn vite --port $PORT &
-DEV_PID=$!
-npx wait-on http://localhost:$PORT
-cd packages/framer-motion && cypress run --config-file=cypress.react-19.json --config baseUrl=http://localhost:$PORT --headed --spec cypress/integration/<test-name>.ts
-kill $DEV_PID
-```
+## Git workflow
 
-**Do NOT set `TEST_PORT` globally with turbo** — it affects both React 18 and 19 dev servers, causing port conflicts. Start each server independently on its own port as shown above.
-
-Both must pass. If a test fails on one React version but not the other, investigate — do not skip it.
-
-### Async test helpers
-
-When waiting for the next frame in async tests:
-
-```javascript
-async function nextFrame() {
-    return new Promise<void>((resolve) => {
-        frame.postRender(() => resolve())
-    })
-}
-```
-
-## Code Style
-
-- **Prioritise small file size** — this is a library shipped to end users. Prefer concise patterns that minimise output bytes.
-- Prefer optional chaining (`value?.jump()`) over explicit `if` statements
-- Use `interface` for type definitions (enforced by ESLint)
-- No default exports (use named exports)
-- Prefer arrow callbacks
-- Use strict equality (`===`)
-- No `var` declarations (use `const`/`let`)
-
-## Fixing Issues from Bug Reports
-
-When working on a bug fix from a GitHub issue:
-
-1. **Read the issue first.** Run `gh issue view <number>` before doing anything else. Do not infer the ask from code context or agent exploration — read the actual issue to understand what's being requested.
-2. **Check git history early.** Before tracing code, run `git log --grep="<keyword>" -- <relevant-file>` to see if the bug was already fixed or if prior commits reveal the root cause. This can save an entire session of manual code tracing.
-3. **The reporter's reproduction code is the basis for your test.** If the issue links to a CodeSandbox/StackBlitz, fetch it. Try multiple URL patterns if the first fails. If the issue has inline code, use that directly.
-4. **If you cannot get the reproduction code, STOP and ask for help.** Do not guess at what the reporter meant — that leads to tests that prove nothing. Message the team lead with the URL and ask them to provide the code.
-5. **Do not proceed to a fix without a test that fails for the right reason.** See the "Writing Tests" section above.
-6. **Run one clean install, then wait for it to finish.** Do not run `make bootstrap`, `yarn install`, or `corepack enable && yarn install` as overlapping background tasks — they interfere with each other. One install command, foreground, wait for completion.
-
-### Debugging strategy
-
-- **Get to a test fast.** Do not spend extended time on static code analysis trying to find the bug by reading code. Read enough to form an initial theory (~5 min of tracing), then write a test and start experimenting. Most bugs are found faster through testing than through code reading. This is the single most common mistake — it has caused excessive time waste in multiple sessions.
-- **Use targeted searches, not broad exploration.** Prefer `grep`/`glob` for specific functions (e.g. `isHTMLElement`, `supportsBrowserAnimation`) over large Explore agent calls. Two targeted searches beat one broad sweep.
-- **Pivot quickly when your theory is wrong.** If tracing a code path (e.g. the render pipeline) is inconclusive after 2-3 rounds of investigation, step back and look at adjacent systems — utility functions, type guards, environment checks. The bug is often one level removed from where you expect it.
-- **When a bug can't be reproduced in the test environment, stop after 2-3 attempts.** Electron/JSDOM differ from Chrome in significant ways (e.g. `offsetHeight` on SVGElement, WAAPI support, React reconciliation in dev mode). If your test passes from the start: (1) do a web search for the behavioral difference between environments, (2) if the fix is clearly correct and defensive, apply it and write a test that validates the desired behavior — do not spend 10 Cypress runs trying to force a local failure. A test that can't fail without the fix is acceptable when the bug is environment-specific; note this in the PR.
-- **Capture Cypress output on the first run.** Use `tail -60` on the output. Do not re-run Cypress with different grep patterns to capture errors — it wastes time and the information is in the first run.
-- **Think defensively, not forensically.** You don't always need to trace the exact scenario that produces bad input. If a function can receive invalid values and pass them to a browser API, the fix is to guard against that — regardless of which upstream path produces those values. Ask: "should this value ever reach this API?" If no, add the guard and move on.
-- **Choose the right test layer.** Some behaviors can't be directly asserted in tests (e.g. Chrome WAAPI console warnings can't be intercepted via `console.warn` spy). In these cases, unit-test the underlying logic (e.g. `canAnimate`, `isAnimatable`) rather than writing an E2E test that can't actually prove the bug is fixed. Write the E2E test too if it adds value, but recognize which test is the real regression gate.
-- **Avoid background task sprawl.** Do not launch multiple background exploration tasks early in a session. They complete after they're needed and generate noise. Launch tasks when you need their results, not speculatively.
-
-## Known GitHub CLI Issues
-
-`gh pr edit` fails on this repo due to GitHub's Projects Classic deprecation blocking the GraphQL mutation. **This is expected — do not investigate, retry, or work around it.** If `gh pr create` succeeded and the code is pushed, you're done. Move on.
-
-## Notes
-
-Be thorough - I am at risk of losing my job.
-
-## Timing
-
-Use `time.now()` from `motion-dom/src/frameloop/sync-time.ts` instead of `performance.now()` for frame-synced timestamps. This ensures consistent time measurements within synchronous contexts and proper sync with the animation frame loop.
+- Commit messages in this repo follow a loose `Type: short description` pattern in French (`Feat:`, `Fix:`, `Tune:`, `Refonte …`). Match the existing style.
+- One focused change per commit.
+- No PR template; keep PR descriptions short.
