@@ -623,14 +623,16 @@
     display: block;
     transition: transform 0.7s var(--ease);
 }
-.bento-item:hover img { transform: scale(1.05); }
+.bento-item:hover img,
+.bento-item:active img,
+.bento-item:focus-within img { transform: scale(1.1); }
 @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
         .bento-item img {
             animation: bentoScrollZoom linear both;
             animation-timeline: view();
             animation-range: cover 0% cover 100%;
-            transition: none;
+            transition: transform 0.6s var(--ease);
             will-change: transform;
         }
         @keyframes bentoScrollZoom {
@@ -638,7 +640,12 @@
             50%  { transform: scale(1.07); }
             100% { transform: scale(1.0); }
         }
-        .bento-item:hover img { animation-play-state: paused; }
+        .bento-item:hover img,
+        .bento-item:active img,
+        .bento-item:focus-within img {
+            animation: none;
+            transform: scale(1.1);
+        }
     }
 }
 .bento-overlay { display: none; }
@@ -1466,9 +1473,13 @@
         border-radius: 20px;
         overflow: hidden;
         background: #1a1a1a;
+        cursor: zoom-in;
     }
     .service-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease); }
-    .service-row.open .service-img img { transform: scale(1.05); }
+    .service-row.open .service-img img,
+    .service-img:hover img,
+    .service-img:active img,
+    .service-img:focus-within img { transform: scale(1.08); }
 
     .cases {
         background: var(--ink);
@@ -1538,7 +1549,9 @@
         object-fit: cover;
         transition: transform 0.8s var(--ease);
     }
-    .case:hover .case-img img { transform: scale(1.05); }
+    .case:hover .case-img img,
+    .case:active .case-img img,
+    .case:focus-within .case-img img { transform: scale(1.08); }
     .case-img::after {
         content: '';
         position: absolute;

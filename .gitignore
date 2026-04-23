@@ -54,3 +54,5 @@ local-*.jpeg
 # Screenshots playwright locaux
 hero-video-*.png
 hero-video-*.jpeg
+hero-[0-9]*.png
+hero-[0-9]*.jpeg
