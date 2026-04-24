@@ -599,15 +599,18 @@
     aspect-ratio: 4 / 5;
     transition: transform 0.4s var(--ease);
 }
+.bento-item.has-video { cursor: default; }
 .bento-item:hover { transform: translateY(-3px); }
-.bento-item img {
+.bento-item img,
+.bento-item video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
     transition: transform 0.7s var(--ease);
 }
-.bento-item:hover img { transform: scale(1.05); }
+.bento-item:hover img,
+.bento-item:hover video { transform: scale(1.05); }
 @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
         .bento-item img {
@@ -2801,9 +2804,8 @@
                     <img src="../assets/images/realisations/08-ferrari.jpg" alt="Rio sports campaign — Christ the Redeemer and red bikini" loading="lazy" decoding="async">
                     <div class="bento-overlay"><span class="bento-title">Rio Sport</span><span class="bento-desc">Campaign · Athletic</span></div>
                 </div>
-                <div class="bento-item" data-title="Neshama" data-desc="Amber fragrance — golden light, monolith bottle">
-                    <img src="../assets/images/realisations/05-parfum-neshama.jpg" alt="Neshama fragrance — amber bottle at sunset" loading="lazy" decoding="async">
-                    <div class="bento-overlay"><span class="bento-title">Neshama</span><span class="bento-desc">Fragrance · Amber monolith</span></div>
+                <div class="bento-item has-video">
+                    <video src="../assets/video/bento/parfum-nessama.mp4" poster="../assets/video/bento/parfum-nessama.jpg" muted loop playsinline preload="metadata" aria-label="Neshama fragrance — motion visual"></video>
                 </div>
                 <div class="bento-item" data-title="Mami Podcast" data-desc="Intimate portrait — morning coffee, vintage mic">
                     <img src="../assets/images/realisations/06-mami-podcast.jpg" alt="Mami Podcast — intimate portrait, coffee and vintage microphone" loading="lazy" decoding="async">
@@ -2813,17 +2815,15 @@
                     <img src="../assets/images/realisations/07-moncler-mami.jpg" alt="Moncler — alpine scene, goat and high-mountain picnic" loading="lazy" decoding="async">
                     <div class="bento-overlay"><span class="bento-title">Moncler Alpine</span><span class="bento-desc">Editorial · High mountain</span></div>
                 </div>
-                <div class="bento-item" data-title="American Road" data-desc="Streetwear — duo on the road, US truck">
-                    <img src="../assets/images/realisations/04-money.jpg" alt="Streetwear campaign — duo and dog in front of an American truck" loading="lazy" decoding="async">
-                    <div class="bento-overlay"><span class="bento-title">American Road</span><span class="bento-desc">Streetwear · Roadtrip</span></div>
+                <div class="bento-item has-video">
+                    <video src="../assets/video/bento/jeune-couture.mp4" poster="../assets/video/bento/jeune-couture.jpg" muted loop playsinline preload="metadata" aria-label="Couture editorial — motion visual"></video>
                 </div>
                 <div class="bento-item" data-title="Maison Orsola — Hibiscus" data-desc="Mahajád bottle — deep red, graphic texture">
                     <img src="../assets/images/realisations/09-parfum-hibiscus.jpg" alt="Maison Orsola — Hibiscus Mahajád bottle on red ground" loading="lazy" decoding="async">
                     <div class="bento-overlay"><span class="bento-title">Maison Orsola</span><span class="bento-desc">Fragrance · Hibiscus Mahajád</span></div>
                 </div>
-                <div class="bento-item" data-title="Maison Orsola — Ritual" data-desc="Hibiscus cocktail — silver tray, blue hour">
-                    <img src="../assets/images/realisations/10-parfum-hibiscus-cocktail.jpg" alt="Maison Orsola — hibiscus cocktail and bottle on silver tray" loading="lazy" decoding="async">
-                    <div class="bento-overlay"><span class="bento-title">Maison Orsola — Ritual</span><span class="bento-desc">Still life · Cocktail</span></div>
+                <div class="bento-item has-video">
+                    <video src="../assets/video/bento/parfum-chanel.mp4" poster="../assets/video/bento/parfum-chanel.jpg" muted loop playsinline preload="metadata" aria-label="Fragrance editorial — motion visual"></video>
                 </div>
                 <div class="bento-item" data-title="Kumba" data-desc="Contemporary still life — olive oil cream">
                     <img src="../assets/images/realisations/11-kumba.jpg" alt="Kumba — olive oil cream pot, contemporary still life" loading="lazy" decoding="async">
@@ -3260,7 +3260,8 @@
     document.addEventListener('click', (e) => {
         const bento = e.target.closest('.bento-item');
         if (bento) {
-            const all = [...document.querySelectorAll('.bento-item')];
+            if (bento.classList.contains('has-video')) return;
+            const all = [...document.querySelectorAll('.bento-item:not(.has-video)')];
             const items = all.map(el => ({
                 src: el.querySelector('img').src,
                 title: '',
@@ -3277,6 +3278,23 @@
     });
     document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.service-img img').forEach(img => img.classList.add('zoomable'));
+
+        // Bento videos: autoplay when visible, pause when off-screen
+        (function setupBentoVideos() {
+            const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const videos = document.querySelectorAll('.bento-item.has-video video');
+            if (!videos.length) return;
+            if (reduced) { videos.forEach(v => { v.removeAttribute('autoplay'); v.pause(); }); return; }
+            if (!('IntersectionObserver' in window)) { videos.forEach(v => v.play().catch(() => {})); return; }
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(en => {
+                    const v = en.target;
+                    if (en.isIntersecting) v.play().catch(() => {});
+                    else v.pause();
+                });
+            }, { threshold: 0.25 });
+            videos.forEach(v => io.observe(v));
+        })();
 
         // Bento scroll zoom — JS fallback for browsers without animation-timeline: view()
         var hasNative = CSS && CSS.supports && CSS.supports('animation-timeline', 'view()');
