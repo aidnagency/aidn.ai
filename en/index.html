@@ -572,6 +572,19 @@
     max-width: 1400px;
     margin: 0 auto;
 }
+.feed-label {
+    font-family: var(--mono, 'JetBrains Mono', monospace);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 20px;
+    display: block;
+}
+@media (max-width: 600px) {
+    .feed-label { font-size: 0.7rem; margin-bottom: 14px; }
+}
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1761,6 +1774,45 @@
         letter-spacing: 0.12em;
         color: var(--muted-dark);
     }
+    .pricing-included {
+        max-width: 1400px;
+        margin: 0 auto 20px;
+        padding: 18px 28px;
+        background: rgba(242, 239, 232, 0.06);
+        border: 1px solid rgba(255, 91, 12, 0.35);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+    .pricing-included-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--orange);
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .pricing-included-list {
+        font-family: var(--sans);
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: 0.01em;
+        color: var(--paper);
+        line-height: 1.5;
+    }
+    @media (max-width: 900px) {
+        .pricing-included {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 16px 20px;
+        }
+        .pricing-included-list { font-size: 12px; }
+    }
 
     .faq {
         padding: 120px 32px;
@@ -2588,7 +2640,7 @@
                 <div class="service-body">
                     <div class="service-body-inner">
                         <div>
-                            <p>Before any image, we map your brand: positioning, competitors. The goal: a clear, defensible direction — and above all, recognizable.</p>
+                            <p>Mapping the brand before any visual production: positioning, territory, symbolic tension. The goal: a clear, defensible, recognizable direction.</p>
                             <div class="service-tags">
                                 <span class="service-tag">Brand audit</span>
                                 <span class="service-tag">Positioning</span>
@@ -2605,23 +2657,23 @@
                 <div class="service-header" onclick="toggleService('service2')">
                     <span class="service-num">02</span>
                     <div class="service-info">
-                        <h3>Creative <span class="serif">Direction</span></h3>
-                        <p>Visual world · Palette · Brand language</p>
+                        <h3>Rebranding & <span class="serif">Identity Refresh</span></h3>
+                        <p>Visual guidelines · Brand world · Source files</p>
                     </div>
                     <div class="service-chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
                 </div>
                 <div class="service-body">
                     <div class="service-body-inner">
                         <div>
-                            <p>Moodboard, visual guidelines, brand bible. We build the visual language that will make your brand recognizable across every format — from packshot to campaign.</p>
+                            <p>Reshape or structure an existing identity, delivered turnkey. Visual guidelines, brand world and source files — the visual backbone ready to deploy.</p>
                             <div class="service-tags">
-                                <span class="service-tag">Moodboard</span>
                                 <span class="service-tag">Visual guidelines</span>
-                                <span class="service-tag">Brand bible</span>
-                                <span class="service-tag">Guidelines</span>
+                                <span class="service-tag">Brand world</span>
+                                <span class="service-tag">Source files</span>
+                                <span class="service-tag">Turnkey identity</span>
                             </div>
                         </div>
-                        <div class="service-img"><img src="../assets/images/services/02-louis-vuitton.jpg" alt="Creative direction — Louis Vuitton heritage world" loading="lazy"></div>
+                        <div class="service-img"><img src="../assets/images/services/02-louis-vuitton.jpg" alt="Rebranding & identity refresh — heritage world" loading="lazy"></div>
                     </div>
                 </div>
             </div>
@@ -2630,23 +2682,23 @@
                 <div class="service-header" onclick="toggleService('service3')">
                     <span class="service-num">03</span>
                     <div class="service-info">
-                        <h3>Image & <span class="serif">Campaign Creation</span></h3>
-                        <p>Visuals · Campaigns · Editorial packshots</p>
+                        <h3>Creative <span class="serif">Direction</span></h3>
+                        <p>Visual world · Palette · Brand language</p>
                     </div>
                     <div class="service-chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
                 </div>
                 <div class="service-body">
                     <div class="service-body-inner">
                         <div>
-                            <p>The core of our practice. AI image generation for campaigns, hero visuals, narrative packshots, editorial portraits, still life. Every image is composed, not mass-produced.</p>
+                            <p>Building a visual language recognizable across every format. Moodboard, palette, brand bible — from intent to a deployable visual signature.</p>
                             <div class="service-tags">
-                                <span class="service-tag">Visuals</span>
-                                <span class="service-tag">Packshots</span>
-                                <span class="service-tag">Campaigns</span>
-                                <span class="service-tag">Editorial portraits</span>
+                                <span class="service-tag">Moodboard</span>
+                                <span class="service-tag">Palette</span>
+                                <span class="service-tag">Brand bible</span>
+                                <span class="service-tag">Guidelines</span>
                             </div>
                         </div>
-                        <div class="service-img"><img src="../assets/images/services/03-money-helicopter.jpg" alt="Campaign creation — helicopter scene, bold ad image" loading="lazy"></div>
+                        <div class="service-img"><img src="../assets/images/realisations/02-rouge-serpent.jpg" alt="Creative direction — visual world and brand palette" loading="lazy"></div>
                     </div>
                 </div>
             </div>
@@ -2654,6 +2706,31 @@
             <div class="service-row" id="service4">
                 <div class="service-header" onclick="toggleService('service4')">
                     <span class="service-num">04</span>
+                    <div class="service-info">
+                        <h3>Visual & <span class="serif">Campaign Creation</span></h3>
+                        <p>Still visuals · Motion visuals · Editorial packshots</p>
+                    </div>
+                    <div class="service-chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+                </div>
+                <div class="service-body">
+                    <div class="service-body-inner">
+                        <div>
+                            <p>AI-crafted visuals, never mass-produced. Still and motion visuals, narrative packshots, editorial portraits, still life — every piece composed as a statement.</p>
+                            <div class="service-tags">
+                                <span class="service-tag">Still visuals</span>
+                                <span class="service-tag">Motion visuals</span>
+                                <span class="service-tag">Packshots</span>
+                                <span class="service-tag">Campaigns</span>
+                            </div>
+                        </div>
+                        <div class="service-img"><img src="../assets/images/services/03-money-helicopter.jpg" alt="Visual & campaign creation — bold ad scene" loading="lazy"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-row" id="service5">
+                <div class="service-header" onclick="toggleService('service5')">
+                    <span class="service-num">05</span>
                     <div class="service-info">
                         <h3>Adaptations & <span class="serif">Formats</span></h3>
                         <p>Social · Print · E-commerce · Short-form motion</p>
@@ -2663,7 +2740,7 @@
                 <div class="service-body">
                     <div class="service-body-inner">
                         <div>
-                            <p>Your visual world adapted across every format. Social, print, e-commerce, short films. A living image library that keeps working over time.</p>
+                            <p>Your visual world adapted across social, print, e-commerce and short films. A library of still and motion visuals that keeps living and being reused over time.</p>
                             <div class="service-tags">
                                 <span class="service-tag">Social media</span>
                                 <span class="service-tag">Print</span>
@@ -2671,14 +2748,14 @@
                                 <span class="service-tag">Short films</span>
                             </div>
                         </div>
-                        <div class="service-img"><img src="../assets/images/services/04-gucci.jpg" alt="Multi-format adaptations — editorial Gucci campaign" loading="lazy"></div>
+                        <div class="service-img"><img src="../assets/images/services/04-gucci.jpg" alt="Multi-format adaptations — visual world deployed" loading="lazy"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="service-row" id="service5">
-                <div class="service-header" onclick="toggleService('service5')">
-                    <span class="service-num">05</span>
+            <div class="service-row" id="service6">
+                <div class="service-header" onclick="toggleService('service6')">
+                    <span class="service-num">06</span>
                     <div class="service-info">
                         <h3>Advisory & <span class="serif">Long-term Partnership</span></h3>
                         <p>Creative direction over time</p>
@@ -2688,7 +2765,7 @@
                 <div class="service-body">
                     <div class="service-body-inner">
                         <div>
-                            <p>We support your brand over the long run. Evolving the visual world, new campaigns, cross-channel consistency. A partnership, not a transaction.</p>
+                            <p>Long-term support for your brand's visual evolution and consistency. A creative direction partnership, not a one-off engagement.</p>
                             <div class="service-tags">
                                 <span class="service-tag">Creative direction</span>
                                 <span class="service-tag">Long-term support</span>
@@ -2696,7 +2773,7 @@
                                 <span class="service-tag">Advisory sessions</span>
                             </div>
                         </div>
-                        <div class="service-img"><img src="../assets/images/services/05-chaussure.jpg" alt="Advisory & support — shoe packshot, long-term object work" loading="lazy"></div>
+                        <div class="service-img"><img src="../assets/images/services/05-chaussure.jpg" alt="Advisory & support — long-term object work" loading="lazy"></div>
                     </div>
                 </div>
             </div>
@@ -2706,6 +2783,7 @@
     <!-- Projects -->
     <section id="realisations" class="feed-section">
         <div class="feed-inner">
+            <span class="feed-label">Conceptual Projects</span>
             <div class="bento-grid">
                 <div class="bento-item" data-title="Minimal Editorial" data-desc="Silhouette — black dress, pure line">
                     <img src="../assets/images/realisations/01-chinoise.jpg" alt="Dancer in black dress, classic posture — minimal editorial" loading="lazy" decoding="async">
@@ -2765,6 +2843,11 @@
             <h2 class="reveal"><span class="reveal-line"><span>Our <span class="serif hl">packages</span></span></span></h2>
         </div>
 
+        <div class="pricing-included" aria-label="Included in every package">
+            <span class="pricing-included-label">Included in every package</span>
+            <span class="pricing-included-list">Strategic audit & watch · Creative direction · Dedicated visual world</span>
+        </div>
+
         <div class="pricing-grid">
             <div class="price-card">
                 <div>
@@ -2773,9 +2856,8 @@
                 </div>
                 <p class="price-sub">A fast, focused launch.</p>
                 <div class="price-features">
-                    <div class="price-feat">Brand audit & positioning</div>
-                    <div class="price-feat">Moodboard & creative direction</div>
-                    <div class="price-feat">Hero visuals series (3 to 5)</div>
+                    <div class="price-feat">Still visuals: a series around a flagship product</div>
+                    <div class="price-feat">Launch-ready visual world</div>
                     <div class="price-feat">One round of revisions included</div>
                 </div>
                 <a href="https://wa.me/33612345678?text=Hi%20AiDN%2C%20I%27d%20like%20to%20talk%20about%20a%20creative%20direction%20project." class="price-btn" target="_blank" rel="noopener noreferrer" data-hover>Let's talk →</a>
@@ -2791,10 +2873,9 @@
                 </div>
                 <p class="price-sub">Maximize cross-channel impact.</p>
                 <div class="price-features">
-                    <div class="price-feat">Full creative direction & guidelines</div>
-                    <div class="price-feat">Main image campaign (hero + packshots)</div>
-                    <div class="price-feat">Adaptations for social, print, e-commerce</div>
-                    <div class="price-feat">Optional: one short editorial motion piece</div>
+                    <div class="price-feat">Still visuals: full campaign (hero visual + packshots)</div>
+                    <div class="price-feat">Motion visuals: short-form motion included</div>
+                    <div class="price-feat">Adaptations for social, print & e-commerce</div>
                 </div>
                 <a href="https://wa.me/33612345678?text=Hi%20AiDN%2C%20I%27d%20like%20to%20talk%20about%20a%20visual%20campaign%20project." class="price-btn" target="_blank" rel="noopener noreferrer" data-hover>Let's talk →</a>
             </div>
@@ -2802,14 +2883,13 @@
             <div class="price-card">
                 <div>
                     <div class="price-tier">Elite</div>
-                    <h3>Direction + Strategy + <span class="serif">Partnership</span></h3>
+                    <h3>Direction + Strategy + <span class="serif">Partnership (3 months)</span></h3>
                 </div>
                 <p class="price-sub">Transform your image over the long run.</p>
                 <div class="price-features">
-                    <div class="price-feat">Deep strategic audit & rebranding</div>
-                    <div class="price-feat">Brand bible & complete visual world</div>
-                    <div class="price-feat">Two seasonal campaigns</div>
-                    <div class="price-feat">Ongoing creative direction support (3 months)</div>
+                    <div class="price-feat">Still visuals: seasonal campaigns across a product line</div>
+                    <div class="price-feat">Motion visuals: fresh production every month</div>
+                    <div class="price-feat">Dedicated creative direction support over 3 months</div>
                 </div>
                 <a href="https://wa.me/33612345678?text=Hi%20AiDN%2C%20I%27d%20like%20to%20talk%20about%20a%20rebranding%20project." class="price-btn" target="_blank" rel="noopener noreferrer" data-hover>Let's talk →</a>
             </div>
@@ -3183,8 +3263,8 @@
             const all = [...document.querySelectorAll('.bento-item')];
             const items = all.map(el => ({
                 src: el.querySelector('img').src,
-                title: el.dataset.title || '',
-                desc: el.dataset.desc || ''
+                title: '',
+                desc: ''
             }));
             openLightbox(null, null, items, all.indexOf(bento));
             return;
