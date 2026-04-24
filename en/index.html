@@ -599,7 +599,6 @@
     aspect-ratio: 4 / 5;
     transition: transform 0.4s var(--ease);
 }
-.bento-item.has-video { cursor: default; }
 .bento-item:hover { transform: translateY(-3px); }
 .bento-item img,
 .bento-item video {
@@ -653,7 +652,8 @@
     justify-content: center;
     cursor: default;
 }
-.img-lightbox-stage img {
+.img-lightbox-stage img,
+.img-lightbox-stage video {
     max-width: 92vw;
     max-height: 78vh;
     width: auto;
@@ -663,6 +663,19 @@
     display: block;
     animation: lightboxIn 0.3s ease;
 }
+.img-lightbox-stage img.hidden,
+.img-lightbox-stage video.hidden { display: none; }
+.img-lightbox-dock-thumb.is-video::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.25)),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'><path d='M8 5v14l11-7z'/></svg>") center / 14px no-repeat;
+    pointer-events: none;
+    border-radius: inherit;
+}
+.img-lightbox-dock-thumb { position: relative; }
 .img-lightbox-caption {
     position: absolute;
     bottom: 0;
@@ -3053,6 +3066,7 @@
         </button>
         <div class="img-lightbox-stage">
             <img id="imgLightboxImg" src="" alt="">
+            <video id="imgLightboxVideo" class="hidden" muted loop playsinline preload="metadata" aria-label="Motion visual"></video>
             <div class="img-lightbox-caption">
                 <h3 id="imgLightboxTitle"></h3>
                 <p id="imgLightboxDesc"></p>
@@ -3193,8 +3207,23 @@
         if (!lightboxItems.length) return;
         const item = lightboxItems[lightboxIndex];
         const img = document.getElementById('imgLightboxImg');
-        img.src = item.src;
-        img.alt = item.title || item.alt || '';
+        const vid = document.getElementById('imgLightboxVideo');
+        if (item.type === 'video') {
+            img.classList.add('hidden');
+            img.removeAttribute('src');
+            vid.classList.remove('hidden');
+            if (item.poster) vid.poster = item.poster;
+            if (vid.src !== item.src) vid.src = item.src;
+            vid.play().catch(() => {});
+        } else {
+            vid.pause();
+            vid.classList.add('hidden');
+            vid.removeAttribute('src');
+            vid.load();
+            img.classList.remove('hidden');
+            img.src = item.src;
+            img.alt = item.title || item.alt || '';
+        }
         document.getElementById('imgLightboxTitle').textContent = item.title || '';
         document.getElementById('imgLightboxDesc').textContent = item.desc || '';
         const hasMeta = item.title || item.desc;
@@ -3224,12 +3253,12 @@
             items.forEach((it, idx) => {
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.className = 'img-lightbox-dock-thumb';
+                btn.className = 'img-lightbox-dock-thumb' + (it.type === 'video' ? ' is-video' : '');
                 btn.setAttribute('role', 'tab');
-                btn.setAttribute('aria-label', it.title || ('Image ' + (idx + 1)));
+                btn.setAttribute('aria-label', it.title || ((it.type === 'video' ? 'Motion visual ' : 'Image ') + (idx + 1)));
                 btn.addEventListener('click', (e) => { e.stopPropagation(); lightboxIndex = idx; renderLightbox(); });
                 const t = document.createElement('img');
-                t.src = it.src;
+                t.src = it.type === 'video' ? (it.poster || it.src) : it.src;
                 t.alt = '';
                 t.loading = 'lazy';
                 btn.appendChild(t);
@@ -3240,7 +3269,7 @@
             next.classList.toggle('hidden', !showNav);
             dock.classList.toggle('hidden', !showNav);
         } else {
-            lightboxItems = [{ src, title: alt || '', desc: '', alt }];
+            lightboxItems = [{ src, type: 'image', title: alt || '', desc: '', alt }];
             lightboxIndex = 0;
             prev.classList.add('hidden');
             next.classList.add('hidden');
@@ -3253,6 +3282,8 @@
 
     function closeLightbox() {
         const lb = document.getElementById('imgLightbox');
+        const vid = document.getElementById('imgLightboxVideo');
+        if (vid) { vid.pause(); vid.removeAttribute('src'); vid.load(); vid.classList.add('hidden'); }
         lb.classList.remove('active');
         document.body.style.overflow = '';
     }
@@ -3260,13 +3291,15 @@
     document.addEventListener('click', (e) => {
         const bento = e.target.closest('.bento-item');
         if (bento) {
-            if (bento.classList.contains('has-video')) return;
-            const all = [...document.querySelectorAll('.bento-item:not(.has-video)')];
-            const items = all.map(el => ({
-                src: el.querySelector('img').src,
-                title: '',
-                desc: ''
-            }));
+            const all = [...document.querySelectorAll('.bento-item')];
+            const items = all.map(el => {
+                const v = el.querySelector('video');
+                if (v) {
+                    return { src: v.currentSrc || v.src, type: 'video', poster: v.poster || '', title: '', desc: '' };
+                }
+                const img = el.querySelector('img');
+                return { src: img.src, type: 'image', title: '', desc: '' };
+            });
             openLightbox(null, null, items, all.indexOf(bento));
             return;
         }
