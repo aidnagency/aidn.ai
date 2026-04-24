@@ -612,6 +612,19 @@
     max-width: 1400px;
     margin: 0 auto;
 }
+.feed-label {
+    font-family: var(--mono, 'JetBrains Mono', monospace);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 20px;
+    display: block;
+}
+@media (max-width: 600px) {
+    .feed-label { font-size: 0.7rem; margin-bottom: 14px; }
+}
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1813,6 +1826,45 @@
         letter-spacing: 0.12em;
         color: var(--muted-dark);
     }
+    .pricing-included {
+        max-width: 1400px;
+        margin: 0 auto 20px;
+        padding: 18px 28px;
+        background: rgba(242, 239, 232, 0.06);
+        border: 1px solid rgba(255, 91, 12, 0.35);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+    .pricing-included-label {
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--orange);
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    .pricing-included-list {
+        font-family: var(--sans);
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: 0.01em;
+        color: var(--paper);
+        line-height: 1.5;
+    }
+    @media (max-width: 900px) {
+        .pricing-included {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 16px 20px;
+        }
+        .pricing-included-list { font-size: 12px; }
+    }
 
     .faq {
         padding: 120px 32px;
@@ -2640,7 +2692,7 @@
                 <div class="service-body">
                     <div class="service-body-inner">
                         <div>
-                            <p>Avant la moindre image, nous cartographions votre marque : positionnement, concurrents. L'objectif : une direction claire, défendable, et surtout reconnaissable.</p>
+                            <p>Cartographie de la marque avant production de visuels : positionnement, territoire, tension symbolique. L'objectif : une direction claire, défendable, et reconnaissable.</p>
                             <div class="service-tags">
                                 <span class="service-tag">Audit de marque</span>
                                 <span class="service-tag">Positionnement</span>
@@ -2657,23 +2709,23 @@
                 <div class="service-header" onclick="toggleService('service2')">
                     <span class="service-num">02</span>
                     <div class="service-info">
-                        <h3>Direction <span class="serif">Artistique</span></h3>
-                        <p>Univers visuel · Palette · Langage de marque</p>
+                        <h3>Rebranding & <span class="serif">Refonte d'identité</span></h3>
+                        <p>Charte graphique · Univers · Fichiers sources</p>
                     </div>
                     <div class="service-chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
                 </div>
                 <div class="service-body">
                     <div class="service-body-inner">
                         <div>
-                            <p>Moodboard, charte visuelle, bible de marque. Nous construisons le langage visuel qui rendra votre marque reconnaissable sur tous les formats — du packshot à la campagne.</p>
+                            <p>Refondre ou structurer une identité existante, livrée clés en main. Charte graphique, univers de marque et fichiers sources — l'ossature visuelle prête à déployer.</p>
                             <div class="service-tags">
-                                <span class="service-tag">Moodboard</span>
-                                <span class="service-tag">Charte visuelle</span>
-                                <span class="service-tag">Bible de marque</span>
-                                <span class="service-tag">Guidelines</span>
+                                <span class="service-tag">Charte graphique</span>
+                                <span class="service-tag">Univers de marque</span>
+                                <span class="service-tag">Fichiers sources</span>
+                                <span class="service-tag">Identité clé en main</span>
                             </div>
                         </div>
-                        <div class="service-img"><picture><source srcset="assets/images/services/02-louis-vuitton.webp" type="image/webp"><img src="assets/images/services/02-louis-vuitton.jpg" alt="Direction artistique — univers héritage Louis Vuitton" width="1400" height="1222" loading="lazy" decoding="async"></picture></div>
+                        <div class="service-img"><picture><source srcset="assets/images/services/02-louis-vuitton.webp" type="image/webp"><img src="assets/images/services/02-louis-vuitton.jpg" alt="Rebranding & refonte d'identité — univers héritage" width="1400" height="1222" loading="lazy" decoding="async"></picture></div>
                     </div>
                 </div>
             </div>
@@ -2682,23 +2734,23 @@
                 <div class="service-header" onclick="toggleService('service3')">
                     <span class="service-num">03</span>
                     <div class="service-info">
-                        <h3>Création d'images & <span class="serif">campagnes</span></h3>
-                        <p>Visuels · Campagnes · Packshots éditoriaux</p>
+                        <h3>Direction <span class="serif">Artistique</span></h3>
+                        <p>Univers visuel · Palette · Langage de marque</p>
                     </div>
                     <div class="service-chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
                 </div>
                 <div class="service-body">
                     <div class="service-body-inner">
                         <div>
-                            <p>Le cœur de notre pratique. Génération d'images IA pour campagnes, hero visuels, packshots narratifs, portraits éditoriaux, natures mortes. Chaque image pensée, pas produite à la chaîne.</p>
+                            <p>Construction du langage visuel reconnaissable sur tous formats. Moodboard, palette, bible de marque — de l'intention jusqu'à la signature visuelle déployable.</p>
                             <div class="service-tags">
-                                <span class="service-tag">Visuels</span>
-                                <span class="service-tag">Packshots</span>
-                                <span class="service-tag">Campagnes</span>
-                                <span class="service-tag">Portraits éditoriaux</span>
+                                <span class="service-tag">Moodboard</span>
+                                <span class="service-tag">Palette</span>
+                                <span class="service-tag">Bible de marque</span>
+                                <span class="service-tag">Guidelines</span>
                             </div>
                         </div>
-                        <div class="service-img"><picture><source srcset="assets/images/services/03-money-helicopter.webp" type="image/webp"><img src="assets/images/services/03-money-helicopter.jpg" alt="Création de campagne — scène hélicoptère, image publicitaire forte" width="1400" height="1222" loading="lazy" decoding="async"></picture></div>
+                        <div class="service-img"><picture><source srcset="assets/images/realisations/02-rouge-serpent.webp" type="image/webp"><img src="assets/images/realisations/02-rouge-serpent.jpg" alt="Direction artistique — univers visuel et palette de marque" width="1400" height="1400" loading="lazy" decoding="async"></picture></div>
                     </div>
                 </div>
             </div>
@@ -2706,6 +2758,31 @@
             <div class="service-row" id="service4">
                 <div class="service-header" onclick="toggleService('service4')">
                     <span class="service-num">04</span>
+                    <div class="service-info">
+                        <h3>Création de visuels & <span class="serif">campagnes</span></h3>
+                        <p>Visuels statiques · Visuels animés · Packshots éditoriaux</p>
+                    </div>
+                    <div class="service-chev"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+                </div>
+                <div class="service-body">
+                    <div class="service-body-inner">
+                        <div>
+                            <p>Visuels IA pensés, non produits en chaîne. Visuels statiques et animés, packshots narratifs, portraits éditoriaux, natures mortes — chaque pièce construite comme une prise de parole.</p>
+                            <div class="service-tags">
+                                <span class="service-tag">Visuels statiques</span>
+                                <span class="service-tag">Visuels animés</span>
+                                <span class="service-tag">Packshots</span>
+                                <span class="service-tag">Campagnes</span>
+                            </div>
+                        </div>
+                        <div class="service-img"><picture><source srcset="assets/images/services/03-money-helicopter.webp" type="image/webp"><img src="assets/images/services/03-money-helicopter.jpg" alt="Création de visuels & campagnes — scène publicitaire forte" width="1400" height="1222" loading="lazy" decoding="async"></picture></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-row" id="service5">
+                <div class="service-header" onclick="toggleService('service5')">
+                    <span class="service-num">05</span>
                     <div class="service-info">
                         <h3>Déclinaisons & <span class="serif">Formats</span></h3>
                         <p>Social · Print · E-commerce · Motion courts</p>
@@ -2715,7 +2792,7 @@
                 <div class="service-body">
                     <div class="service-body-inner">
                         <div>
-                            <p>Votre univers visuel décliné sur tous les formats. Réseaux sociaux, print, e-commerce, films courts. Une bibliothèque d'images qui vit et se réutilise dans le temps.</p>
+                            <p>Univers visuel décliné sur réseaux, print, e-commerce, films courts. Une bibliothèque de visuels statiques et animés qui vit et se réutilise dans le temps.</p>
                             <div class="service-tags">
                                 <span class="service-tag">Social media</span>
                                 <span class="service-tag">Print</span>
@@ -2723,14 +2800,14 @@
                                 <span class="service-tag">Films courts</span>
                             </div>
                         </div>
-                        <div class="service-img"><picture><source srcset="assets/images/services/04-gucci.webp" type="image/webp"><img src="assets/images/services/04-gucci.jpg" alt="Déclinaisons multi-format — campagne Gucci éditoriale" width="1400" height="1222" loading="lazy" decoding="async"></picture></div>
+                        <div class="service-img"><picture><source srcset="assets/images/services/04-gucci.webp" type="image/webp"><img src="assets/images/services/04-gucci.jpg" alt="Déclinaisons multi-format — univers visuel décliné" width="1400" height="1222" loading="lazy" decoding="async"></picture></div>
                     </div>
                 </div>
             </div>
 
-            <div class="service-row" id="service5">
-                <div class="service-header" onclick="toggleService('service5')">
-                    <span class="service-num">05</span>
+            <div class="service-row" id="service6">
+                <div class="service-header" onclick="toggleService('service6')">
+                    <span class="service-num">06</span>
                     <div class="service-info">
                         <h3>Conseil & <span class="serif">Accompagnement</span></h3>
                         <p>Direction artistique dans la durée</p>
@@ -2740,7 +2817,7 @@
                 <div class="service-body">
                     <div class="service-body-inner">
                         <div>
-                            <p>Nous accompagnons votre marque dans le temps. Évolution de l'univers visuel, nouvelles campagnes, cohérence cross-canal. Un partenariat, pas une prestation.</p>
+                            <p>Accompagnement long terme pour l'évolution et la cohérence visuelle de votre marque. Un partenariat de direction artistique, pas une prestation ponctuelle.</p>
                             <div class="service-tags">
                                 <span class="service-tag">Direction artistique</span>
                                 <span class="service-tag">Accompagnement long</span>
@@ -2748,7 +2825,7 @@
                                 <span class="service-tag">Sessions conseil</span>
                             </div>
                         </div>
-                        <div class="service-img"><picture><source srcset="assets/images/services/05-chaussure.webp" type="image/webp"><img src="assets/images/services/05-chaussure.jpg" alt="Conseil & accompagnement — packshot chaussure, travail d'objet long terme" width="1400" height="1222" loading="lazy" decoding="async"></picture></div>
+                        <div class="service-img"><picture><source srcset="assets/images/services/05-chaussure.webp" type="image/webp"><img src="assets/images/services/05-chaussure.jpg" alt="Conseil & accompagnement — travail d'objet long terme" width="1400" height="1222" loading="lazy" decoding="async"></picture></div>
                     </div>
                 </div>
             </div>
@@ -2758,6 +2835,7 @@
     <!-- Projects -->
     <section id="realisations" class="feed-section">
         <div class="feed-inner">
+            <span class="feed-label">Projets conceptuels</span>
             <div class="bento-grid">
                 <div class="bento-item" data-title="Éditorial minimaliste" data-desc="Silhouette chinoise — robe noire, ligne pure">
                     <picture><source srcset="assets/images/realisations/01-chinoise.webp" type="image/webp"><img src="assets/images/realisations/01-chinoise.jpg" alt="Danseuse en robe noire, posture classique — éditorial minimaliste" width="1400" height="1400" loading="lazy" decoding="async"></picture>
@@ -2817,6 +2895,11 @@
             <h2 class="reveal"><span class="reveal-line"><span>Nos <span class="serif hl">formules</span></span></span></h2>
         </div>
 
+        <div class="pricing-included" aria-label="Inclus dans chaque formule">
+            <span class="pricing-included-label">Inclus dans chaque formule</span>
+            <span class="pricing-included-list">Audit & veille stratégique · Direction artistique · Univers visuel dédié</span>
+        </div>
+
         <div class="pricing-grid">
             <div class="price-card">
                 <div>
@@ -2825,9 +2908,8 @@
                 </div>
                 <p class="price-sub">Lancement rapide et ciblé.</p>
                 <div class="price-features">
-                    <div class="price-feat">Audit de marque & positionnement</div>
-                    <div class="price-feat">Moodboard & direction artistique</div>
-                    <div class="price-feat">Série de visuels hero (3 à 5)</div>
+                    <div class="price-feat">Visuels statiques : série autour d'un produit phare</div>
+                    <div class="price-feat">Univers visuel de lancement</div>
                     <div class="price-feat">Une série de révisions incluse</div>
                 </div>
                 <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20échanger%20sur%20un%20projet%20de%20direction%20artistique." class="price-btn" target="_blank" rel="noopener noreferrer" data-hover>Parlons du projet →</a>
@@ -2843,10 +2925,9 @@
                 </div>
                 <p class="price-sub">Maximiser votre impact multi-canal.</p>
                 <div class="price-features">
-                    <div class="price-feat">Direction artistique complète & charte</div>
-                    <div class="price-feat">Campagne image principale (hero + packshots)</div>
-                    <div class="price-feat">Déclinaisons social, print, e-commerce</div>
-                    <div class="price-feat">Option : un court motion éditorial</div>
+                    <div class="price-feat">Visuels statiques : campagne complète (visuel phare + packshots)</div>
+                    <div class="price-feat">Visuels animés : formats motion courts inclus</div>
+                    <div class="price-feat">Déclinaisons social, print & e-commerce</div>
                 </div>
                 <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20échanger%20sur%20un%20projet%20de%20campagne%20visuelle." class="price-btn" target="_blank" rel="noopener noreferrer" data-hover>Parlons du projet →</a>
             </div>
@@ -2854,14 +2935,13 @@
             <div class="price-card">
                 <div>
                     <div class="price-tier">Elite</div>
-                    <h3>Direction + Stratégie + <span class="serif">Suivi</span></h3>
+                    <h3>Direction + Stratégie + <span class="serif">Suivi (3 mois)</span></h3>
                 </div>
                 <p class="price-sub">Transformer votre image sur le long terme.</p>
                 <div class="price-features">
-                    <div class="price-feat">Audit stratégique approfondi & rebranding</div>
-                    <div class="price-feat">Bible de marque & univers visuel complet</div>
-                    <div class="price-feat">Deux campagnes saisonnières</div>
-                    <div class="price-feat">Accompagnement D.A. continu (3 mois)</div>
+                    <div class="price-feat">Visuels statiques : campagnes saisonnières sur une gamme</div>
+                    <div class="price-feat">Visuels animés : production renouvelée chaque mois</div>
+                    <div class="price-feat">Accompagnement D.A. dédié sur 3 mois</div>
                 </div>
                 <a href="https://wa.me/33612345678?text=Bonjour%20AiDN%2C%20je%20souhaite%20échanger%20sur%20un%20projet%20de%20rebranding." class="price-btn" target="_blank" rel="noopener noreferrer" data-hover>Parlons du projet →</a>
             </div>
@@ -3235,8 +3315,8 @@
             const all = [...document.querySelectorAll('.bento-item')];
             const items = all.map(el => ({
                 src: el.querySelector('img').src,
-                title: el.dataset.title || '',
-                desc: el.dataset.desc || ''
+                title: '',
+                desc: ''
             }));
             openLightbox(null, null, items, all.indexOf(bento));
             return;
